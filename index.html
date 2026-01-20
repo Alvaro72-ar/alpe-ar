@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALPE Ar Condicionado & Climatização - Tecnologia para seu conforto</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer">
+<style>
+:root{
+  --cor-principal:#007bff;
+  --cor-secundaria:#343a40;
+  --cor-fundo:#f8f9fa;
+  --cor-texto:#333;
+  --cor-whatsapp:#25d366;
+}
+
+/* Configuração de Fonte Oficial (Estilo Fujitsu/Técnico) */
+* {
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 400;
+  letter-spacing: 0.2px; /* Leve espaçamento para clareza técnica */
+  -webkit-font-smoothing: antialiased; /* Deixa a fonte mais macia/lisa */
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, .cta-header { font-weight: 700 !important; letter-spacing: -0.5px; }
+body, p, span, li { font-weight: 400 !important; }
+strong, b { font-weight: 700 !important; }
+
+body{margin:0;color:var(--cor-texto);background:white;line-height:1.6;}
+header{background:white;padding:10px 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:flex-end;gap:0;text-decoration:none;} 
+.logo img:first-child { height: 60px; }
+.logo img:last-child { height: 45px; margin-left: -30px; }
+nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;transition:color 0.3s;}
+nav a:hover{color:var(--cor-principal);}
+.cta-header{background:var(--cor-principal);color:white;padding:8px 15px;border-radius:5px;text-decoration:none;font-weight:bold;transition:all 0.3s;}
+.cta-header:hover{background:#0056b3;transform:translateY(-2px);}
+.section{padding:30px 5%;text-align:center;}
+.section-dark{background-color:var(--cor-secundaria);color:white;}
+.section h2{font-size:36px;margin-bottom:15px;color:var(--cor-secundaria);}
+.section-dark h2{color:white;}
+
+/* BANNER HERO COM LOGO */
+.banner-hero {
+  width: 100%;
+  min-height: 600px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.banner-hero::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 60% 70%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 50% 50%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 90% 60%, rgba(255,255,255,0.2), transparent);
+  background-size: 200% 200%;
+  animation: moveStars 20s linear infinite;
+  will-change: background-position;
+}
+@keyframes moveStars {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+.banner-content {
+  text-align: center;
+  z-index: 10;
+  padding: 40px 20px;
+  max-width: 900px;
+}
+.logo-container {
+  margin-bottom: 40px;
+  animation: fadeInDown 1s ease-out;
+}
+.logo-container img {
+  width: 280px;
+  height: auto;
+  filter: drop-shadow(0 10px 30px rgba(0, 123, 255, 0.3));
+}
+.banner-title {
+  font-size: 52px;
+  font-weight: bold;
+  color: white;
+  margin: 30px 0 15px;
+  line-height: 1.2;
+  animation: fadeInUp 1s ease-out 0.2s both;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.banner-subtitle {
+  font-size: 24px;
+  color: rgba(255,255,255,0.85);
+  margin: 0 0 40px;
+  animation: fadeInUp 1s ease-out 0.4s both;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+.banner-cta {
+  display: inline-flex;
+  gap: 20px;
+  animation: fadeInUp 1s ease-out 0.6s both;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-primary {
+  background: #007bff;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s;
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3);
+  border: 2px solid transparent;
+}
+.btn-primary:hover {
+  background: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 123, 255, 0.5);
+}
+.btn-secondary {
+  background: transparent;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+  transition: all 0.3s;
+  border: 2px solid rgba(255,255,255,0.5);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: white;
+  transform: translateY(-3px);
+}
+.features {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  margin-top: 60px;
+  animation: fadeInUp 1s ease-out 0.8s both;
+  flex-wrap: wrap;
+}
+.feature-item {
+  text-align: center;
+  color: white;
+  max-width: 200px;
+}
+.feature-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 4px 10px rgba(0, 123, 255, 0.3));
+}
+.feature-text {
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* MARCAS */
+.marcas-grid{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+.logo-marca{
+  width:150px;
+  height:90px;
+  background:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  border:2px solid #e5e7eb;
+  padding:15px;
+  transition:all 0.3s ease;
+}
+.logo-marca:hover{
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  border-color:var(--cor-principal);
+}
+.logo-marca img{
+  max-width:120px;
+  max-height:70px;
+  width:100%;
+  height:auto;
+  object-fit:contain;
+  filter:grayscale(20%);
+  transition:filter 0.3s;
+}
+.logo-marca:hover img{
+  filter:grayscale(0%);
+}
+
+.servicos-grid{display:flex;justify-content:center;gap:30px;margin-top:20px;flex-wrap:wrap;}
+.servico-card{background:white;color:var(--cor-secundaria);padding:30px;border-radius:8px;width:45%;min-width:300px;box-shadow:0 4px 6px rgba(0,0,0,0.1);transition:all 0.3s;}
+.servico-card:hover{transform:translateY(-5px);box-shadow:0 8px 15px rgba(0,0,0,0.15);}
+
+/* CATÁLOGO */
+.catalogo-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:10px;
+  margin-top:20px;
+  max-width:1200px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.produto-card{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  transition:all 0.3s;
+  display:flex;
+  flex-direction:column;
+}
+.produto-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+.produto-card img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+  background:#fafafa;
+  padding:10px;
+  display:block;
+}
+.produto-info{padding:12px;text-align:left;display:flex;flex-direction:column;flex:1;}
+.produto-info h4{margin:5px 0;color:var(--cor-secundaria);font-size:14px;line-height:1.4;}
+.produto-info .preco{font-size:18px;font-weight:bold;color:var(--cor-principal);margin:5px 0;}
+.produto-info p{font-size:12px !important; margin: 4px 0;}
+.produto-info .cta-card{
+  display:block;
+  background:var(--cor-principal);
+  color:white;
+  text-align:center;
+  padding:8px 0;
+  border-radius:5px;
+  text-decoration:none;
+  margin-top:auto;
+  font-weight:600;
+  font-size:13px;
+  transition:all 0.3s;
+}
+.produto-info .cta-card:hover{
+  background:#0056b3;
+  transform:scale(1.02);
+}
+
+/* CAROUSEL */
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: auto; /* Altura automática baseada na proporção */
+  aspect-ratio: 21/9; /* Proporção Widescreen (Padrão de Cinema) */
+  max-height: 500px; /* Limite para não ficar gigante em telas enormes */
+  height: 350px; /* Altura fixa REDUZIDA para evitar cortes laterais */
+  background: #ffffff;
+}
+.carousel-slide {
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+  object-fit: contain; /* Mostra a imagem inteira sem cortar nada */
+  object-fit: cover; /* Preenche o espaço uniformemente */
+  object-position: center;
+  display: block;
+}
+
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  height: 100%;
+}
+.carousel-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(0,0,0,0.5);
+  color:white;
+  border:none;
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  cursor:pointer;
+  z-index:2;
+  font-size:20px;
+  transition:all 0.3s;
+}
+.carousel-arrow:hover{
+  background:rgba(0,123,255,0.8);
+}
+.carousel-arrow.left{left:20px;} 
+.carousel-arrow.right{right:20px;}
+.carousel-dots{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:20px;
+  display:flex;
+  gap:10px;
+  z-index:2;
+}
+.carousel-dots button{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  border:none;
+  background:rgba(255,255,255,0.5);
+  cursor:pointer;
+  transition:all 0.3s;
+}
+.carousel-dots button.active{
+  background:var(--cor-principal);
+  width:30px;
+  border-radius:6px;
+}
+
+.whatsapp-square{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  z-index:1000;
+}
+.whatsapp-square img{
+  width:150px;
+  height:auto;
+  border-radius:0;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition:all 0.3s;
+}
+.whatsapp-square img:hover{
+  transform:scale(1.05);
+  box-shadow:0 6px 15px rgba(0,0,0,0.3);
+}
+.topo-site img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.top-bar {
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+.top-bar-container {
+    max-width: 1400px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    gap: 20px;
+}
+.top-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #000;
+    text-align: left;
+}
+.top-item div {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+.top-item span { font-size: 11px; color: #555; font-weight: 400; }
+.top-item img { width: 24px; height: 24px; object-fit: contain; margin-right: 2px; }
+.top-item strong { font-weight: bold; }
+@media (max-width: 900px) {
+    .top-bar-container { justify-content: center; }
+}
+.icon-inline { width: 16px; height: 16px; vertical-align: middle; margin-bottom: 3px; margin-right: 4px; }
+.icon-service { width: 32px; height: 32px; vertical-align: middle; margin-right: 10px; }
+.icon-footer { width: 18px; height: 18px; vertical-align: middle; margin-right: 5px; filter: brightness(0) invert(1); }
+
+footer{
+  background:var(--cor-secundaria);
+  color:white;
+  padding:20px;
+  text-align:center;
+  font-size:14px;
+}
+
+/* RESPONSIVO */
+@media (max-width:768px){
+  .banner-hero{min-height:500px;}
+  .logo-container img{width:220px;}
+  .banner-title{font-size:36px;}
+  .banner-subtitle{font-size:18px;}
+  .btn-primary,.btn-secondary{padding:14px 30px;font-size:16px;}
+  .features{gap:25px;}
+  .carousel{height:auto; aspect-ratio:16/9;} /* Ajuste proporcional para celular (evita cortes excessivos) */
+  .carousel{height:180px;} /* Altura fixa menor para celular (mostra mais as laterais) */
+  .servico-card{width:100%;}
+  nav{display:none;}
+  .logo{font-size:18px;}
+  .whatsapp-square img{width:50px;}
+}
+
+/* ESTILOS REFATORADOS (Para limpar o HTML) */
+.header-actions { display: flex; align-items: center; gap: 20px; }
+.cart-link { position: relative; display: flex; align-items: center; text-decoration: none; }
+.cart-badge { position: absolute; top: -8px; right: -8px; background: #d30029; color: white; font-size: 10px; font-weight: bold; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+
+.video-banner { margin-top: 0; width: 100%; height: 320px; overflow: hidden; border-radius: 0 0 8px 8px; }
+.video-content { width: 100%; height: 100%; object-fit: cover; }
+
+.section-destaque { padding: 30px 5%; background: linear-gradient(to bottom, #fff, #f8f9fa); border-top: 1px solid #eee; }
+.destaque-container { max-width: 1000px; margin: 0 auto; }
+.destaque-img { max-width: 250px; display: block; margin: 0 auto 20px; }
+.destaque-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+.card-destaque { flex: 1; min-width: 300px; background: white; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.08); overflow: hidden; transition: transform 0.3s; }
+.card-destaque-premium { border-top: 6px solid #d30029; }
+.card-destaque-essencial { border-top: 6px solid #00918E; }
+.card-destaque-body { padding: 20px; }
+.card-destaque-title { font-size: 22px; margin-bottom: 5px; font-weight: bold; }
+.card-destaque-title.premium { color: #d30029; }
+.card-destaque-title.essencial { color: #00918E; }
+.card-destaque-desc { color: #555; font-size: 14px; margin: 0; }
+.card-destaque-hr { border: 0; border-top: 1px solid #eee; margin: 15px 0; }
+.card-destaque-list { text-align: left; list-style: none; padding: 0; color: #444; font-size: 14px; }
+.card-destaque-list li { margin-bottom: 8px; }
+.btn-destaque { display: block; text-align: center; margin-top: 15px; border-radius: 50px; }
+.btn-destaque.premium { background: #d30029; }
+.btn-destaque.essencial { background: #00918E; }
+.cart-icon { width: 26px; height: 26px; }
+.btn-especialista { display: inline-block; margin-top: 30px; }
+
+
+.prod-feature { font-weight: 600; }
+.prod-feature.green { color: green; }
+.prod-feature.red { color: red; }
+.prod-feature.light-green { color: rgb(18, 184, 71); }
+.prod-installment { font-size: 14px; color: #666; }
+
+.section-calculadora { background: var(--cor-principal); color: white; padding: 30px 20px; text-align: center; }
+.form-calculadora { max-width: 400px; margin: 25px auto; text-align: left; }
+.input-calculadora { width: 100%; padding: 10px; border-radius: 6px; border: none; margin: 6px 0 15px; }
+.input-calculadora-last { margin-bottom: 20px; }
+.btn-calculadora { width: 100%; padding: 12px; background: white; color: var(--cor-principal); border: none; border-radius: 6px; font-weight: bold; font-size: 16px; cursor: pointer; }
+.result-calculadora { font-size: 20px; font-weight: bold; margin-top: 20px; }
+
+.section-pagamento { padding: 20px 6%; background: #fff; }
+.title-pagamento { font-size: 26px; margin-bottom: 20px; color: #222; }
+.grid-pagamento { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: center; }
+.img-pagamento { height: 40px; }
+
+.footer-copy { margin: 0; }
+.footer-contact { margin: 10px 0 0; }
+
+/* MENU DROPDOWN */
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  z-index: 1000;
+  border-radius: 8px;
+  top: 100%;
+  left: 0;
+  padding: 10px 0;
+}
+.dropdown-content a {
+  color: var(--cor-texto);
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover { background-color: #f8f9fa; color: var(--cor-principal); }
+.dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ESTILOS DE CONTATO E SEÇÕES (Substituindo inline styles) */
+.section-tipos { background-color: #fff; }
+.section-servicos { background-color: #f8f9fa; }
+.section-contato { background: #fff; border-top: 1px solid #eee; }
+.form-contato { max-width: 500px; margin: 30px auto 0; text-align: left; display: flex; flex-direction: column; gap: 15px; }
+.input-contato { padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+textarea.input-contato { resize: vertical; }
+.btn-contato { border: none; cursor: pointer; width: 100%; }
+
+/* SISTEMAS (SPLIT, MULTI, VRF) */
+.sistemas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.sistema-card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sistema-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.15); border-color: var(--cor-principal); }
+.sistema-icon { font-size: 40px; color: var(--cor-principal); margin-bottom: 15px; }
+.sistema-img { width: 100%; height: 180px; object-fit: contain; margin-bottom: 10px; background: #fafafa; padding: 10px; border-radius: 8px; }
+.sistema-card h3 { font-size: 16px; margin-bottom: 5px; color: var(--cor-secundaria); font-weight: 700; }
+.sistema-card p { font-size: 12px; color: #666; line-height: 1.4; margin: 0; }
+</style>
+</head>
+<body>
+
+<!-- BARRA SUPERIOR -->
+<div class="top-bar">
+    <div class="top-bar-container">
+        <div class="top-item">
+            <img src="images/Icone/Fale_conosco.png" alt="Chat">
+            <div><strong>FALE CONOSCO</strong></div>
+        </div>
+        <div class="top-item">
+            <img src="images/Icone/Televendas.png" alt="Telefone">
+            <div><strong>TELEVENDAS</strong></div>
+        </div>
+        <div class="top-item">
+            <img src="images/Icone/whatsapp-logo-.png" alt="WhatsApp">
+            <div><strong>Compre pelo WhatsApp</strong></div>
+        </div>
+        <div class="top-item">
+            <img src="images/Icone/entrega.png" alt="Entrega">
+            <div>
+                <strong>Entrega em todo o Brasil</strong>
+                <span>verifique as modalidades</span>
+            </div>
+        </div>
+        <div class="top-item">
+            <img src="images/Icone/Cartao_parc.png" alt="Cartão">
+            <div>
+                <strong>Parcele em até 8x</strong>
+                <span>sem juros</span>
+            </div>
+        </div>
+        <div class="top-item">
+            <img src="images/Icone/Pix.png" alt="Pix">
+            <div>
+                <strong>5% OFF no PIX</strong>
+                <span>pagamento à vista</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<header>
+  <a href="index.html" class="logo">
+    <img src="images/Logo marcas/Triângulo-Logo.webp" alt="Logo ALPE">
+    
+    <img src="images/Logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
+  </a>
+  <nav>
+    <div class="dropdown">
+      <a href="#marcas">Marcas ▾</a>
+      <div class="dropdown-content">
+        <a href="Marcas.index/daikin.html">Daikin</a>
+        <a href="Marcas.index/fujitsu.html">Fujitsu</a>
+        <a href="Marcas.index/gree.html">Gree</a>
+        <a href="Marcas.index/hitachi.html">Hitachi</a>
+        <a href="Marcas.index/lg.html">LG</a>
+        <a href="Marcas.index/midea.html">Midea</a>
+        <a href="Marcas.index/samsung.html">Samsung</a>
+        <a href="Marcas.index/elgin.html">Elgin</a>
+        <a href="Marcas.index/electrolux.html">Electrolux</a>
+        <a href="Marcas.index/hisense.html">Hisense</a>
+        <a href="Marcas.index/philco.html">Philco</a>
+        <a href="Marcas.index/tcl.html">TCL</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#tipos">Tipos ▾</a>
+      <div class="dropdown-content">
+        <a href="#tipos">Split Hi-Wall</a>
+        <a href="#tipos">Multi-Split</a>
+        <a href="#tipos">Mini VRF</a>
+        <a href="#tipos">VRF</a>
+        <a href="#tipos">Cassette</a>
+        <a href="#tipos">Piso Teto</a>
+      </div>
+    </div>
+    <a href="Sobre_Nos/sobre-nos.html">Sobre Nós</a>
+    <a href="#servicos">Serviços</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+  <div class="header-actions">
+    <a href="#" class="cart-link">
+      <img src="https://img.icons8.com/ios-filled/50/000000/shopping-cart.png" alt="Carrinho" class="cart-icon">
+      <span class="cart-badge">0</span>
+    </a>
+    <a href="#calculadora" class="cta-header">Calcule Seu BTU</a>
+  </div>
+</header>
+
+ <main>
+
+    <!-- CARROSSEL DE BANNERS -->
+    <section class="carousel" id="mainCarousel">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Slide 1 -->
+        <img class="carousel-slide" src="images/banner/banner_Daikin-Full-Inverter.jpg" alt="Banner Daikin">
+        
+        <!-- Slide 2 -->
+        <img class="carousel-slide" src="images/Banner/Banner_Fujitsu-Premium.png" alt="Banner Fujitsu 2">
+        
+        <!-- Slide 3 -->
+        <img class="carousel-slide" src="images/Banner/banner-Elgin.png" alt="Banner Elgin">
+      </div>
+      <button type="button" class="carousel-arrow left" id="prevBtn" aria-label="Slide Anterior">&#10094;</button>
+      <button type="button" class="carousel-arrow right" id="nextBtn" aria-label="Próximo Slide">&#10095;</button>
+      <div class="carousel-dots" id="carouselDots"></div>
+    </section>
+
+<!-- SCRIPT DO CARROSSEL (ADICIONADO) -->
+<script>
+(function(){
+  const track = document.getElementById('carouselTrack');
+  if(!track) return;
+  
+  const slides = Array.from(track.children);
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('carouselDots');
+  let index = 0;
+  const interval = 5000; // Tempo de troca (5 segundos)
+  let timer;
+
+  // Limpar bolinhas existentes para evitar duplicação
+  dotsContainer.innerHTML = '';
+
+  // Criar bolinhas de navegação
+  slides.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    if (i === 0) b.classList.add('active');
+    b.setAttribute('aria-label', 'Ir para o slide ' + (i + 1));
+    b.onclick = () => { goTo(i); resetTimer(); };
+    dotsContainer.appendChild(b);
+  });
+
+  const dots = Array.from(dotsContainer.children);
+
+  function goTo(i) {
+    index = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(-${index * 100}%)`;
+    dots.forEach(d => d.classList.remove('active'));
+    if(dots[index]) dots[index].classList.add('active');
+  }
+
+  function nextSlide() { goTo(index + 1); }
+  function prevSlide() { goTo(index - 1); }
+
+  if(next) next.onclick = () => { nextSlide(); resetTimer(); };
+  if(prev) prev.onclick = () => { prevSlide(); resetTimer(); };
+
+  function startTimer() { timer = setInterval(nextSlide, interval); }
+  function stopTimer() { clearInterval(timer); }
+  function resetTimer() { stopTimer(); startTimer(); }
+
+  // Iniciar
+  startTimer();
+})();
+</script>
+
+
+<!-- VÍDEO ABAIXO DO CARROSSEL (LOCAL ORIGINAL DO CARROSSEL) -->
+<div class="video-banner">
+  <video autoplay muted loop playsinline webkit-playsinline class="video-content">
+    <source src="images/Banner/Video Project 4.mp4" type="video/mp4" />
+  </video>
+</div>
+
+<!-- MARCAS COM LOGOS -->
+<section class="section" id="marcas">
+  <h2>As Marcas que Movem o Mundo da Climatização</h2>
+  <div class="marcas-grid">
+    <a href="Marcas.index/daikin.html" class="logo-marca">
+      <img src="images/Logo marcas/Daikin-Logo.png" alt="Logo Daikin">
+    </a>
+    <a href="Marcas.index/lg.html" class="logo-marca">
+      <img src="images/Logo marcas/LG-Logo.png" alt="Logo LG">
+    </a>
+    <a href="Marcas.index/samsung.html" class="logo-marca">
+      <img src="images/Logo marcas/Samsung-Logo.png" alt="Logo Samsung">
+    </a>
+    <a href="Marcas.index/fujitsu.html" class="logo-marca">
+      <img src="images/Logo marcas/Fujitsu_logo.png" alt="Logo Fujitsu">
+    </a>
+    <a href="Marcas.index/midea.html" class="logo-marca">
+      <img src="images/Logo marcas/Midea_Logo.png" alt="Logo Midea">
+    </a>
+    <a href="Marcas.index/hitachi.html" class="logo-marca">
+      <img src="images/Logo marcas/Hitachi-Logo (1).png" alt="Logo Hitachi">
+    </a>
+    <a href="Marcas.index/hisense.html" class="logo-marca">
+      <img src="images/Logo marcas/Hisense-Logo.png" alt="Logo Hisense">
+    </a>
+    <a href="Marcas.index/electrolux.html" class="logo-marca">
+      <img src="images/Logo marcas/Electrolux-logo.png" alt="Logo Electrolux">
+    </a>
+    <a href="Marcas.index/tcl.html" class="logo-marca">
+      <img src="images/Logo marcas/TCL-Logo.png" alt="Logo TCL">
+    </a>
+    <a href="Marcas.index/philco.html" class="logo-marca">
+      <img src="images/Logo marcas/Philco-logo.png" alt="Logo Philco">
+    </a>
+  </div>
+</section>
+
+<!-- TIPOS DE SISTEMAS -->
+<section class="section section-tipos" id="tipos">
+  <h2>Soluções para Todos os Projetos</h2>
+  <p>Escolha o sistema ideal para sua necessidade, do residencial ao corporativo.</p>
+  <div class="sistemas-grid">
+    <div class="sistema-card">
+      <img src="images/Produtos/Split_LG/split-inverter-lg-hi-wall-dual-compact-9000-btus-frio-220v.png" alt="Split Hi-Wall" class="sistema-img">
+      <h3>Split Hi-Wall</h3>
+      <p>O modelo mais popular para residências. Silencioso, eficiente e com design moderno para um único ambiente.</p>
+    </div>
+    <div class="sistema-card">
+      <img src="images/Produtos/Multi_Split/Multi-split-Fujitsu.webp" alt="Multi-Split" class="sistema-img">
+      <h3>Multi-Split</h3>
+      <p>Climatize até 5 ambientes com apenas uma unidade externa. Ideal para apartamentos com pouco espaço na varanda.</p>
+    </div>
+    <div class="sistema-card">
+      <img src="images/Produtos/Mini_Vrf/Vrv_Daikin_Fit.webp" alt="Mini VRF" class="sistema-img">
+      <h3>Mini VRF</h3>
+      <p>Alta capacidade e eficiência para residências de alto padrão e pequenos comércios. Conecte múltiplas unidades internas.</p>
+    </div>
+    <div class="sistema-card">
+      <img src="images/Produtos/VRF/V8-Series-VRF.webp" alt="VRF" class="sistema-img">
+      <h3>VRF</h3>
+      <p>A solução definitiva para grandes edifícios e empresas. Controle preciso, máxima economia e longas distâncias de tubulação.</p>
+    </div>
+    <div class="sistema-card">
+      <img src="images/Produtos/Cassete/Cassete_Electrolux.jpg" alt="Cassette" class="sistema-img">
+      <h3>Cassette</h3>
+      <p>Ideal para ambientes amplos e com forro rebaixado. Distribuição de ar uniforme em 360º e design discreto.</p>
+    </div>
+    <div class="sistema-card">
+      <img src="images/Produtos/Piso_teto/piso-teto.Fujitsu.webp" alt="Piso Teto" class="sistema-img">
+      <h3>Piso Teto</h3>
+      <p>Versatilidade e alta potência. Pode ser instalado no piso ou no teto, perfeito para comércios e grandes salões.</p>
+    </div>
+  </div>
+  <a href="#contato" class="cta-header btn-especialista">FALAR COM UM ESPECIALISTA</a>
+</section>
+
+<!-- DESTAQUE FUJITSU (PREMIUM vs ESSENCIAL) -->
+<section class="section section-destaque">
+  <div class="destaque-container">
+    <!-- Substitua 'caminho-da-sua-imagem.jpg' pelo arquivo que você deseja usar -->
+    <img src="https://th.bing.com/th/id/R.54c9925b7a82d0e227879aa2a23a9b37?rik=%2fQqHuepk686i7Q&riu=http%3a%2f%2fairforcedair.com.au%2fwp-content%2fuploads%2f2023%2f03%2fFUJITSU-AIRSTAGE-logo-horizontal-full-colour.png&ehk=xjV1dTYiwlUiXyGWInrDTd7mX5BE%2b6o1kF0X4g7UKL4%3d&risl=&pid=ImgRaw&r=0" alt="Destaque Fujitsu" class="destaque-img">
+    
+    <div class="destaque-grid">
+      
+      <!-- CARD PREMIUM -->
+      <div class="card-destaque card-destaque-premium">
+        <div class="card-destaque-body">
+          <h3 class="card-destaque-title premium">LINHA PREMIUM</h3>
+          <p class="card-destaque-desc">A máxima eficiência energética com recursos de inteligência.</p>
+          <hr class="card-destaque-hr">
+          <ul class="card-destaque-list">
+            <li><img src="https://img.icons8.com/ios-filled/50/d30029/star--v1.png" class="icon-inline" alt="Star"> <strong>Sensor de Presença</strong> Humana</li>
+            <li><img src="https://img.icons8.com/ios-filled/50/d30029/star--v1.png" class="icon-inline" alt="Star"> <strong>Extrema Economia</strong> (Selo A)</li>
+            <li><img src="https://img.icons8.com/ios-filled/50/d30029/star--v1.png" class="icon-inline" alt="Star"> Funcionamento <strong>Super Silencioso</strong></li>
+          </ul>
+          <a href="Marcas.index/fujitsu.html#premium" class="cta-header btn-destaque premium">QUERO PREMIUM</a>
+        </div>
+      </div>
+
+      <!-- CARD ESSENCIAL -->
+      <div class="card-destaque card-destaque-essencial">
+        <div class="card-destaque-body">
+          <h3 class="card-destaque-title essencial">LINHA ESSENCIAL</h3>
+          <p class="card-destaque-desc">O conforto ideal com a durabilidade lendária da Fujitsu.</p>
+          <hr class="card-destaque-hr">
+          <ul class="card-destaque-list">
+            <li><img src="https://img.icons8.com/ios-filled/50/00918E/checkmark--v1.png" class="icon-inline" alt="Check"> <strong>Alta Durabilidade</strong> e Robustez</li>
+            <li><img src="https://img.icons8.com/ios-filled/50/00918E/checkmark--v1.png" class="icon-inline" alt="Check"> Proteção contra <strong>Corrosão</strong></li>
+            <li><img src="https://img.icons8.com/ios-filled/50/00918E/checkmark--v1.png" class="icon-inline" alt="Check"> Melhor <strong>Custo-Benefício</strong></li>
+          </ul>
+          <a href="Marcas.index/fujitsu.html#essencial" class="cta-header btn-destaque essencial">QUERO ESSENCIAL</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- SERVIÇOS -->
+<section class="section section-servicos" id="servicos">
+  <h2>Venda e Serviço. A Solução Completa de Conforto com a ALPE.</h2>
+  <div class="servicos-grid">
+    <div class="servico-card">
+      <h3><img src="images/Icone/Instalacao_certificada.png" class="icon-service" alt="Tools"> Instalação Certificada</h3>
+      <p>Compre e instale com a ALPE e garanta que seu equipamento funcione com a máxima eficiência e segurança, mantendo a garantia de fábrica.</p>
+      <a href="#contato" class="cta-header">SOLICITE SEU ORÇAMENTO</a>
+    </div>
+    <div class="servico-card">
+      <h3><img src="images/Icone/Manutencao_preventiva.png" class="icon-service" alt="Clean"> Manutenção Preventiva</h3>
+      <p>Planos de Manutenção Preventiva (PMOC) para empresas e limpeza especializada para residências. Ar mais limpo e contas mais leves.</p>
+      <a href="#contato" class="cta-header">CONHEÇA NOSSOS PLANOS</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="section" id="produtos">
+  <h2>OS MAIS VENDIDOS DA ALPE</h2>
+  <p>Eficiência, tecnologia e os melhores preços do mercado.</p>
+  <div class="catalogo-grid">
+    
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Samsung/Samsung-12000.webp" alt="Samsung Inverter 12.000 BTU">
+      <div class="produto-info">
+        <h4>Samsung Inverter 12.000 BTU</h4>
+        <p class="prod-feature green">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.599,00</div>
+        <p class="prod-installment">ou 10x de R$ 329,90</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+    
+    <div class="produto-card">
+      <img src="images/Produtos/Split_LG/split-inverter-lg-hi-wall-dual-compact-9000-btus-frio-220v.png" alt="LG Dual Inverter 9.000 BTU">
+      <div class="produto-info">
+        <h4>LG Dual Inverter 9.000 BTU</h4>
+        <p class="prod-feature green">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.207,08</div>
+        <p class="prod-installment">ou 10x de R$ 265,00</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+    
+    <div class="produto-card">
+      <img src="images/Produtos/Cassete/k7-4-vias-daikin-sky-air.webp" alt="Daikin Cassete 36.000 BTU">
+      <div class="produto-info">
+        <h4>Daikin Cassete 36.000 BTU</h4>
+        <p class="prod-feature red">🔥 Destaque Comercial</p>
+        <div class="preco">R$ 14.719,58</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Hisense/ar-condicionado-split-inverter-hi-wall-wi-fi-hisense-12000-btus-frio-220v.jpg" alt="Hisense inverter 12.000 BTU">
+      <div class="produto-info">
+        <h4>Hisense inverter 12.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.299,48</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+    
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Elgin/ar-condicionado-elgin-inverter-eco-ii-wi-fi-12000-btus-frio-220v-r-32.webp" alt="Elgin inverter 12.000 BTU">
+      <div class="produto-info">
+        <h4>Elgin inverter 12.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 1.899,05</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Electrolux/Electrolux-9000.png" alt="Electrolux inverter 9.000 BTU">
+      <div class="produto-info">
+        <h4>Electrolux inverter 9.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 1.899,00</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Fujitsu/fujitsu-9000-premium.jpg" alt="Fujitsu inverter 9.000 BTU">
+      <div class="produto-info">
+        <h4>Fujitsu inverter 9.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 1.722,28</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Hitachi/Hitachi-9000.webp" alt="Hitachi inverter 9.000 BTU">
+      <div class="produto-info">
+        <h4>Hitachi inverter 9.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 1.994,05</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+    <div class="produto-card">
+      <img src="images/Produtos/Split_Philco/Philco_Split_12000.webp" alt="Philco inverter 12.000 BTU">
+      <div class="produto-info">
+        <h4>Philco inverter 12.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 1.999,00</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+     <div class="produto-card">
+      <img src="images/Produtos/Split_Gree/split-inverter-gree-g-top-auto-9000-btuh-frio-r-32-220v-9000-frio-63.webp" alt="Gree inverter 9.000 BTU">
+      <div class="produto-info">
+        <h4>Gree inverter 9.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.051,05</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+     <div class="produto-card">
+      <img src="images/Produtos/Split_TCL/TCL-freshin3-0-1.webp" alt="TCL inverter 12.000 BTU">
+      <div class="produto-info">
+        <h4>TCL inverter 12.000 BTU</h4>
+        <p class="prod-feature hw-freshin_3.0">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.199,24</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+     <div class="produto-card">
+      <img src="images/Produtos/Split_Midea/Midea-9000.webp" alt="Midea inverter 9.000 BTU">
+      <div class="produto-info">
+        <h4>Midea inverter 9.000 BTU</h4>
+        <p class="prod-feature light-green">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.469,05</div>
+        <p class="prod-installment">Solicite Orçamento</p>
+        <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CALCULADORA BTU FUNCIONAL -->
+<section class="section section-calculadora" id="calculadora">
+  <h2>QUAL O AR IDEAL PARA O SEU AMBIENTE?</h2>
+  <p>Use nossa Calculadora de BTU e descubra o modelo ideal para garantir conforto e economia.</p>
+
+  <form id="btuForm" class="form-calculadora">
+    <label for="area">Área do ambiente (m²):</label>
+    <input type="number" id="area" required placeholder="Ex: 12" class="input-calculadora">
+
+    <label for="pessoas">Quantidade de pessoas:</label>
+    <input type="number" id="pessoas" required placeholder="Ex: 2" class="input-calculadora input-calculadora-last">
+
+    <button type="submit" class="btn-calculadora">
+      CALCULAR BTU IDEAL
+    </button>
+  </form>
+
+  <p id="btuResult" class="result-calculadora"></p>
+</section>
+
+
+<!-- FORMAS DE PAGAMENTO -->
+<section class="section-pagamento">
+  <h2 class="title-pagamento">Formas de Pagamento</h2>
+  <div class="grid-pagamento">
+    <img src="images/logo pagamento/pix.webp" alt="Pix" class="img-pagamento">
+    <img src="images/logo pagamento/boleto.webp" alt="boleto" class="img-pagamento">
+    <img src="images/logo pagamento/mastercard.webp" alt="Mastercard" class="img-pagamento">
+    <img src="images/logo pagamento/visa.webp" alt="Visa" class="img-pagamento">
+    <img src="images/logo pagamento/dinner club.webp" alt="Diners Club" class="img-pagamento">
+    <img src="images/logo pagamento/elo.webp" alt="Elo" class="img-pagamento">
+    <img src="images/logo pagamento/hipercard.webp" alt="Hipercard" class="img-pagamento">
+    <img src="images/logo pagamento/america express.webp" alt="America Express" class="img-pagamento">
+  </div>
+</section>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20visitei%20o%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento."
+   class="whatsapp-square" target="_blank" rel="noopener noreferrer" aria-label="Contato WhatsApp">
+  <img src="images/Icone/FALE_CONOSCO_150x50.webp" alt="Fale Conosco">
+</a>
+
+<!-- FORMULÁRIO DE CONTATO -->
+<section id="contato" class="section section-contato">
+  <h2>Fale Conosco</h2>
+  <p>Tem alguma dúvida ou quer um orçamento personalizado? Envie uma mensagem!</p>
+  
+  <!-- IMPORTANTE: Cadastre-se no formspree.io para obter seu link e substitua abaixo -->
+  <form action="https://formspree.io/f/SEU_CODIGO_AQUI" method="POST" class="form-contato">
+    <input type="text" name="nome" placeholder="Seu Nome" required class="input-contato">
+    <input type="email" name="email" placeholder="Seu E-mail" required class="input-contato">
+    <input type="tel" name="telefone" placeholder="Seu Telefone (WhatsApp)" class="input-contato">
+    <textarea name="mensagem" rows="4" placeholder="Como podemos ajudar?" required class="input-contato"></textarea>
+    <button type="submit" class="btn-primary btn-contato">ENVIAR MENSAGEM</button>
+  </form>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2025 ALPE Ar Condicionado & Climatização. Todos os direitos reservados.</p>
+  <p class="footer-contact"><img src="https://img.icons8.com/ios-filled/50/ffffff/phone.png" class="icon-footer" alt="Phone"> 21 98022-0417 | <img src="https://img.icons8.com/ios-filled/50/ffffff/email.png" class="icon-footer" alt="Email"> alpe.arcondicionado@hotmail.com</p>
+</footer>
+
+
+
+<!-- SCRIPT DA CALCULADORA -->
+<script>
+document.getElementById('btuForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const area = Number(document.getElementById('area').value) || 0;
+    const pessoas = Number(document.getElementById('pessoas').value) || 1;
+
+    const base = area * 600;
+    const pessoasExtra = Math.max(0, pessoas - 1) * 600;
+    const resultado = Math.ceil(base + pessoasExtra);
+
+    const recomendado = resultado < 7000 ? 7000 : resultado;
+
+    document.getElementById('btuResult').textContent =
+      'BTU recomendado: ' + recomendado + ' BTU';
+});
+</script>
+
+
+<!-- SCRIPT DO CARRINHO -->
+<script src="js/cart.js"></script>
+</body>
+</html>

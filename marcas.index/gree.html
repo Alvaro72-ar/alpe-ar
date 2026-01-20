@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gree - A Maior Fabricante do Mundo | ALPE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--cor-principal:#007bff;--cor-secundaria:#343a40;--cor-texto:#333;}
+* { font-family: 'Roboto', sans-serif !important; font-weight: 400; letter-spacing: 0.2px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+h1, h2, h3, .cta-header { font-weight: 700 !important; letter-spacing: -0.5px; }
+body, p, span, li { font-weight: 400 !important; }
+strong, b { font-weight: 700 !important; }
+body{margin:0;color:var(--cor-texto);background:white;line-height:1.6;}
+header{background:white;padding:5px 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100;}
+.logo { display: flex; align-items: flex-end; gap: 0; text-decoration: none; }
+.logo img:first-child { height: 55px; }
+.logo img:last-child { height: 45px; margin-left: -15px; }
+nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
+.cta-header{background:var(--cor-principal);color:white;padding:8px 15px;border-radius:5px;text-decoration:none;font-weight:bold;white-space:nowrap;}
+.section{padding:30px 5%;text-align:center;}
+.catalogo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;max-width:1200px;margin:0 auto;}
+.produto-card{background:white;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;box-shadow:0 4px 10px rgba(0,0,0,0.08);transition:all 0.3s;display:flex;flex-direction:column;}
+.produto-card:hover{transform:translateY(-8px);}
+.produto-card img{width:100%;height:180px;object-fit:contain;background:#fafafa;padding:10px;display:block;}
+.produto-info{padding:12px;text-align:left;display:flex;flex-direction:column;flex:1;}
+.produto-info h4{margin:5px 0;color:var(--cor-secundaria);font-size:14px;line-height:1.4;}
+.produto-info .preco{font-size:18px;font-weight:bold;color:var(--cor-principal);margin:5px 0;}
+.produto-info p{font-size:11px !important; margin: 4px 0;}
+.cta-card{display:block;color:white;text-align:center;padding:8px 0;border-radius:5px;text-decoration:none;margin-top:auto;font-weight:600;font-size:13px;}
+footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:center;}
+.whatsapp-square{position:fixed;bottom:20px;right:20px;z-index:1000;}
+.whatsapp-square img{width:150px;height:auto;box-shadow:0 4px 10px rgba(0,0,0,0.2);transition:all 0.3s;}
+.whatsapp-square img:hover{transform:scale(1.05);box-shadow:0 6px 15px rgba(0,0,0,0.3);}
+.top-bar { width: 100%; background: #ffffff; border-bottom: 1px solid #ddd; font-size: 14px; }
+.top-bar-container { max-width: 1400px; margin: auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; padding: 8px 10px; gap: 20px; }
+.top-item { display: flex; align-items: center; gap: 8px; color: #000; text-align: left; }
+.top-item div { display: flex; flex-direction: column; line-height: 1.2; }
+.top-item span { font-size: 11px; color: #555; font-weight: 400; }
+.top-item img { width: 24px; height: 24px; object-fit: contain; margin-right: 2px; }
+.top-item strong { font-weight: bold; }
+@media (max-width: 900px) { .top-bar-container { justify-content: center; } }
+
+/* RESPONSIVO - Tablet */
+@media (max-width:1024px){
+  header{padding:5px 2%;}
+  nav a{margin-left:12px;font-size:13px;}
+  .catalogo-grid{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));}
+}
+
+/* RESPONSIVO - Celular */
+@media (max-width:768px){
+  header{padding:8px 3%;flex-wrap:wrap;}
+  .logo img:first-child{height:45px;}
+  .logo img:last-child{height:35px;margin-left:-10px;}
+  nav{display:none;}
+  
+  .top-bar{font-size:11px;}
+  .top-bar-container{padding:5px;gap:8px;flex-direction:column;}
+  .top-item{font-size:10px;}
+  .top-item img{width:18px;height:18px;}
+  
+  .brand-logo{max-width:150px;}
+  
+  .catalogo-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px;}
+  .produto-card{border-radius:6px;}
+  .produto-card img{height:100px;}
+  .produto-info h4{font-size:11px;}
+  .produto-info .preco{font-size:14px;}
+  .cta-card{font-size:11px;padding:6px 0;}
+  
+  .section{padding:20px 3%;}
+  .section h2{font-size:22px;}
+  
+  .whatsapp-square img{width:60px;}
+  
+  footer{padding:12px;font-size:11px;}
+}
+.icon-inline { width: 16px; height: 16px; vertical-align: middle; margin-bottom: 3px; margin-right: 4px; }
+
+/* MENU DROPDOWN */
+.dropdown { position: relative; display: inline-block; }
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  z-index: 1000;
+  border-radius: 8px;
+  top: 100%;
+  left: 0;
+  padding: 10px 0;
+}
+.dropdown-content a {
+  color: var(--cor-texto);
+  padding: 10px 20px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+.dropdown-content a:hover { background-color: #f8f9fa; color: var(--cor-principal); }
+.dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Header Actions */
+.header-actions { display: flex; align-items: center; gap: 20px; }
+.cart-link { position: relative; display: flex; align-items: center; text-decoration: none; }
+.cart-badge { position: absolute; top: -8px; right: -8px; background: #d30029; color: white; font-size: 10px; font-weight: bold; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+
+.section-hero { background-color: #f8f9fa; }
+.brand-logo { height: auto; max-width: 200px; margin: 0 auto 20px; display: block; }
+.section-title-gree { color: #00a9ce; border-bottom: 2px solid #00a9ce; display: inline-block; padding-bottom: 10px; }
+.grid-margin { margin-top: 20px; }
+.feature-highlight { color: #00a9ce; font-weight: 600; }
+.cta-gree { background-color: #00a9ce; }
+.cart-icon { width: 26px; height: 26px; }
+.footer-link { color: white; text-decoration: underline; }
+.selo-procel { color: green; font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="top-bar">
+    <div class="top-bar-container">
+        <div class="top-item"><img src="../images/Icone/Fale_conosco.png" alt="Chat"><div><strong>FALE CONOSCO</strong></div></div>
+        <div class="top-item"><img src="../images/Icone/Televendas.png" alt="Telefone"><div><strong>TELEVENDAS</strong></div></div>
+        <div class="top-item"><img src="../images/Icone/whatsapp-logo-.png" alt="WhatsApp"><div><strong>Compre pelo WhatsApp</strong></div></div>
+        <div class="top-item"><img src="../images/Icone/entrega.png" alt="Entrega"><div><strong>Entrega em todo o Brasil</strong><span>verifique as modalidades</span></div></div>
+        <div class="top-item"><img src="../images/Icone/Cartao_parc.png" alt="Cartão"><div><strong>Parcele em até 8x</strong><span>sem juros</span></div></div>
+        <div class="top-item"><img src="../images/Icone/Pix.png" alt="Pix"><div><strong>5% OFF no PIX</strong><span>pagamento à vista</span></div></div>
+    </div>
+</div>
+<header>
+  <a href="../index.html" class="logo"><img src="../images/logo marcas/Triângulo-Logo.webp" alt="Logo ALPE"><img src="../images/logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária"></a>
+  <nav>
+    <a href="../index.html">Voltar ao Início</a>
+    <div class="dropdown">
+      <a href="#">Marcas ▾</a>
+      <div class="dropdown-content">
+        <a href="daikin.html">Daikin</a>
+        <a href="fujitsu.html">Fujitsu</a>
+        <a href="gree.html">Gree</a>
+        <a href="hitachi.html">Hitachi</a>
+        <a href="lg.html">LG</a>
+        <a href="midea.html">Midea</a>
+        <a href="samsung.html">Samsung</a>
+        <a href="elgin.html">Elgin</a>
+        <a href="electrolux.html">Electrolux</a>
+        <a href="hisense.html">Hisense</a>
+        <a href="philco.html">Philco</a>
+        <a href="tcl.html">TCL</a>
+      </div>
+    </div>
+    <a href="../sobre-nos/sobre-nos.html">Sobre Nós</a>
+    <a href="../index.html#servicos">Serviços</a>
+    <a href="../index.html#produtos">Produtos</a>
+    <a href="../index.html#contato">Contato</a>
+    <a href="#gtop">G-Top</a>
+    <a href="#diamond">G-Diamond</a>
+  </nav>
+  <div class="header-actions">
+    <a href="#" class="cart-link"><img src="https://img.icons8.com/ios-filled/50/000000/shopping-cart.png" alt="Carrinho" class="cart-icon"><span class="cart-badge">0</span></a>
+    <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20vi%20a%20página%20Gree." target="_blank" rel="noopener noreferrer" class="cta-header">Fale Conosco</a>
+  </div>
+</header>
+<section class="section section-hero">
+  <img src="../images/logo marcas/gree-logo_original.png" alt="Gree" class="brand-logo">
+  <h1>Qualidade Mundial</h1>
+  <p>A marca de ar condicionado mais vendida do mundo.</p>
+</section>
+<section id="gtop" class="section">
+  <h2 class="section-title-gree">G-TOP INVERTER</h2>
+  <div class="catalogo-grid grid-margin">
+    <div class="produto-card">
+      <!-- Substitua pela imagem correta do produto Gree -->
+      <img src="../images/produtos/split_gree/split-inverter-gree-g-top-auto-9000-btuh-frio-r-32-220v-9000-frio-63.webp" alt="Gree G-Top 9000">
+      <div class="produto-info">
+        <h4>Gree G-Top Inverter 9.000 BTU</h4>
+        <p class="selo-procel">✓ Selo Procel A</p>
+        <div class="preco">R$ 2.051,05</div>
+        <a href="#" class="cta-card cta-gree btn-add-cart">COMPRAR AGORA</a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer><p>© 2025 ALPE.Ar Condicionado. <a href="../index.html" class="footer-link">Voltar ao site principal</a></p></footer>
+<a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20vi%20a%20página%20Gree." class="whatsapp-square" target="_blank" rel="noopener noreferrer"><img src="../images/icone/fale_conosco_150x50.webp" alt="Fale Conosco"></a>
+<script src="../js/cart.js"></script>
+</body>
+</html>
