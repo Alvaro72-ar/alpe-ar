@@ -421,7 +421,10 @@ footer{
   .banner-subtitle{font-size:18px;}
   .btn-primary,.btn-secondary{padding:14px 30px;font-size:16px;}
   .features{gap:25px;}
-  .carousel{height:auto; aspect-ratio:16/9;} /* Ajuste proporcional para celular (evita cortes excessivos) */
+  .carousel{height:220px; aspect-ratio:auto;} /* Altura fixa para garantir que o banner apareça */
+  .card-destaque{min-width:40%;} /* Permite que os cards fiquem lado a lado */
+  .card-destaque-body{padding:10px;} /* Reduz espaçamento interno para caber melhor */
+  .destaque-grid{gap:10px;} /* Reduz o espaço entre os cards */
   .servico-card{width:100%;}
   .logo img:first-child{height:45px;}
   .logo img:last-child{height:35px;margin-left:-10px;}
