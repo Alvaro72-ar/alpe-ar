@@ -420,11 +420,12 @@ footer{
   .banner-title{font-size:36px;}
   .banner-subtitle{font-size:18px;}
   .btn-primary,.btn-secondary{padding:14px 30px;font-size:16px;}
-  .features{gap:25px;}
+  .features{gap:15px;} /* Reduzir o gap para caber mais */
   .carousel{height:220px; aspect-ratio:auto;} /* Altura fixa para garantir que o banner apareça */
-  .card-destaque{min-width:40%;} /* Permite que os cards fiquem lado a lado */
+  .carousel-slide{object-fit: contain;} /* Garante que a imagem inteira do banner seja visível */
+  .card-destaque{width:48%; min-width: unset;} /* Força 2 cards por linha, remove min-width conflitante */
   .card-destaque-body{padding:10px;} /* Reduz espaçamento interno para caber melhor */
-  .destaque-grid{gap:10px;} /* Reduz o espaço entre os cards */
+  .destaque-grid{gap:4%;} /* Ajusta o espaço entre os cards para 2 por linha */
   .servico-card{width:100%;}
   .logo img:first-child{height:45px;}
   .logo img:last-child{height:35px;margin-left:-10px;}
