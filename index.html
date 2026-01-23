@@ -280,10 +280,8 @@ nav a:hover{color:var(--cor-principal);}
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: auto; /* Altura automática baseada na proporção */
   aspect-ratio: 21/9; /* Proporção Widescreen (Padrão de Cinema) */
   max-height: 500px; /* Limite para não ficar gigante em telas enormes */
-  height: 350px; /* Altura fixa REDUZIDA para evitar cortes laterais */
   background: #ffffff;
 }
 .carousel-slide {
@@ -424,9 +422,7 @@ footer{
   .btn-primary,.btn-secondary{padding:14px 30px;font-size:16px;}
   .features{gap:25px;}
   .carousel{height:auto; aspect-ratio:16/9;} /* Ajuste proporcional para celular (evita cortes excessivos) */
-  .carousel{height:180px;} /* Altura fixa menor para celular (mostra mais as laterais) */
   .servico-card{width:100%;}
-  nav{display:none;}
   .logo img:first-child{height:45px;}
   .logo img:last-child{height:35px;margin-left:-10px;}
   .whatsapp-square img{width:50px;}
@@ -549,6 +545,19 @@ textarea.input-contato { resize: vertical; }
 .sistema-card h3 { font-size: 16px; margin-bottom: 5px; color: var(--cor-secundaria); font-weight: 700; }
 .sistema-card p { font-size: 12px; color: #666; line-height: 1.4; margin: 0; }
 </style>
+<!-- Estilos para o Menu Mobile -->
+<style>
+  .hamburger { display: none; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--cor-secundaria); padding-left: 15px; }
+  @media (max-width: 768px) {
+    .hamburger { display: block; }
+    header { justify-content: space-between; }
+    nav { display: none; flex-direction: column; width: 100%; order: 3; background: #fff; padding: 15px 0; text-align: center; gap: 15px; border-top: 1px solid #eee; }
+    nav.active { display: flex; }
+    nav a { margin: 0; }
+    .dropdown-content { display: none; position: static; box-shadow: none; border-top: 1px solid #eee; margin-top: 10px; background: #f9f9f9; }
+    .dropdown:hover .dropdown-content { display: none; } /* Desativa hover no mobile para evitar conflitos */
+  }
+</style>
 </head>
 <body>
 
@@ -597,7 +606,7 @@ textarea.input-contato { resize: vertical; }
     
     <img src="images/logo marcas/texto-logo_-_editado-removebg-preview.png" alt="Logo Secundária">
   </a>
-  <nav>
+  <nav id="main-nav">
     <div class="dropdown">
       <a href="#marcas">Marcas ▾</a>
       <div class="dropdown-content">
@@ -638,6 +647,11 @@ textarea.input-contato { resize: vertical; }
     </a>
     <a href="#calculadora" class="cta-header">Calcule Seu BTU</a>
   </div>
+
+  <!-- Botão Hambúrguer (só aparece no mobile) -->
+  <button type="button" class="hamburger" id="hamburger-btn" aria-label="Abrir Menu">
+    <i class="fas fa-bars"></i>
+  </button>
 </header>
 
  <main>
@@ -1078,6 +1092,39 @@ document.getElementById('btuForm').addEventListener('submit', function(e) {
 });
 </script>
 
+<!-- SCRIPT DO MENU MOBILE -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const navMenu = document.getElementById('main-nav');
+
+  if (hamburgerBtn && navMenu) {
+    hamburgerBtn.addEventListener('click', function() {
+      navMenu.classList.toggle('active');
+      const icon = hamburgerBtn.querySelector('i');
+      if (navMenu.classList.contains('active')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+  }
+
+  // Adiciona funcionalidade de toque para dropdowns no mobile
+  const dropdownToggles = document.querySelectorAll('#main-nav .dropdown > a');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', function(e) {
+      // Verifica se estamos em visualização mobile (pelo hamburger visível)
+      if (hamburgerBtn && window.getComputedStyle(hamburgerBtn).display === 'block') {
+        e.preventDefault(); // Previne a navegação do link principal
+        const dropdownContent = this.nextElementSibling;
+        // Alterna a exibição do conteúdo do dropdown
+        dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+      }
+    });
+  });
+});
+</script>
 
 <!-- SCRIPT DO CARRINHO -->
 <script src="js/cart.js"></script>
