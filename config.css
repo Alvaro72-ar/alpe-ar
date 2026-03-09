@@ -1,0 +1,15 @@
+/* CONFIGURAÇÕES CSS DO SITE ALPE */
+
+/* CORES DO TEMA */
+:root {
+  --cor-principal: #007bff;
+  --cor-secundaria: #343a40;
+  --cor-fundo: #f8f9fa;
+  --cor-texto: #333;
+  --cor-whatsapp: #25d366;
+}
+
+/* INSTRUÇÕES DE USO:
+1. Para configurações JavaScript (números, textos), veja config.js
+2. Para alterar cores, modifique as variáveis CSS acima
+*/
