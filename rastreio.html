@@ -1,85 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Rastreio de Encomenda</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      width: 350px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 22px;
-      margin-bottom: 20px;
-      color: #333;
-    }
-    input[type="text"] {
-      width: 90%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-    .resultado {
-      margin-top: 20px;
-      font-size: 16px;
-      color: #444;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rastrear Pedido | ALPE Ar Condicionado</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --cor-principal:#007bff;
+  --cor-secundaria:#343a40;
+  --cor-fundo:#f8f9fa;
+  --cor-texto:#333;
+}
+* { font-family: 'Roboto', sans-serif; box-sizing: border-box; }
+body{margin:0;color:var(--cor-texto);background:var(--cor-fundo);line-height:1.6;display:flex;flex-direction:column;min-height:100vh;}
+
+/* Header Simplificado */
+header{background:white;padding:10px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,0.05);}
+.logo{display:flex;align-items:flex-end;text-decoration:none;} 
+.logo img:first-child { height: 60px; }
+.logo img:last-child { height: 35px; margin-left: -20px; }
+nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
+nav a:hover{color:var(--cor-principal);}
+
+/* Área de Rastreio */
+.main-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+.tracking-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 500px; text-align: center; }
+.tracking-card h1 { color: var(--cor-secundaria); margin-bottom: 10px; }
+.tracking-card p { color: #666; margin-bottom: 30px; }
+
+.input-group { margin-bottom: 20px; text-align: left; }
+.input-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #444; }
+.input-group input { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: border 0.3s; }
+.input-group input:focus { border-color: var(--cor-principal); outline: none; }
+
+.btn-track { background: var(--cor-principal); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+.btn-track:hover { background: #0056b3; }
+
+/* Resultado do Rastreio */
+#result-area { display: none; margin-top: 30px; text-align: left; border-top: 1px solid #eee; padding-top: 20px; animation: fadeIn 0.5s; }
+.status-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+.status-transito { background: #fff3cd; color: #856404; }
+.status-entregue { background: #d4edda; color: #155724; }
+
+.timeline { position: relative; padding-left: 20px; margin-top: 20px; border-left: 2px solid #eee; }
+.timeline-item { position: relative; margin-bottom: 20px; }
+.timeline-item::before { content: ''; position: absolute; left: -26px; top: 5px; width: 10px; height: 10px; background: var(--cor-principal); border-radius: 50%; border: 2px solid white; box-shadow: 0 0 0 2px var(--cor-principal); }
+.timeline-date { font-size: 12px; color: #888; }
+.timeline-desc { font-weight: 500; }
+
+footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:center;font-size:14px;margin-top:auto;}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .logo img:first-child { height: 45px; }
+    .logo img:last-child { height: 30px; margin-left: -10px; }
+    nav { display: none; } /* Menu simplificado para mobile */
+}
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Rastreio de Encomenda</h1>
-    <form id="formRastreio">
-      <input type="text" id="codigo" placeholder="Digite o código de rastreio" required>
-      <br>
-      <button type="submit">Rastrear</button>
-    </form>
-    <div class="resultado" id="resultado"></div>
-  </div>
 
-  <script>
-    const form = document.getElementById('formRastreio');
-    const resultado = document.getElementById('resultado');
+<header>
+  <a href="index.html" class="logo">
+    <img src="images/logo marcas/Triângulo-Logo.webp" alt="Logo ALPE">
+    <img src="images/Logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
+  </a>
+  <nav>
+    <a href="index.html">Voltar ao Início</a>
+    <a href="index.html#contato">Ajuda</a>
+  </nav>
+</header>
 
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const codigo = document.getElementById('codigo').value.trim();
+<main class="main-content">
+    <div class="tracking-card">
+        <i class="fas fa-shipping-fast" style="font-size: 48px; color: var(--cor-principal); margin-bottom: 20px;"></i>
+        <h1>Acompanhe seu Pedido</h1>
+        <p>Digite o CPF ou número do pedido para verificar o status da entrega.</p>
+        
+        <form id="trackingForm" onsubmit="buscarPedido(event)">
+            <div class="input-group">
+                <label for="codigo">Código de Rastreio ou CPF</label>
+                <input type="text" id="codigo" placeholder="Ex: 123.456.789-00 ou PED-1234" required>
+            </div>
+            <button type="submit" class="btn-track">RASTREAR AGORA</button>
+        </form>
 
-      if (codigo === "") {
-        resultado.textContent = "Por favor, digite um código válido.";
-        return;
-      }
+        <div id="result-area">
+            <div id="dynamic-content">
+                <!-- O conteúdo será injetado aqui pelo JS -->
+            </div>
+        </div>
+    </div>
+</main>
 
-      // Aqui você pode integrar com uma API real de rastreio (Correios, etc.)
-      // Por enquanto, vamos simular uma resposta:
-      resultado.textContent = "Status do código " + codigo + ": Em trânsito para o destino.";
-    });
-  </script>
+<footer>
+  <p>© 2025 ALPE Ar Condicionado & Climatização.</p>
+</footer>
+
+<script>
+function buscarPedido(e) {
+    e.preventDefault();
+    const codigo = document.getElementById('codigo').value;
+    const resultArea = document.getElementById('result-area');
+    const content = document.getElementById('dynamic-content');
+    const btn = document.querySelector('.btn-track');
+
+    // Efeito de carregamento
+    const originalText = btn.innerText;
+    btn.innerText = "BUSCANDO...";
+    btn.disabled = true;
+
+    setTimeout(() => {
+        btn.innerText = originalText;
+        btn.disabled = false;
+        resultArea.style.display = 'block';
+
+        // Simulação de lógica (pode ser substituída por backend real no futuro)
+        // Se o código tiver mais de 3 caracteres, mostra sucesso simulado
+        if(codigo.length > 3) {
+            content.innerHTML = `
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="margin: 0 0 5px 0; color: #333;">Pedido #8492</h3>
+                    <span class="status-badge status-transito">Em Trânsito</span>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">Previsão: <strong>12/03/2026</strong></p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">Hoje, 08:30</div>
+                        <div class="timeline-desc">Saiu para entrega ao destinatário</div>
+                        <div style="font-size:12px; color:#666;">Rio de Janeiro, RJ</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Ontem, 14:20</div>
+                        <div class="timeline-desc">Chegou na unidade de distribuição</div>
+                        <div style="font-size:12px; color:#666;">Duque de Caxias, RJ</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">07/03/2026</div>
+                        <div class="timeline-desc">Pagamento Aprovado</div>
+                    </div>
+                </div>
+                
+                <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá,%20estou%20com%20dúvida%20no%20pedido%20${codigo}" target="_blank" style="display:block; margin-top:20px; color:var(--cor-principal); text-decoration:none; font-weight:bold; font-size:14px;">
+                    <i class="fab fa-whatsapp"></i> Falar com atendente sobre este pedido
+                </a>
+            `;
+        } else {
+            // Caso de erro simulado
+            content.innerHTML = `
+                <div style="color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 5px;">
+                    <i class="fas fa-exclamation-circle"></i> Pedido não encontrado. Verifique o código digitado.
+                </div>
+            `;
+        }
+    }, 1500); // Delay de 1.5s para simular busca
+}
+</script>
+
 </body>
 </html>
