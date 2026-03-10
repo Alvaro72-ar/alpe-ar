@@ -2,11 +2,84 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Rastreio</title>
+  <title>Rastreio de Encomenda</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 350px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    input[type="text"] {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .resultado {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #444;
+    }
+  </style>
 </head>
 <body>
-  <h1>Página de Rastreio</h1>
-  <p>Esta é uma página de teste para confirmar que o rastreio.html está funcionando.</p>
+  <div class="container">
+    <h1>Rastreio de Encomenda</h1>
+    <form id="formRastreio">
+      <input type="text" id="codigo" placeholder="Digite o código de rastreio" required>
+      <br>
+      <button type="submit">Rastrear</button>
+    </form>
+    <div class="resultado" id="resultado"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formRastreio');
+    const resultado = document.getElementById('resultado');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const codigo = document.getElementById('codigo').value.trim();
+
+      if (codigo === "") {
+        resultado.textContent = "Por favor, digite um código válido.";
+        return;
+      }
+
+      // Aqui você pode integrar com uma API real de rastreio (Correios, etc.)
+      // Por enquanto, vamos simular uma resposta:
+      resultado.textContent = "Status do código " + codigo + ": Em trânsito para o destino.";
+    });
+  </script>
 </body>
 </html>
-
