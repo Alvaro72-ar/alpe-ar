@@ -1,0 +1,8 @@
+{
+  "vendas": 25000.00,
+  "lucro": 8500.00,
+  "pedidos": 42,
+  "deltaVendas": "+15%",
+  "deltaLucro": "+10%",
+  "deltaPedidos": "+5"
+}

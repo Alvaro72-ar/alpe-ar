@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Utilitário para acesso seguro ao Storage (evita erro de Tracking Prevention)
+// Utilitário para acesso seguro ao Storage (evita erro de Tracking Prevention)
     const safeStorage = {
         get: (key) => {
             try {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Salva na lista e no navegador
         cart.push(product);
-        safeStorage.set('alpe_cart', JSON.stringify(cart));
+safeStorage.set('alpe_cart', JSON.stringify(cart));
         updateBadge();
         
         // Efeito visual no botão para confirmar
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <span id="close-cart" style="position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; font-weight:bold;">&times;</span>
                     <h2 style="margin-top:0; border-bottom:1px solid #eee; padding-bottom:10px; color:#333;">Seu Carrinho</h2>
                     <div id="cart-items" style="overflow-y:auto; flex:1; margin:10px 0;"></div>
-                    <div style="border-top:1px solid #eee; padding-top:15px; display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
+<div style="border-top:1px solid #eee; padding-top:15px; display:flex; justify-content:space-between; align-items:center; flex-wrap: wrap; gap: 10px;">
                         <button type="button" id="clear-cart" style="background:#dc3545; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer;">Esvaziar</button>
                         <div style="display: flex; gap: 10px; margin-left: auto; flex-wrap: wrap;">
                             <a href="../checkout.html" id="dashboard-checkout-btn" style="background:#007bff; color:white; text-decoration:none; padding:10px 15px; border-radius:5px; font-weight:bold; font-size: 14px;">Finalizar Pedido</a>
@@ -114,13 +114,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         // Limpar carrinho
         document.getElementById('clear-cart').addEventListener('click', () => {
-            if(confirm('Esvaziar carrinho?')) { cart = []; safeStorage.set('alpe_cart', JSON.stringify(cart)); updateBadge(); renderCartItems(); }
+if(confirm('Esvaziar carrinho?')) { cart = []; safeStorage.set('alpe_cart', JSON.stringify(cart)); updateBadge(); renderCartItems(); }
         });
     }
 
     function renderCartItems() {
         const container = document.getElementById('cart-items');
-        const checkoutBtn = document.getElementById('checkout-btn');
+const checkoutBtn = document.getElementById('checkout-btn');
         const dashboardCheckoutBtn = document.getElementById('dashboard-checkout-btn');
         const clearCartBtn = document.getElementById('clear-cart');
 
@@ -140,7 +140,7 @@ document.addEventListener('DOMContentLoaded', function() {
         cart.forEach((item, index) => {
             const div = document.createElement('div');
             div.style.cssText = "display:flex; align-items:center; gap:10px; margin-bottom:10px; background:#f8f9fa; padding:10px; border-radius:5px;";
-            div.innerHTML = `<img src="${item.image}" style="width:50px; height:50px; object-fit:contain; background:white; border: 1px solid #eee; border-radius: 4px;"><div style="flex:1;"><h4 style="margin:0; font-size:14px; color:#333;">${item.name}</h4><span style="color:#007bff; font-weight:bold;">${item.price}</span></div><button type="button" onclick="removeItem(${index})" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold; font-size: 18px; padding: 5px;">&times;</button>`;
+div.innerHTML = `<img src="${item.image}" style="width:50px; height:50px; object-fit:contain; background:white; border: 1px solid #eee; border-radius: 4px;"><div style="flex:1;"><h4 style="margin:0; font-size:14px; color:#333;">${item.name}</h4><span style="color:#007bff; font-weight:bold;">${item.price}</span></div><button type="button" onclick="removeItem(${index})" style="border:none; background:none; color:red; cursor:pointer; font-weight:bold; font-size: 18px; padding: 5px;">&times;</button>`;
             container.appendChild(div);
             msg += `* ${item.name} - ${item.price}%0A`;
         });
@@ -150,9 +150,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Função global auxiliar para remover item (necessária pois o onclick é inline)
         window.removeItem = function(index) {
             cart.splice(index, 1);
-            safeStorage.set('alpe_cart', JSON.stringify(cart));
+safeStorage.set('alpe_cart', JSON.stringify(cart));
             updateBadge();
             renderCartItems();
         };
     }
 });
+
