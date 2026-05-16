@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Confirmado | ALPE Ar Condicionado</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+<!-- Favicon -->
+<link rel="icon" href="images/logo marcas/Triângulo-Logo.webp" type="image/webp">
+<style>
+:root{
+  --cor-principal:#007bff;
+  --cor-secundaria:#343a40;
+  --cor-fundo:#f8f9fa;
+  --cor-texto:#333;
+  --cor-sucesso: #28a745;
+}
+* { font-family: 'Roboto', sans-serif; box-sizing: border-box; }
+body{margin:0;color:var(--cor-texto);background:var(--cor-fundo);line-height:1.6;display:flex;flex-direction:column;min-height:100vh;}
+
+/* Header Simplificado */
+header{background:white;padding:10px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,0.05);}
+.logo{display:flex;align-items:flex-end;text-decoration:none;} 
+.logo img:first-child { height: 60px; }
+.logo img:last-child { height: 35px; margin-left: -20px; }
+nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
+nav a:hover{color:var(--cor-principal);}
+
+/* Área Principal */
+.main-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+.tracking-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 600px; text-align: center; }
+.tracking-card h1 { color: var(--cor-secundaria); margin-bottom: 10px; }
+.tracking-card p { color: #666; margin-bottom: 30px; }
+
+.btn-track { background: var(--cor-principal); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
+.btn-track:hover { background: #0056b3; }
+
+/* Resumo do Pedido */
+.order-summary {
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+.order-summary h2 {
+    font-size: 20px;
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+    text-align: left;
+}
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.summary-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+}
+.summary-item-info {
+    flex: 1;
+}
+.summary-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+.summary-item-info span {
+    font-weight: bold;
+    color: var(--cor-principal);
+}
+.summary-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:center;font-size:14px;margin-top:auto;}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .tracking-card { padding: 20px; }
+    .logo img:first-child { height: 45px; }
+    .logo img:last-child { height: 30px; margin-left: -10px; }
+    nav { display: none; } /* Menu simplificado para mobile */
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <img src="images/logo marcas/Triângulo-Logo.webp" alt="Logo ALPE">
+    <img src="images/Logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
+  </a>
+  <nav>
+    <a href="index.html">Voltar ao Início</a>
+    <a href="index.html#contato">Ajuda</a>
+  </nav>
+</header>
+
+<main class="main-content">
+    <div class="tracking-card">
+        <div id="confirmation-container">
+            <!-- Conteúdo dinâmico será injetado aqui -->
+        </div>
+    </div>
+</main>
+
+<footer>
+  <p>© 2025 ALPE Ar Condicionado & Climatização.</p>
+</footer>
+
+<script src="config.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Utilitário para acesso seguro ao Storage
+    const safeStorage = {
+        get: (key) => {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                console.warn('Acesso ao localStorage bloqueado pelo navegador.', e);
+                return null;
+            }
+        },
+        remove: (key) => {
+            try {
+                localStorage.removeItem(key);
+            } catch (e) {
+                console.error('Erro ao remover do localStorage.', e);
+            }
+        }
+    };
+
+    const lastOrder = JSON.parse(safeStorage.get('alpe_last_order'));
+    const container = document.getElementById('confirmation-container');
+
+    if (!lastOrder || !container) {
+        container.innerHTML = `
+            <h1>Nenhum pedido recente encontrado</h1>
+            <p>Não foi possível carregar os detalhes do seu último pedido.</p>
+            <a href="index.html" class="btn-track" style="text-decoration: none;">Voltar ao Início</a>
+        `;
+        return;
+    }
+
+    // Limpa o carrinho principal, pois o pedido foi concluído
+    safeStorage.remove('alpe_cart');
+
+    let itemsHTML = '';
+    lastOrder.items.forEach(item => {
+        itemsHTML += `
+            <div class="summary-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="summary-item-info">
+                    <h4>${item.name}</h4>
+                    <span>${item.price}</span>
+                </div>
+            </div>
+        `;
+    });
+
+    const cliente = lastOrder.cliente;
+    const whatsappText = encodeURIComponent(`Olá ALPE, acabei de fazer o pedido pelo site. Detalhes:\n\nNome: ${cliente.nome}\nEmail: ${cliente.email}\nItens: ${lastOrder.items.map(i => i.name).join(', ')}\nTotal: ${lastOrder.total}.\n\nGostaria de confirmar os próximos passos.`);
+    const whatsappLink = `https://api.whatsapp.com/send?phone=${typeof WHATSAPP_NUMBER !== 'undefined' ? WHATSAPP_NUMBER : '5521980220417'}&text=${whatsappText}`;
+
+    container.innerHTML = `
+        <i class="fas fa-check-circle" style="font-size: 48px; color: var(--cor-sucesso); margin-bottom: 20px;"></i>
+        <h1>Pedido Recebido!</h1>
+        <p>Obrigado, ${cliente.nome.split(' ')[0]}! Recebemos seu pedido e entraremos em contato em breve para combinar o pagamento e a entrega.</p>
+        
+        <div class="order-summary">
+            <h2>Resumo do Pedido</h2>
+            <div id="summary-items-container">${itemsHTML}</div>
+            <div class="summary-total"><strong>Total:</strong> ${lastOrder.total}</div>
+        </div>
+
+        <div style="text-align: left; margin-bottom: 30px; background: #f8f9fa; padding: 15px; border-radius: 8px;">
+            <h3 style="margin-top:0; font-size: 16px;">Enviado para:</h3>
+            <p style="margin:0; font-size: 14px;"><strong>${cliente.nome}</strong></p>
+            <p style="margin:0; font-size: 14px;">${cliente.endereco}</p>
+            <p style="margin:0; font-size: 14px;">Contato: ${cliente.telefone}</p>
+        </div>
+
+        <div style="display:flex; flex-direction: column; gap:15px;">
+             <a href="${whatsappLink}" target="_blank" class="btn-track" style="background-color:#25d366;">
+                <i class="fab fa-whatsapp"></i> Acompanhar no WhatsApp
+            </a>
+            <a href="index.html" class="btn-track" style="background-color: #6c757d;">Voltar ao Início</a>
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>

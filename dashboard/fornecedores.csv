@@ -1,0 +1,4 @@
+Fornecedor,Tipo de Integração,Dados Sincronizados,Frequência,Status,Observações
+Distribuidora X,Planilha CSV,Catálogo de produtos e preços,Semanal,Ativo,Atualização manual
+Indústria Y,API,Estoque pedidos e preços,Tempo real,Ativo,Integração automática
+Atacadista Z,EDI,Pedidos e notas fiscais,Diário,Em teste,Ajuste de mapeamento

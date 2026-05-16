@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finalizar Pedido | ALPE Ar Condicionado</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+<!-- Favicon -->
+<link rel="icon" href="images/logo marcas/Triângulo-Logo.webp" type="image/webp">
+<style>
+:root{
+  --cor-principal:#007bff;
+  --cor-secundaria:#343a40;
+  --cor-fundo:#f8f9fa;
+  --cor-texto:#333;
+}
+* { font-family: 'Roboto', sans-serif; box-sizing: border-box; }
+body{margin:0;color:var(--cor-texto);background:var(--cor-fundo);line-height:1.6;display:flex;flex-direction:column;min-height:100vh;}
+
+/* Header Simplificado */
+header{background:white;padding:10px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,0.05);}
+.logo{display:flex;align-items:flex-end;text-decoration:none;} 
+.logo img:first-child { height: 60px; }
+.logo img:last-child { height: 35px; margin-left: -20px; }
+nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
+nav a:hover{color:var(--cor-principal);}
+
+/* Área Principal */
+.main-content { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+.tracking-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 600px; text-align: center; }
+.tracking-card h1 { color: var(--cor-secundaria); margin-bottom: 10px; }
+.tracking-card p { color: #666; margin-bottom: 30px; }
+
+.input-group { margin-bottom: 20px; text-align: left; }
+.input-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #444; }
+.input-group input, .input-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; transition: border 0.3s; font-family: 'Roboto', sans-serif; }
+.input-group input:focus, .input-group textarea:focus { border-color: var(--cor-principal); outline: none; }
+
+.btn-track { background: var(--cor-principal); color: white; border: none; padding: 15px; width: 100%; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background 0.3s; }
+.btn-track:hover { background: #0056b3; }
+
+/* Resumo do Pedido */
+.order-summary {
+    text-align: left;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+.order-summary h2 {
+    font-size: 20px;
+    color: var(--cor-secundaria);
+    margin-bottom: 15px;
+    text-align: left;
+}
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+.summary-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #f8f9fa;
+    border: 1px solid #eee;
+}
+.summary-item-info {
+    flex: 1;
+}
+.summary-item-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+.summary-item-info span {
+    font-weight: bold;
+    color: var(--cor-principal);
+}
+.summary-total {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+#thank-you-message {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 8px;
+}
+#thank-you-message a {
+    color: var(--cor-principal);
+    font-weight: bold;
+}
+
+footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:center;font-size:14px;margin-top:auto;}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .tracking-card { padding: 20px; }
+    .logo img:first-child { height: 45px; }
+    .logo img:last-child { height: 30px; margin-left: -10px; }
+    nav { display: none; } /* Menu simplificado para mobile */
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <img src="images/logo marcas/Triângulo-Logo.webp" alt="Logo ALPE">
+    <img src="images/Logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
+  </a>
+  <nav>
+    <a href="index.html">Voltar ao Início</a>
+    <a href="index.html#contato">Ajuda</a>
+  </nav>
+</header>
+
+<main class="main-content">
+    <div class="tracking-card">
+        <div id="checkout-form-container">
+            <i class="fas fa-shopping-cart" style="font-size: 48px; color: var(--cor-principal); margin-bottom: 20px;"></i>
+            <h1>Finalizar Pedido</h1>
+            <p>Preencha seus dados para concluir a compra. Entraremos em contato para combinar o pagamento e a entrega.</p>
+            
+            <div id="order-summary" class="order-summary">
+                <h2>Resumo do Pedido</h2>
+                <div id="summary-items-container">
+                    <!-- Items will be injected here -->
+                </div>
+                <div id="summary-total" class="summary-total">
+                    <!-- Total will be injected here -->
+                </div>
+            </div>
+
+            <div id="form-message" style="display:none; margin-bottom: 20px; padding: 15px; border-radius: 8px; text-align: center;"></div>
+
+            <form id="checkoutForm" action="#" method="POST">
+                <div class="input-group">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="telefone">Telefone / WhatsApp</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(21) 99999-9999" required>
+                </div>
+                <div class="input-group">
+                    <label for="endereco">Endereço de Entrega</label>
+                    <textarea id="endereco" name="endereco" rows="3" placeholder="Rua, Número, Bairro, Cidade - RJ" required></textarea>
+                </div>
+                
+                <!-- Hidden field for cart items -->
+                <input type="hidden" name="Pedido" id="pedido-items">
+                <input type="hidden" name="_subject" value="Novo Pedido Recebido - Site ALPE">
+
+                <button type="submit" class="btn-track">ENVIAR PEDIDO</button>
+            </form>
+        </div>
+
+        <div id="thank-you-message">
+            <h2>Obrigado!</h2>
+            <p>Seu pedido foi recebido com sucesso. Em breve, nossa equipe entrará em contato para confirmar os detalhes.</p>
+            <a href="index.html" style="margin-top: 20px; display: inline-block;">Voltar ao Início</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+  <p>© 2025 ALPE Ar Condicionado & Climatização.</p>
+</footer>
+
+<script src="config.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Utilitário para acesso seguro ao Storage
+    const safeStorage = {
+        get: (key) => {
+            try {
+                return localStorage.getItem(key);
+            } catch (e) {
+                console.warn('Acesso ao localStorage bloqueado pelo navegador.', e);
+                return null;
+            }
+        },
+        set: (key, value) => {
+            try {
+                localStorage.setItem(key, value);
+            } catch (e) {
+                console.error('Erro ao salvar no localStorage.', e);
+            }
+        }
+    };
+
+    const cart = JSON.parse(safeStorage.get('alpe_cart')) || [];
+    const itemsContainer = document.getElementById('summary-items-container');
+    const totalContainer = document.getElementById('summary-total');
+    const hiddenInput = document.getElementById('pedido-items');
+    const checkoutFormContainer = document.getElementById('checkout-form-container');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const form = document.getElementById('checkoutForm');
+    const messageDiv = document.getElementById('form-message');
+
+    // Seta a action do formulário a partir do config.js
+    if (form && typeof FORMSPREE_URL !== 'undefined') {
+        form.action = FORMSPREE_URL;
+    }
+
+    if (cart.length === 0 && checkoutFormContainer) {
+        checkoutFormContainer.innerHTML = '<div style="text-align: center;"><h1>Seu carrinho está vazio</h1><p style="margin-bottom: 20px;">Adicione produtos ao carrinho para poder finalizar o pedido.</p><a href="index.html#produtos" class="btn-track" style="text-decoration: none;">Ver produtos</a></div>';
+        return;
+    }
+
+    let total = 0;
+    let orderText = 'Itens do Pedido:\\n\\n';
+
+    cart.forEach(item => {
+        // Regex to safely extract number from price string like "R$ 2.999,00"
+        const priceString = item.price || '0';
+        const itemPrice = parseFloat(priceString.replace(/[^0-9,]/g, '').replace(',', '.')) || 0;
+        total += itemPrice;
+
+        const itemHTML = `
+            <div class="summary-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="summary-item-info">
+                    <h4>${item.name}</h4>
+                    <span>${item.price}</span>
+                </div>
+            </div>
+        `;
+        if(itemsContainer) itemsContainer.innerHTML += itemHTML;
+        orderText += `- ${item.name} (${item.price})\\n`;
+    });
+
+    const formattedTotal = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    if(totalContainer) totalContainer.innerHTML = `<strong>Total:</strong> ${formattedTotal}`;
+    orderText += `\\nTotal do Pedido: ${formattedTotal}`;
+    if(hiddenInput) hiddenInput.value = orderText;
+
+    if(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const submitButton = form.querySelector('button[type="submit"]');
+            submitButton.innerText = 'ENVIANDO...';
+            submitButton.disabled = true;
+            if(messageDiv) messageDiv.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                 if (response.ok) {
+                    // SUCESSO: Salva os dados do pedido e redireciona
+                    const clienteData = {
+                        nome: formData.get('nome'),
+                        email: formData.get('email'),
+                        telefone: formData.get('telefone'),
+                        endereco: formData.get('endereco')
+                    };
+ 
+                    const lastOrder = {
+                        items: cart,
+                        total: formattedTotal,
+                        cliente: clienteData,
+                        data: new Date().toLocaleString('pt-BR')
+                    };
+ 
+                    safeStorage.set('alpe_last_order', JSON.stringify(lastOrder));
+                    
+                    // Redireciona para a página de confirmação
+                    window.location.href = 'pedido-confirmado.html';
+ 
+                 } else {
+                    // ERRO: Verifica o status e mostra a mensagem apropriada
+                    if (response.status === 404) {
+                        showError('Erro ao enviar: Formulário não encontrado. Verifique se a URL do Formspree no código HTML está correta.');
+                        return;
+                    }
+                    response.json().then(data => {
+                        if (data && Object.hasOwn(data, 'errors')) {
+                            showError(data["errors"].map(error => error["message"]).join(", "));
+                        } else {
+                            showError('Ocorreu um erro no servidor. Tente novamente.');
+                        }
+                    }).catch(() => {
+                        showError('Erro inesperado ao processar a resposta. Verifique sua conexão e tente novamente.');
+                    });
+                }
+            }).catch(error => {
+                showError('Erro de conexão. Verifique sua internet.');
+            });
+
+            function showError(msg) {
+                if(messageDiv) {
+                    messageDiv.style.display = 'block';
+                    messageDiv.style.backgroundColor = '#f8d7da';
+                    messageDiv.style.color = '#721c24';
+                    messageDiv.style.border = '1px solid #f5c6cb';
+                    messageDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + msg;
+                } else {
+                    alert(msg);
+                }
+                submitButton.innerText = 'ENVIAR PEDIDO';
+                submitButton.disabled = false;
+            }
+        });
+    }
+});
+</script>
+
+</body>
+</html>

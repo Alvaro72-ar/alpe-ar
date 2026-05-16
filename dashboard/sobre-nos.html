@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre Nós | ALPE Ar Condicionado & Climatização</title>
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,750&display=swap" rel="stylesheet">
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --cor-principal:#007bff;
+  --cor-secundaria:#343a40;
+  --cor-fundo:#f8f9fa;
+  --cor-texto:#333;
+}
+* { font-family: 'Roboto', sans-serif; box-sizing: border-box; }
+body{margin:0;color:var(--cor-texto);background:white;line-height:1.6;}
+
+header{background:white;padding:10px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:flex-end;text-decoration:none;} 
+.logo img:first-child { height: 60px; }
+.logo img:last-child { height: 35px; margin-left: -20px; }
+nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
+nav a:hover{color:var(--cor-principal);}
+
+.hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+    color: white;
+    padding: 80px 5%;
+    text-align: center;
+}
+.hero h1 { font-family: 'Fraunces', serif; font-size: 48px; margin-bottom: 20px; }
+.hero p { font-size: 20px; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+
+.section { padding: 60px 10%; }
+.container { max-width: 1100px; margin: 0 auto; }
+
+.history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+.history-text h2 { font-family: 'Fraunces', serif; font-size: 32px; color: var(--cor-secundaria); margin-bottom: 20px; }
+
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+.value-card { background: #f8f9fa; padding: 30px; border-radius: 15px; text-align: center; transition: transform 0.3s; border: 1px solid #eee; }
+.value-card:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+.value-card i { font-size: 40px; color: var(--cor-principal); margin-bottom: 20px; }
+.value-card h3 { font-size: 22px; margin-bottom: 15px; }
+
+footer{background:var(--cor-secundaria);color:white;padding:40px 5%;text-align:center;font-size:14px;}
+
+@media (max-width: 768px) {
+    .history-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 36px; }
+    nav { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html" class="logo">
+    <img src="../images/logo marcas/logo-alpe.png" alt="Logo ALPE" style="height: 65px;">
+  </a>
+  <nav>
+    <a href="../index.html">Início</a>
+    <a href="../index.html#produtos">Produtos</a>
+    <a href="../index.html#servicos">Serviços</a>
+    <a href="../index.html#contato">Contato</a>
+  </nav>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1>Excelência em Climatização</h1>
+        <p>A ALPE Ar Condicionado é referência em soluções completas de conforto térmico, unindo tecnologia de ponta e engenharia especializada.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="history-grid">
+            <div class="history-text">
+                <h2>Nossa História</h2>
+                <p>Nascida da paixão pela engenharia e pelo bem-estar, a ALPE consolidou-se no mercado como uma empresa que vai além da venda de equipamentos. Nós projetamos o conforto ideal para cada ambiente.</p>
+                <p>Com anos de experiência e parcerias com as maiores marcas globais como Daikin, Fujitsu e Samsung, oferecemos desde a instalação residencial certificada até complexos sistemas VRF para grandes edifícios comerciais.</p>
+            </div>
+            <div style="background: #eee; height: 300px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-style: italic; color: #999; border: 2px dashed #ccc;">
+                [Foto da Equipe ou Sede ALPE]
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" style="background: #fafafa;">
+    <div class="container">
+        <h2 style="text-align: center; font-family: 'Fraunces', serif; font-size: 32px; margin-bottom: 10px;">Nossos Valores</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">O que nos move todos os dias para entregar o melhor serviço.</p>
+        <div class="values-grid">
+            <div class="value-card"><i class="fas fa-check-circle"></i><h3>Qualidade Certificada</h3><p>Trabalhamos apenas com as melhores marcas e técnicos treinados.</p></div>
+            <div class="value-card"><i class="fas fa-handshake"></i><h3>Compromisso</h3><p>Transparência total desde o orçamento até a entrega técnica.</p></div>
+            <div class="value-card"><i class="fas fa-lightbulb"></i><h3>Inovação</h3><p>Sempre atualizados com as tecnologias Inverter e automação inteligente.</p></div>
+        </div>
+    </div>
+</section>
+
+<footer><p>© 2025 ALPE Ar Condicionado & Climatização. Rio de Janeiro - Brasil</p></footer>
+</body>
+</html>

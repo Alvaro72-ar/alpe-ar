@@ -14,10 +14,9 @@ h1, h2, h3, .cta-header { font-weight: 700 !important; letter-spacing: -0.5px; }
 body, p, span, li { font-weight: 400 !important; }
 strong, b { font-weight: 700 !important; }
 body{margin:0;color:var(--cor-texto);background:white;line-height:1.6;}
-header{background:white;padding:5px 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100;}
-.logo { display: flex; align-items: flex-end; gap: 0; text-decoration: none; }
-.logo img:first-child { height: 55px; }
-.logo img:last-child { height: 45px; margin-left: -15px; }
+header{background:white;padding:0 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100;}
+.logo { display: flex; align-items: center; gap: 0; text-decoration: none; line-height: 0; padding: 0; }
+.logo img { height: 150px; width: auto; display: block; }
 nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
 .cta-header{background:var(--cor-principal);color:white;padding:8px 15px;border-radius:5px;text-decoration:none;font-weight:bold;white-space:nowrap;}
 .section{padding:30px 5%;text-align:center;}
@@ -31,6 +30,33 @@ nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-wei
 .produto-info p{font-size:11px !important; margin: 4px 0;}
 .cta-card{display:block;color:white;text-align:center;padding:8px 0;border-radius:5px;text-decoration:none;margin-top:auto;font-weight:600;font-size:13px;}
 footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:center;}
+.mobile-menu-toggle{display:none;background:none;border:none;font-size:28px;cursor:pointer;color:var(--cor-secundaria);z-index:1002;}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle { display: block; }
+  nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 100px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1001;
+    overflow-y: auto;
+  }
+  nav.nav-open {
+    transform: translateX(0);
+  }
+  nav a { margin: 0; padding: 15px 0; width: 80%; text-align: center; border-bottom: 1px solid #eee; }
+}
+
 .whatsapp-square{position:fixed;bottom:20px;right:20px;z-index:1000;}
 .whatsapp-square img{width:150px;height:auto;box-shadow:0 4px 10px rgba(0,0,0,0.2);transition:all 0.3s;}
 .whatsapp-square img:hover{transform:scale(1.05);box-shadow:0 6px 15px rgba(0,0,0,0.3);}
@@ -136,7 +162,10 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
     </div>
 </div>
 <header>
-  <a href="../index.html" class="logo"><img src="../images/logo marcas/triângulo-logo.webp" alt="Logo ALPE"><img src="../images/logo marcas/texto-logo_-_editado-removebg-preview.png" alt="Logo Secundária"></a>
+  <a href="../index.html" class="logo">
+    <img src="../images/logo marcas/Triângulo-Logo.webp" alt="Logo ALPE">
+    <img src="../images/logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
+  </a>
   <nav>
     <a href="../index.html">Voltar ao Início</a>
     <div class="dropdown">
@@ -156,12 +185,13 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
         <a href="tcl.html">TCL</a>
       </div>
     </div>
-    <a href="../sobre-nos/sobre-nos.html">Sobre Nós</a>
+    <a href="../Sobre_Nos/sobre-nos.html">Sobre Nós</a>
     <a href="../index.html#servicos">Serviços</a>
     <a href="../index.html#produtos">Produtos</a>
     <a href="../index.html#contato">Contato</a>
     <a href="#dual">Dual Inverter</a>
     <a href="#artcool">Artcool</a>
+    <a href="../dashboard/index.html">Dashboard</a>
   </nav>
   <div class="header-actions">
     <a href="#" class="cart-link">
@@ -169,6 +199,9 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
       <span class="cart-badge">0</span>
     </a>
     <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20vi%20a%20página%20LG." target="_blank" rel="noopener noreferrer" class="cta-header">Fale Conosco</a>
+    <button type="button" class="mobile-menu-toggle" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
   </div>
 </header>
 <section class="section section-hero">
@@ -204,6 +237,29 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
 </section>
 <footer><p>© 2025 ALPE.Ar Condicionado. <a href="../index.html" class="footer-link">Voltar ao site principal</a></p></footer>
 
-<script src="../js/cart.js"></script>
+<script src="cart.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.mobile-menu-toggle');
+    const nav = document.querySelector('nav');
+
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', function() {
+            nav.classList.toggle('nav-open');
+            const icon = menuToggle.querySelector('i');
+            if (nav.classList.contains('nav-open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+                document.body.style.overflow = 'hidden';
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+});
+</script>
 </body>
 </html>

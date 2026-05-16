@@ -9,7 +9,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <!-- Ícones -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+<!-- Favicon -->
+<link rel="icon" href="images/logo marcas/Triângulo-Logo.webp" type="image/webp">
 <style>
 :root{
   --cor-principal:#007bff;
@@ -106,14 +108,26 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
 </footer>
 
 <script>
+// Utilitário para acesso seguro ao Storage (evita erro de Tracking Prevention)
+const safeStorage = {
+    get: (key) => {
+        try {
+            return localStorage.getItem(key);
+        } catch (e) {
+            console.warn('Acesso ao localStorage bloqueado pelo navegador.', e);
+            return null;
+        }
+    }
+};
+
 function buscarPedido(e) {
     e.preventDefault();
-    const codigo = document.getElementById('codigo').value;
+    const codigoInput = document.getElementById('codigo').value.trim().toUpperCase();
     const resultArea = document.getElementById('result-area');
     const content = document.getElementById('dynamic-content');
     const btn = document.querySelector('.btn-track');
 
-    // Efeito de carregamento
+    // Efeito visual de carregamento
     const originalText = btn.innerText;
     btn.innerText = "BUSCANDO...";
     btn.disabled = true;
@@ -123,46 +137,70 @@ function buscarPedido(e) {
         btn.disabled = false;
         resultArea.style.display = 'block';
 
-        // Simulação de lógica (pode ser substituída por backend real no futuro)
-        // Se o código tiver mais de 3 caracteres, mostra sucesso simulado
-        if(codigo.length > 3) {
+        // Busca nos pedidos salvos (formato do Dashboard/Main)
+        const pedidos = JSON.parse(safeStorage.get('alpe_pedidos')) || [];
+        
+        // Tenta encontrar por ID (ex: 8492 ou #8492) ou por Nome do Cliente
+        const pedidoEncontrado = pedidos.find(p => 
+            p.id.toString() === codigoInput.replace('#', '') || 
+            p.cliente.toUpperCase().includes(codigoInput)
+        );
+
+        if(pedidoEncontrado) {
+            // Define a cor e texto do badge baseado no status real
+            let badgeClass = 'status-transito';
+            if(pedidoEncontrado.status === 'Entregue') badgeClass = 'status-entregue';
+
             content.innerHTML = `
                 <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                    <h3 style="margin: 0 0 5px 0; color: #333;">Pedido #8492</h3>
-                    <span class="status-badge status-transito">Em Trânsito</span>
-                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">Previsão: <strong>12/03/2026</strong></p>
+                    <h3 style="margin: 0 0 5px 0; color: #333;">Pedido #${pedidoEncontrado.id}</h3>
+                    <span class="status-badge ${badgeClass}">${pedidoEncontrado.status}</span>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">Cliente: <strong>${pedidoEncontrado.cliente}</strong></p>
+                    <p style="margin: 5px 0 0 0; font-size: 13px; color: #666;">Data: <strong>${pedidoEncontrado.data}</strong></p>
                 </div>
                 
                 <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">Hoje, 08:30</div>
-                        <div class="timeline-desc">Saiu para entrega ao destinatário</div>
-                        <div style="font-size:12px; color:#666;">Rio de Janeiro, RJ</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Ontem, 14:20</div>
-                        <div class="timeline-desc">Chegou na unidade de distribuição</div>
-                        <div style="font-size:12px; color:#666;">Duque de Caxias, RJ</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">07/03/2026</div>
-                        <div class="timeline-desc">Pagamento Aprovado</div>
-                    </div>
+                    ${renderTimeline(pedidoEncontrado.status, pedidoEncontrado.data)}
                 </div>
                 
-                <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá,%20estou%20com%20dúvida%20no%20pedido%20${codigo}" target="_blank" style="display:block; margin-top:20px; color:var(--cor-principal); text-decoration:none; font-weight:bold; font-size:14px;">
+                <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá,%20tenho%20uma%20pergunta%20sobre%20o%20pedido%20%23${pedidoEncontrado.id}" target="_blank" style="display:block; margin-top:20px; color:var(--cor-principal); text-decoration:none; font-weight:bold; font-size:14px;">
                     <i class="fab fa-whatsapp"></i> Falar com atendente sobre este pedido
                 </a>
             `;
         } else {
-            // Caso de erro simulado
             content.innerHTML = `
                 <div style="color: #dc3545; background: #f8d7da; padding: 10px; border-radius: 5px;">
-                    <i class="fas fa-exclamation-circle"></i> Pedido não encontrado. Verifique o código digitado.
+                    <i class="fas fa-exclamation-circle"></i> Pedido não encontrado. Certifique-se de digitar o número do pedido corretamente (ex: 1001).
                 </div>
             `;
         }
     }, 1500); // Delay de 1.5s para simular busca
+}
+
+function renderTimeline(status, dataPedido) {
+    const steps = [
+        { label: 'Pedido Recebido', date: dataPedido, active: true },
+        { label: 'Pagamento Aprovado', date: dataPedido, active: status !== 'Pendente' && status !== 'Cancelado' },
+        { label: 'Pedido Enviado', date: 'Aguardando', active: status === 'Enviado' || status === 'Entregue' },
+        { label: 'Entregue', date: '-', active: status === 'Entregue' }
+    ];
+
+    if (status === 'Cancelado') {
+        return `
+            <div class="timeline-item">
+                <div class="timeline-date">${dataPedido}</div>
+                <div class="timeline-desc" style="color:red;">Pedido Cancelado</div>
+            </div>
+        `;
+    }
+
+    // Filtra apenas os passos ativos para mostrar na linha do tempo
+    return steps.filter(s => s.active).reverse().map(s => `
+        <div class="timeline-item">
+            <div class="timeline-date">${s.label === 'Pedido Recebido' ? s.date : 'Atualizado'}</div>
+            <div class="timeline-desc">${s.label}</div>
+        </div>
+    `).join('');
 }
 </script>
 

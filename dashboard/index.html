@@ -1,0 +1,4275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ClimaERP AI — Painel Premium</title>
+  <meta name="description" content="ClimaERP AI: Dashboard, Produtos e IA de Precificação para lojas de climatização. Interface premium, rápida e responsiva." />
+  <meta name="theme-color" content="#0B1220"/>
+
+  <!-- Google Fonts (display + body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,750&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+  <style>
+    :root{
+      /* Premium “cold-lux” palette */
+      --bg0:#070A12;
+      --bg1:#0B1220;
+      --bg2:#0F1A2E;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.085);
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.14);
+
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --faint: rgba(255,255,255,.46);
+
+      --ice:#7FE7FF;
+      --aqua:#3DE3C9;
+      --violet:#A78BFA;
+      --amber:#FBBF24;
+      --rose:#FB7185;
+
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --shadow2: 0 10px 28px rgba(0,0,0,.45);
+
+      --radius-xl: 26px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --radius-sm: 12px;
+
+      --gap: clamp(14px, 2.2vw, 22px);
+      --max: 1220px;
+    }
+
+    /* --- PREMIUM LIGHT THEME --- */
+    body.light {
+      --bg0: #F1F5F9;
+      --bg1: #F8FAFC;
+      --bg2: #FFFFFF;
+      --panel: rgba(255,255,255,.75);
+      --panel2: rgba(255,255,255,.90);
+      --stroke: rgba(0,0,0,.06);
+      --stroke2: rgba(0,0,0,.09);
+
+      --text: #0F172A;
+      --muted: #475569;
+      --faint: #94A3B8;
+
+      --shadow: 0 25px 60px -12px rgba(15, 23, 42, 0.08);
+      --shadow2: 0 12px 24px -6px rgba(15, 23, 42, 0.06);
+    }
+    body.light {
+      background: 
+        radial-gradient(1000px 800px at 0% 0%, rgba(127, 231, 255, 0.12), transparent 60%),
+        radial-gradient(800px 600px at 100% 0%, rgba(167, 139, 250, 0.10), transparent 60%),
+        radial-gradient(900px 700px at 50% 100%, rgba(61, 227, 201, 0.08), transparent 60%),
+        #F8FAFC;
+    }
+    body.light .noise { opacity:0.04; mix-blend-mode:multiply; filter:none; }
+    body.light .sidebar { 
+      background: rgba(255, 255, 255, 0.65); 
+      border-right: 1px solid rgba(0,0,0,.05);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    body.light .brand {
+      background: #FFFFFF;
+      border-color: rgba(0,0,0,.05);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+    }
+    body.light .pill {
+      background: #F1F5F9;
+      border-color: rgba(0,0,0,.08);
+      color: var(--muted);
+    }
+    body.light .dot {
+      background: radial-gradient(circle at 30% 30%, #A3E635, #65A30D);
+      box-shadow: 0 0 0 3px rgba(101, 163, 13, 0.2);
+    }
+    body.light .surface, body.light .kpi, body.light .insight, body.light .field, body.light .btn, body.light .nav button, body.light .sup-card, body.light .li, body.light .price, body.light .box, body.light .chat-window, body.light .modal-panel {
+      background: #FFFFFF;
+      border-color: rgba(0,0,0,.06);
+      box-shadow: 0 4px 12px -2px rgba(0,0,0,0.03);
+    }
+    body.light .li .bullet { color: #0EA5E9; }
+    body.light .li p b { color: var(--text); }
+    body.light .nav button:hover, body.light .btn:hover { background: #F1F5F9; border-color: rgba(0,0,0,.1); }
+    body.light .nav button.active { 
+      background: #FFFFFF; 
+      border-color: rgba(127,231,255,.4); 
+      color: #0F172A;
+      box-shadow: 0 12px 25px -8px rgba(127,231,255,.25);
+    }
+    body.light .nav button .icon {
+      background: linear-gradient(135deg, rgba(127,231,255,.15), rgba(167,139,250,.10));
+      border-color: rgba(0,0,0,.04);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+    }
+    body.light .field label { color: #1E293B; font-weight: 800; }
+    body.light .field input, body.light .field select { background: #FFFFFF; color: #0F172A; border: 2px solid #CBD5E1; }
+    body.light .field input:focus, body.light .field select:focus { background: #FFFFFF; border-color: #3DE3C9; box-shadow: 0 0 0 4px rgba(61,227,201,0.1); }
+    body.light .field input::placeholder { color: rgba(15, 23, 42, 0.5); }
+    body.light .field select option { background-color: #FFFFFF; color: #0F172A; }
+    body.light .chart-area { background: #FFFFFF; border-color: rgba(0,0,0,.04); }
+    body.light .logo {
+      background: 
+        radial-gradient(25px 20px at 75% 80%, rgba(14,165,233,.15), transparent 60%),
+        linear-gradient(135deg, rgba(14,165,233,.1), rgba(99,102,241,.08)),
+        #FFFFFF;
+      border-color: rgba(0,0,0,.06); 
+      box-shadow: 0 10px 20px -5px rgba(0,0,0,0.05);
+    }
+    body.light .logo::after { opacity:0.05; }
+    body.light .chip { background: #FFFFFF; border-color: rgba(0,0,0,.05); color: #334155; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    body.light .chip .badge { color: #0F172A; background: #F1F5F9; }
+    body.light .btn-primary { 
+      background: linear-gradient(135deg, #0EA5E9, #6366F1); 
+      color: #fff; 
+      box-shadow: 0 10px 25px -5px rgba(14,165,233,.3); 
+      border:0; 
+    }
+    body.light .chat-input { background: #F1F5F9; color: #0F172A; border-color: transparent; }
+    body.light .msg-ia { background: #F1F5F9; color: #1E293B; }
+    body.light .msg-usuario { background: linear-gradient(135deg, #0EA5E9, #6366F1); color: #fff; }
+    body.light .mobilebar { background: rgba(255,255,255,.8); border-bottom: 1px solid rgba(0,0,0,.05); backdrop-filter: blur(15px); }
+    body.light .drawer .panel { background: #FFFFFF; }
+    body.light .t-card { background: #F8FAFC; border-color: rgba(0,0,0,.05); }
+    body.light .mini { background: rgba(255,255,255,0.5); border-color: rgba(0,0,0,0.05); }
+    body.light .kbd { background: #FFFFFF; color: #475569; border-color: rgba(0,0,0,.1); box-shadow: 0 2px 4px rgba(0,0,0,.05); }
+    body.light .price { background: #F8FAFC; border-color: rgba(0,0,0,.05); }
+    body.light .price .big { color: #0EA5E9; }
+    body.light .kpi.active { background: #FFFFFF; border-color: rgba(127,231,255,0.5); box-shadow: 0 15px 35px -10px rgba(127,231,255,0.2); }
+    body.light .delta { background: rgba(61,227,201,0.15); color: #059669; }
+    body.light .delta.neg { background: rgba(251,113,133,0.15); color: #E11D48; }
+    body.light ::selection { background: rgba(14,165,233, 0.15); color: #0EA5E9; }
+    body.light #resbtu { color: #0891b2 !important; }
+    body.light #resultadoConsumo { color: #d97706 !important; }
+    body.light .st-red { background: rgba(251,113,133,0.15); color: #E11D48; }
+    body.light .modal-backdrop { background: rgba(15, 23, 42, 0.2); backdrop-filter: blur(4px); }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 900px at 10% 12%, rgba(127,231,255,.14), transparent 55%),
+        radial-gradient(900px 700px at 85% 18%, rgba(167,139,250,.12), transparent 60%),
+        radial-gradient(700px 700px at 72% 88%, rgba(61,227,201,.11), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 35%, #070A12 100%);
+      overflow-x:hidden;
+    }
+
+    /* Subtle noise layer (inline SVG data URI) */
+    .noise{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.10;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size:260px 260px;
+    }
+
+    a{ color:inherit; }
+    button, input, select{ font:inherit; color:inherit; }
+    ::selection{ background: rgba(127,231,255,.25); }
+
+    /* Layout */
+    .app{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns: 300px 1fr;
+      gap:0;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      position:sticky;
+      top:0;
+      height:100vh;
+      padding: 22px;
+      border-right:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 12px 14px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,.045);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .brand-left{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width:0;
+    }
+
+    .logo{
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background:
+        radial-gradient(12px 12px at 30% 32%, rgba(255,255,255,.75), transparent 55%),
+        radial-gradient(25px 20px at 75% 60%, rgba(127,231,255,.60), transparent 60%),
+        linear-gradient(135deg, rgba(127,231,255,.35), rgba(167,139,250,.28)),
+        rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18),
+        0 12px 28px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: conic-gradient(from 180deg, rgba(127,231,255,.0), rgba(127,231,255,.35), rgba(167,139,250,.0));
+      transform: rotate(25deg);
+      opacity:.9;
+      filter: blur(2px);
+    }
+
+    .brand h1{
+      margin:0;
+      font-family: Fraunces, serif;
+      letter-spacing: .2px;
+      font-size: 18px;
+      line-height: 1.05;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .brand small{
+      display:block;
+      margin-top:2px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing:.3px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.82);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing:.2px;
+      flex:0 0 auto;
+    }
+    .dot{
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(127,231,255,.65));
+      box-shadow: 0 0 0 3px rgba(127,231,255,.12);
+    }
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      margin-top: 2px;
+      overflow-y: auto;
+      padding-right: 4px;
+      flex: 1;
+      min-height: 0;
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .nav::-webkit-scrollbar {
+      display: none;
+    }
+
+
+    .nav button{
+      width:100%;
+      text-align:left;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 12px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .nav button .left{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width:0;
+    }
+    .nav button .icon{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(12px 12px at 30% 25%, rgba(255,255,255,.65), transparent 55%),
+        linear-gradient(135deg, rgba(127,231,255,.20), rgba(167,139,250,.16));
+      display:grid;
+      place-items:center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+      flex:0 0 auto;
+    }
+    /* Corrige a cor dos ícones para o tema claro, sem quebrar os ícones multi-coloridos */
+    body.light .nav button .icon svg [stroke="rgba(255,255,255,.9)"] {
+      stroke: var(--muted) !important;
+    }
+    body.light .nav button[data-page="ia"] .icon svg [stroke="rgba(127,231,255,.9)"] { stroke: #0EA5E9 !important; }
+    body.light .nav button[data-page="ia"] .icon svg [stroke="rgba(167,139,250,.85)"] { stroke: #6366F1 !important; }
+    .nav button .label{
+      font-weight: 650;
+      letter-spacing: .15px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .nav button .hint{
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      flex:0 0 auto;
+      opacity:.9;
+    }
+
+    .nav button:hover{
+      transform: translateY(-1px);
+      border-color: rgba(127,231,255,.18);
+      background: rgba(127,231,255,.06);
+    }
+    .nav button:active{ transform: translateY(0px) scale(.99); }
+
+    .nav button.active{
+      background: linear-gradient(135deg, rgba(127,231,255,.15), rgba(167,139,250,.12));
+      border-color: rgba(127,231,255,.26);
+      box-shadow: 0 18px 40px rgba(0,0,0,.38);
+    }
+    .nav button.active::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: radial-gradient(520px 220px at 25% 20%, rgba(127,231,255,.16), transparent 55%);
+      pointer-events:none;
+    }
+
+    .sidebar-footer{
+      margin-top:auto;
+      padding-top: 10px;
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+    }
+
+    .mini{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.035);
+      padding: 12px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .mini strong{
+      display:block;
+      font-size: 13px;
+      letter-spacing:.2px;
+    }
+    .mini p{
+      margin:4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    /* Compacta o card de "Operação Inteligente" */
+    .sidebar-footer .mini:first-child {
+      align-items: center;
+    }
+    .sidebar-footer .mini:first-child p {
+      display: none;
+    }
+    .kbd{
+      margin-left:auto;
+      color: rgba(255,255,255,.74);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing:.6px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      border-bottom-color: rgba(255,255,255,.18);
+      padding: 6px 8px;
+      border-radius: 10px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+
+    /* Main */
+    .main{
+      padding: clamp(18px, 2.8vw, 32px);
+    }
+    .container{
+      max-width: var(--max);
+      margin: 0 auto;
+      display:flex;
+      flex-direction:column;
+      gap: var(--gap);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 16px;
+    }
+    .titleblock h2{
+      margin:0;
+      font-family: Fraunces, serif;
+      font-size: clamp(26px, 2.8vw, 40px);
+      line-height: 1.06;
+      letter-spacing: .2px;
+    }
+    .titleblock p{
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 68ch;
+      line-height: 1.45;
+    }
+
+    .top-actions{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.84);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .chip .badge{
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing:.6px;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+     background:
+        linear-gradient(135deg, rgba(61,227,201,.18), rgba(127,231,255,.14));
+      color: rgba(255,255,255,.90);
+    }
+
+    .btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 11px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight: 700;
+      letter-spacing: .2px;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .btn:hover{
+      background: rgba(127,231,255,.07);
+      border-color: rgba(127,231,255,.18);
+      transform: translateY(-1px);
+    }
+    .btn:active{ transform: translateY(0) scale(.99); }
+
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(127,231,255,.18), rgba(167,139,250,.14));
+      border-color: rgba(127,231,255,.24);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .btn-primary:hover{
+      background: linear-gradient(135deg, rgba(127,231,255,.22), rgba(167,139,250,.16));
+    }
+
+    /* Pages */
+    .page{ display:none; }
+    .page.active{ display:block; }
+
+    /* Sections */
+    .surface{
+      border-radius: var(--radius-xl);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      position:relative;
+    }
+    .surface::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(900px 240px at 25% -10%, rgba(127,231,255,.12), transparent 60%),
+        radial-gradient(700px 240px at 90% 0%, rgba(167,139,250,.10), transparent 55%);
+      pointer-events:none;
+      opacity:.95;
+    }
+    .surface > *{ position:relative; }
+
+    .section-head{
+      padding: 18px 18px 0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 16px;
+    }
+    .section-head h3{
+      margin:0;
+      font-family: Fraunces, serif;
+      font-size: 18px;
+      letter-spacing:.2px;
+    }
+    .section-head .meta{
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Dashboard grid */
+    .dash{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: var(--gap);
+      align-items:start;
+    }
+
+    .kpis{
+      padding: 18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .kpi{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      padding: 12px;
+      min-height: 104px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      overflow:hidden;
+      position:relative;
+    }
+    .kpi::after{
+      content:"";
+      position:absolute;
+      inset:-60px -40px auto auto;
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(127,231,255,.22), transparent 60%);
+      opacity:.8;
+      filter: blur(0px);
+      pointer-events:none;
+      transform: rotate(10deg);
+    }
+    .kpi:hover{
+      transform: translateY(-2px);
+      border-color: rgba(127,231,255,.18);
+      background: rgba(127,231,255,.05);
+    }
+    .kpi.active{
+      border-color: rgba(127,231,255,.5);
+      background: rgba(127,231,255,.08);
+      box-shadow: 0 0 0 1px rgba(127,231,255,.1);
+    }
+    .kpi:active{ transform: scale(.98); }
+
+    .kpi .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+    .kpi .label{
+      color: rgba(255,255,255,.78);
+      font-weight: 650;
+      letter-spacing:.2px;
+      font-size: 13px;
+    }
+    .kpi .delta{
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing:.3px;
+      padding: 6px 8px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.82);
+    }
+    .kpi .delta.neg{
+      color: var(--rose);
+      background: rgba(251,113,133,0.1);
+      border-color: rgba(251,113,133,0.2);
+    }
+    .kpi .value{
+      font-family: Fraunces, serif;
+      font-weight: 750;
+      letter-spacing: -1px;
+      font-size: clamp(16px, 1.7vw, 20px);
+      margin-top: 10px;
+      white-space: nowrap;
+    }
+    .kpi .sub{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.3;
+    }
+
+    .chart-wrap{
+      padding: 14px 18px 18px;
+    }
+    .chart-area{
+      margin-top: 10px;
+      border-radius: 20px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(800px 260px at 12% 0%, rgba(127,231,255,.10), transparent 55%),
+        rgba(255,255,255,.02);
+      padding: 14px 14px 10px;
+      overflow:hidden;
+    }
+    canvas{ width:100% !important; height: 280px !important; }
+
+    .sidecol{
+      display:flex;
+      flex-direction:column;
+      gap: var(--gap);
+    }
+
+    /* Forecast / insights */
+    .insights{
+      padding: 18px;
+    }
+    .insight-grid{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .insight{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding: 12px 12px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .spark{
+      width: 44px; height: 44px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(12px 12px at 30% 30%, rgba(255,255,255,.65), transparent 55%),
+        linear-gradient(135deg, rgba(61,227,201,.18), rgba(127,231,255,.14));
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+    }
+    /* Ajuste de contraste dos ícones spark no tema claro */
+    body.light .spark svg [stroke*="255,255,255"] { stroke: #475569 !important; }
+    body.light .spark svg [stroke*="127,231,255"] { stroke: #0EA5E9 !important; }
+
+    .insight strong{ display:block; font-size: 13px; letter-spacing:.2px; }
+    .insight p{
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    /* Produtos */
+    .toolbar{
+      padding: 16px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .search{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex:1 1 auto;
+      max-width: 620px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 10px 12px;
+    }
+    .search input{
+      border:0;
+      outline:0;
+      background: transparent;
+      color: rgba(255,255,255,.90);
+      width: 100%;
+      font-weight: 600;
+    }
+    .search input::placeholder{ color: rgba(255,255,255,.50); font-weight: 600; }
+
+    .table-wrap{ padding: 8px 18px 18px; }
+    table{
+      width:100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      font-size: 13px;
+    }
+    thead th{
+      /* A cor é herdada do body e ajustada por tema abaixo */
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing:.6px;
+      text-transform: uppercase;
+      text-align:left;
+      padding: 10px 12px;
+    }
+    body:not(.light) thead th {
+      color: #ffffff; /* Garante cabeçalho branco no tema escuro */
+    }
+    tbody tr{
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    tbody td{
+      padding: 12px 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    /* Aumenta o contraste do texto da tabela no tema escuro */
+    body:not(.light) tbody td {
+      color: rgba(255,255,255, 0.95);
+    }
+    tbody tr td:first-child{
+      border-left: 1px solid rgba(255,255,255,.10);
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
+      font-weight: 700;
+      letter-spacing:.2px;
+    }
+    tbody tr td:last-child{
+      border-right: 1px solid rgba(255,255,255,.10);
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+    .btn-icon{
+      width: 32px; height: 32px; border-radius: 8px;
+      display:inline-flex; align-items:center; justify-content:center;
+      border:1px solid transparent; background:transparent;
+      color: rgba(255,255,255,.5); cursor:pointer; transition:all .2s;
+    }
+    .btn-icon:hover{ background:rgba(255,255,255,.1); color:#fff; }
+    .btn-icon.danger:hover{ background:rgba(251,113,133,.15); color:var(--rose); }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.82);
+      font-weight: 700;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+    .tag .mini-dot{
+      width: 7px; height: 7px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(127,231,255,.6));
+      box-shadow: 0 0 0 3px rgba(127,231,255,.10);
+    }
+    .money{ font-variant-numeric: tabular-nums; font-weight: 750; }
+    .muted { color: var(--muted); }
+    body:not(.light) tbody .muted { color: rgba(255,255,255, 0.75); }
+
+    /* IA */
+    .ai-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: var(--gap);
+      align-items:start;
+    }
+
+    .form{
+      padding: 18px;
+    }
+    .form .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .field{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      border-radius: 18px;
+      padding: 12px;
+    }
+    .field label{
+      display:block;
+      color: rgba(255,255,255,.76);
+      font-size: 12px;
+      font-weight: 750;
+      letter-spacing:.55px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .field input, .field select{
+      width:100%;
+      border:0;
+      outline:0;
+      background: transparent;
+      padding: 10px 10px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.92);
+      font-weight: 650;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.12);
+    }
+    .field input::placeholder{ color: rgba(255,255,255,.45); font-weight: 650; }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    .actions-block {
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.035);
+      border-radius: var(--radius-lg);
+      padding: 8px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .result{
+      padding: 18px;
+    }
+    .result .box{
+      margin-top: 12px;
+      border-radius: 20px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 260px at 12% 0%, rgba(61,227,201,.12), transparent 56%),
+        rgba(255,255,255,.03);
+      padding: 14px;
+    }
+
+    .price{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .price strong{
+      display:block;
+      font-size: 13px;
+      color: rgba(255,255,255,.78);
+      letter-spacing:.2px;
+    }
+    .price .big{
+      font-family: Fraunces, serif;
+      font-size: clamp(26px, 3.2vw, 38px);
+      font-weight: 750;
+      letter-spacing: .2px;
+      margin-top: 4px;
+    }
+    .price .copy-btn{
+      width: 36px; height: 36px; border-radius: 10px;
+      border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05);
+      color:rgba(255,255,255,.7); cursor:pointer; display:grid; place-items:center;
+      transition:all .2s; margin-bottom:4px;
+    }
+    .price .copy-btn:hover{ background:rgba(255,255,255,.1); color:#fff; border-color:rgba(255,255,255,.3); }
+    .price .side{
+      text-align:right;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .list{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .li{
+      display:flex;
+      align-items:flex-start;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+    .li .bullet{
+      width: 28px; height: 28px;
+      border-radius: 12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(135deg, rgba(127,231,255,.16), rgba(167,139,250,.12));
+      display:grid;
+      place-items:center;
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
+      flex:0 0 auto;
+    }
+    .li p{
+      margin:0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .li p b{ color: rgba(255,255,255,.86); }
+
+    /* Reveal animations */
+    .reveal{
+      opacity:0;
+      transform: translateY(10px);
+    }
+    .reveal.in{
+      animation: rise .7s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    @keyframes rise{
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* Mobile */
+    .mobilebar{
+      display:none;
+      position:sticky;
+      top:0;
+      z-index:20;
+      padding: 12px 12px;
+      background: rgba(10,14,24,.72);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .mobilebar-inner{
+      max-width: var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+    .hamb{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+    }
+    .hamb:active{ transform: scale(.99); }
+    .hamb svg{ opacity:.9; }
+
+    .drawer{
+      display:none;
+    }
+
+    @media (max-width: 980px){
+      .app{ grid-template-columns: 1fr; }
+      .sidebar{ display:none; }
+      .mobilebar{ display:block; }
+
+      .drawer{
+        display:block;
+        position:fixed;
+        inset: 0;
+        z-index:30;
+        pointer-events:none;
+        opacity:0;
+        transition: opacity .22s ease;
+      }
+      .drawer.open{
+        opacity:1;
+        pointer-events:auto;
+      }
+      .drawer .backdrop{
+        position:absolute;
+        inset:0;
+        background: rgba(0,0,0,.50);
+      }
+      .drawer .panel{
+        position:absolute;
+        left: 12px;
+        right: 12px;
+        top: 12px;
+        border-radius: 24px;
+        border:1px solid rgba(255,255,255,.12);
+        background: rgba(10,14,24,.82);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: var(--shadow);
+        padding: 14px;
+        transform: translateY(-8px);
+        transition: transform .22s ease;
+      }
+      .drawer.open .panel{ transform: translateY(0px); }
+
+      .dash{ grid-template-columns: 1fr; }
+      .kpis{ grid-template-columns: 1fr; }
+      canvas{ height: 260px !important; }
+
+      .ai-grid{ grid-template-columns: 1fr; }
+      .form .row{ grid-template-columns: 1fr; }
+      thead{ display:none; }
+      tbody td{
+        display:flex;
+        justify-content:space-between;
+        gap: 12px;
+      }
+      tbody tr td:first-child{
+        display:block;
+      }
+      tbody tr td:first-child::before{ content:none; }
+      tbody td::before{
+        content: attr(data-label);
+        color: rgba(255,255,255,.64);
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing:.6px;
+        text-transform: uppercase;
+      }
+    }
+
+    /* Toggles & Feeds */
+    .toggle-switch { position: relative; width: 36px; height: 20px; background: rgba(255,255,255,.1); border-radius: 99px; cursor: pointer; transition: background .2s; flex:0 0 auto; }
+    .toggle-switch::after { content:''; position: absolute; left: 2px; top: 2px; width: 16px; height: 16px; background: #fff; border-radius: 50%; transition: transform .2s; }
+    .toggle-switch.on { background: var(--aqua); }
+    .toggle-switch.on::after { transform: translateX(16px); }
+
+    .feed-item { display:flex; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06); font-size:12px; }
+    .feed-item:last-child { border-bottom:0; }
+    .feed-time { color:var(--muted); font-variant-numeric: tabular-nums; }
+
+    /* Timeline (Agenda) */
+    .timeline { position: relative; padding-left: 24px; border-left: 2px solid rgba(255,255,255,.1); margin-left: 10px; }
+    .t-item { position: relative; margin-bottom: 24px; }
+    .t-item::before { content:''; position: absolute; left: -31px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--bg1); border: 2px solid var(--aqua); }
+    .t-item.future::before { border-color: var(--muted); background: var(--bg1); }
+    .t-time { font-size: 12px; font-weight: 700; color: var(--aqua); margin-bottom: 4px; display:block; }
+    .t-card { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 12px; }
+
+    /* Status Badges */
+    .status-badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; }
+    .st-green { background: rgba(61,227,201,.15); color: #3DE3C9; }
+    .st-blue { background: rgba(127,231,255,.15); color: #7FE7FF; }
+    .st-orange { background: rgba(251,191,36,.15); color: #FBBF24; }
+    .st-gray { background: rgba(255,255,255,.1); color: rgba(255,255,255,.6); }
+    .st-red { background: rgba(251,113,133,.15); color: var(--rose); }
+
+    /* Supplier Card */
+    .sup-card { display:flex; align-items:center; gap:12px; padding:12px; border:1px solid rgba(255,255,255,.1); border-radius:14px; background:rgba(255,255,255,.03); transition:all .2s; }
+    .sup-card:hover { background:rgba(255,255,255,.06); border-color:rgba(255,255,255,.2); transform:translateY(-2px); }
+
+    /* Filters */
+    .filter-scroll { padding: 0 18px 14px; display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; }
+    .filter-scroll::-webkit-scrollbar { display:none; }
+    .filter-btn {
+      border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.04);
+      color:rgba(255,255,255,.7); padding:6px 14px; border-radius:99px;
+      font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap; transition:all .2s;
+    }
+    .filter-btn:hover { background:rgba(255,255,255,.08); color:#fff; }
+    .filter-btn.active { background:rgba(127,231,255,.15); border-color:rgba(127,231,255,.3); color:#7FE7FF; }
+
+    /* Toast Notification */
+    .toast{
+      position:fixed; bottom:24px; right:24px; z-index:100;
+      background:rgba(10,14,24,.9); border:1px solid rgba(61,227,201,.3);
+      color:#3DE3C9; padding:12px 20px; border-radius:12px;
+      font-weight:600; font-size:13px; box-shadow:0 10px 30px rgba(0,0,0,.5);
+      display:flex; align-items:center; gap:10px;
+      animation: slideUp .3s cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes slideUp{ from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* --- CHAT IA & WHATSAPP --- */
+    .whatsapp-square {
+      position: fixed; bottom: 20px; right: 20px; z-index: 200;
+      transition: transform .3s cubic-bezier(.2,.8,.2,1);
+      display:block; width:150px; height:50px; border-radius:8px; overflow:hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,.4);
+    }
+    .whatsapp-square:hover { transform: translateY(-4px); }
+    .whatsapp-square img { width:100%; height:100%; object-fit:cover; }
+
+    .chat-fab {
+      position: fixed; bottom: 85px; right: 20px; z-index: 200;
+      padding: 12px 24px; border-radius: 999px;
+      background: linear-gradient(135deg, var(--aqua), var(--ice));
+      border: 0; box-shadow: 0 10px 25px rgba(61,227,201,.4);
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      transition: transform .3s; color: #070A12;
+      font-weight: 700; font-size: 14px; letter-spacing: 0.5px;
+    }
+    .chat-fab:hover { transform: scale(1.05); }
+    .chat-fab svg { width: 20px; height: 20px; }
+
+    .chat-window {
+      position: fixed; bottom: 150px; right: 20px; width: 360px; height: 500px;
+      background: rgba(15, 26, 46, 0.95); backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.15); border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,.6); z-index: 199;
+      display: flex; flex-direction: column;
+      transform: translateY(20px); opacity: 0; pointer-events: none;
+      transition: all .3s cubic-bezier(.2,.8,.2,1);
+    }
+    .chat-window.ativo { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    
+    .chat-header { padding: 16px; border-bottom: 1px solid rgba(255,255,255,.1); display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,.02); }
+    .chat-body { flex: 1; padding: 16px; overflow-y: auto; display:flex; flex-direction:column; gap:12px; scroll-behavior: smooth; }
+    .chat-footer { padding: 12px; border-top: 1px solid rgba(255,255,255,.1); display:flex; gap:8px; }
+    
+    .msg-chat { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; word-wrap: break-word; }
+    .msg-ia { align-self: flex-start; background: rgba(255,255,255,.08); color: rgba(255,255,255,.9); border-bottom-left-radius: 2px; }
+    .msg-usuario { align-self: flex-end; background: linear-gradient(135deg, rgba(61,227,201,.2), rgba(127,231,255,.2)); color: #fff; border: 1px solid rgba(127,231,255,.2); border-bottom-right-radius: 2px; }
+    
+    .chat-input {
+      flex: 1; background: rgba(0,0,0,.2); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 99px; padding: 10px 16px; color: #fff; outline: none; font-size: 13px;
+    }
+    .chat-send {
+      width: 38px; height: 38px; border-radius: 50%; border: 0;
+      background: var(--aqua); color: #070A12; cursor: pointer;
+      display: grid; place-items: center;
+    }
+
+    /* Modal Window */
+    .modal {
+      position: fixed; inset: 0; z-index: 300;
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px; pointer-events: none; opacity: 0;
+      transition: opacity .22s ease;
+    }
+    .modal.open { pointer-events: auto; opacity: 1; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+    .modal-panel {
+      position: relative; width: 100%; max-width: 600px;
+      border-radius: 24px; border:1px solid rgba(255,255,255,.12);
+      background: rgba(10,14,24,.9); backdrop-filter: blur(16px);
+      box-shadow: var(--shadow); transform: translateY(-8px);
+      transition: transform .22s cubic-bezier(.2,.8,.2,1);
+    }
+    .modal.open .modal-panel { transform: translateY(0); }
+    .modal-header { padding: 16px 24px; border-bottom: 1px solid var(--stroke); display:flex; justify-content:space-between; align-items:center; }
+    .modal-header h3 { margin:0; font-family: Fraunces, serif; }
+    .modal-body { padding: 16px 24px 24px; font-size: 14px; line-height: 1.6; color: var(--muted); }
+    .modal-body h4 { color: var(--text); margin: 16px 0 8px; }
+    .modal-body pre { background: rgba(0,0,0,.3); padding: 12px; border-radius: 12px; font-size: 12px; border: 1px solid var(--stroke); white-space: pre-wrap; }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior:auto !important; }
+      .reveal{ opacity:1; transform:none; }
+      .reveal.in{ animation:none; }
+      .nav button, .btn, .kpi{ transition:none; }
+    }
+
+    /* --- ÁREA DO CLIENTE --- */
+    .cliente-dashboard {
+      padding: 20px 0;
+    }
+    .cliente-dashboard .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--gap);
+      margin: var(--gap) 0;
+    }
+    .cliente-dashboard .card {
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow2);
+    }
+    body.light .cliente-dashboard .card {
+      background: #FFFFFF;
+      border-color: rgba(0,0,0,.06);
+    }
+    .cliente-dashboard .card h3 {
+      margin: 0 0 8px;
+      font-family: Fraunces, serif;
+      font-size: 18px;
+      color: var(--text);
+    }
+    .cliente-dashboard .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .cliente-dashboard .grafico {
+      max-width: 380px;
+      margin: 40px auto 0;
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .cliente-dashboard .grafico h3 {
+      text-align: center;
+      margin: 0 0 20px;
+      font-family: Fraunces, serif;
+    }
+    .cliente-dashboard .card h3 i {
+      margin-right: 10px;
+      color: var(--aqua);
+      width: 20px;
+      text-align: center;
+    }
+    body.light .cliente-dashboard .card h3 i {
+      color: #0EA5E9;
+    }
+
+    /* Animação do Badge de Notificação no Menu */
+    @keyframes blink-badge {
+      0% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 113, 133, 0.7); }
+      70% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 0 6px rgba(251, 113, 133, 0); }
+      100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(251, 113, 133, 0); }
+    }
+    .nav-badge-blink {
+      width: 8px; height: 8px; background: var(--rose); border-radius: 50%; margin-left: auto; animation: blink-badge 2s infinite;
+    }
+    
+    /* Timeline styles */
+    .timeline {
+      position: relative;
+      padding-left: 35px;
+      margin: 20px 0;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: rgba(255,255,255,0.08);
+    }
+    body.light .timeline::before {
+      background: rgba(0,0,0,0.08);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 30px;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -35px;
+      top: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--bg2);
+      border: 3px solid rgba(255,255,255,0.15);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+    body.light .timeline-dot {
+      border-color: rgba(0,0,0,0.1);
+    }
+    .timeline-item.active .timeline-dot {
+      background: var(--aqua);
+      border-color: rgba(61, 227, 201, 0.3);
+      box-shadow: 0 0 15px rgba(61, 227, 201, 0.5);
+      transform: scale(1.2);
+    }
+    .timeline-item.completed .timeline-dot {
+      background: var(--aqua);
+      border-color: var(--aqua);
+    }
+    .timeline-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .timeline-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .timeline-item.completed .timeline-title {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Mobile Topbar -->
+  <header class="mobilebar">
+    <div class="mobilebar-inner">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="logo" aria-hidden="true" style="width:38px;height:38px;border-radius:14px;"></div>
+        <div style="line-height:1.05;">
+          <div style="font-family:Fraunces,serif; font-weight:750; letter-spacing:.2px;">ClimaERP AI</div>
+          <div style="color:rgba(255,255,255,.68); font-weight:600; font-size:12px;">Operação • Vendas • Precificação</div>
+        </div>
+      </div>
+      <button class="hamb" id="hamb" aria-label="Abrir menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" stroke="rgba(255,255,255,.88)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <aside class="drawer" id="drawer" aria-hidden="true">
+    <div class="backdrop" data-close></div>
+    <div class="panel" role="dialog" aria-modal="true" aria-label="Menu">
+      <div class="brand" style="box-shadow:none; margin-bottom:12px;">
+        <div class="brand-left">
+          <div class="logo" aria-hidden="true"></div>
+          <div style="min-width:0;">
+            <h1>ClimaERP AI</h1>
+            <small>Gestão + IA para climatização</small>
+          </div>
+        </div>
+        <span class="pill"><span class="dot"></span>Online</span>
+      </div>
+
+      <nav class="nav" aria-label="Navegação">
+        <button class="active" data-page="dashboard">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 13.5V20a1 1 0 0 0 1 1h5v-7.5H4Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M14 3h5a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-5V3Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M10 7.5h4V21h-4V7.5Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Dashboard</span>
+          </span>
+          <span class="hint">⟶</span>
+        </button>
+
+        <button data-page="produtos">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 7h10l1 14H6L7 7Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 7a3 3 0 0 1 6 0" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9 12h6" stroke="rgba(255,255,255,.8)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">Produtos</span>
+          </span>
+          <span class="hint">⌘K</span>
+        </button>
+
+        <button data-page="pedidos">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M21 8v13H3V8M1 3h22v5H1z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M10 12h4" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">Pedidos</span>
+          </span>
+          <span class="hint">O</span>
+        </button>
+
+        <button data-page="agenda">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M16 2v4M8 2v4M3 10h18" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Agenda</span>
+          </span>
+          <span class="hint">A</span>
+        </button>
+
+        <button data-page="fornecedores">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21h18M5 21V7l8-4 8 4v14" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Fornecedores</span>
+          </span>
+          <span class="hint">F</span>
+        </button>
+
+        <button data-page="revendedores">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">Revendedores</span>
+          </span>
+        </button>
+
+        <button data-page="ferramentas">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.9 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Ferramentas</span>
+            <span class="label">Técnico</span>
+          </span>
+          <span class="hint">T</span>
+        </button>
+
+        <button data-page="ia">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5.5 5.5 7.6 7.6" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M2 12h3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5.5 18.5 7.6 16.4" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12 19v3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 18.5 16.4 16.4" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M19 12h3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 5.5 16.4 7.6" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.2 14.8c2.2 2.2 5.4 2.2 7.6 0" stroke="rgba(127,231,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.2 9.2c2.2-2.2 5.4-2.2 7.6 0" stroke="rgba(167,139,250,.85)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">IA de Precificação</span>
+            <span class="label">Estratégia & IA</span>
+          </span>
+          <span class="hint">⌥P</span>
+        </button>
+      </nav>
+
+      <div class="mini" style="margin-top:12px;">
+        <div class="spark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M6 14l3-3 3 3 6-6" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 8v4h-4" stroke="rgba(255,255,255,.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="spark" aria-hidden="true" style="background:linear-gradient(135deg, rgba(167,139,250,.18), rgba(127,231,255,.14));"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2l4 8-4 4-4-4 4-8Z" stroke="rgba(255,255,255,.88)" stroke-width="2" stroke-linejoin="round"/><path d="M8 22h8" stroke="rgba(255,255,255,.75)" stroke-width="2" stroke-linecap="round"/></svg></div>
+        <div>
+          <strong>Atalhos rápidos</strong>
+          <p><span class="kbd">G</span> Dashboard • <span class="kbd">P</span> Produtos • <span class="kbd">I</span> IA</p>
+          <p><span class="kbd">G</span> Dash • <span class="kbd">P</span> Prod • <span class="kbd">O</span> Pedidos</p>
+          <p><span class="kbd">G</span> Dash • <span class="kbd">P</span> Prod • <span class="kbd">O</span> Pedidos • <span class="kbd">I</span> IA</p>
+        </div>
+      </div>
+
+      <div class="mini" style="margin-top:12px; cursor:pointer;" id="themeToggleMobile">
+        <div class="spark" aria-hidden="true" style="background:linear-gradient(135deg, #FBBF24, #F59E0B);">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          </svg>
+        </div>
+        <div>
+          <strong>Tema Visual</strong>
+          <p id="themeLabelMobile">Mudar para Claro</p>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:12px;">
+        <button class="btn" data-close>Fechar</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app">
+    <!-- Desktop Sidebar (Adicionado class light no body por padrão no script abaixo) -->
+    <aside class="sidebar" aria-label="Barra lateral">
+      <div class="brand reveal" style="animation-delay:.02s;">
+        <div class="brand-left">
+          <div class="logo" aria-hidden="true"></div>
+          <div style="min-width:0;">
+            <h1>ClimaERP AI</h1>
+            <small>Gestão + IA para climatização</small>
+          </div>
+        </div>
+        <span class="pill"><span class="dot"></span>Online</span>
+      </div>
+
+      <nav class="nav reveal" aria-label="Navegação" style="animation-delay:.08s;">
+        <button class="active" data-page="dashboard">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 13.5V20a1 1 0 0 0 1 1h5v-7.5H4Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M14 3h5a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-5V3Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M10 7.5h4V21h-4V7.5Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Dashboard</span>
+          </span>
+          <span class="hint">G</span>
+        </button>
+
+        <button data-page="produtos">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M7 7h10l1 14H6L7 7Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 7a3 3 0 0 1 6 0" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9 12h6" stroke="rgba(255,255,255,.8)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">Produtos</span>
+          </span>
+          <span class="hint">P</span>
+        </button>
+
+        <button data-page="pedidos">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M21 8v13H3V8M1 3h22v5H1z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M10 12h4" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">Pedidos</span>
+          </span>
+          <span class="hint">O</span>
+        </button>
+
+        <button data-page="agenda">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M16 2v4M8 2v4M3 10h18" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Agenda</span>
+          </span>
+          <span class="hint">A</span>
+        </button>
+
+        <button data-page="fornecedores">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M3 21h18M5 21V7l8-4 8 4v14" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Fornecedores</span>
+          </span>
+          <span class="hint">F</span>
+        </button>
+
+        <button data-page="ferramentas">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.9 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="label">Ferramentas</span>
+            <span class="label">Técnico</span>
+          </span>
+          <span class="hint">T</span>
+        </button>
+
+        <button data-page="revendedores">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">Revendedores</span>
+          </span>
+        </button>
+
+        <button data-page="ia">
+          <span class="left">
+            <span class="icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2v3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5.5 5.5 7.6 7.6" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M2 12h3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M5.5 18.5 7.6 16.4" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M12 19v3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 18.5 16.4 16.4" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M19 12h3" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M18.5 5.5 16.4 7.6" stroke="rgba(255,255,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.2 14.8c2.2 2.2 5.4 2.2 7.6 0" stroke="rgba(127,231,255,.9)" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M9.2 9.2c2.2-2.2 5.4-2.2 7.6 0" stroke="rgba(167,139,250,.85)" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span class="label">IA de Precificação</span>
+            <span class="label">Estratégia & IA</span>
+          </span>
+          <span class="hint">I</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer reveal" style="animation-delay:.14s;">
+        <div class="mini">
+          <div class="spark" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v18" stroke="rgba(255,255,255,.82)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M7 8l5-5 5 5" stroke="rgba(127,231,255,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <strong>Operação inteligente</strong>
+            <p>Relatórios claros e precificação com margem, impostos e cenário de mercado.</p>
+          </div>
+          <div class="kbd" title="Pesquisa rápida">⌘K</div>
+        </div>
+
+        <div class="mini" style="cursor:pointer;" id="themeToggle" title="Alternar Tema">
+          <div class="spark" aria-hidden="true" style="background:linear-gradient(135deg, #FBBF24, #F59E0B);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="5"></circle>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+          </div>
+          <div>
+            <strong>Tema Visual</strong>
+            <p id="themeLabel">Mudar para Claro</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main" role="main">
+      <div class="container">
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page active" aria-labelledby="dash-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="dash-title">Dashboard</h2>
+              <p>Visão geral do mês: vendas, lucro, pedidos e tendência. Ajuste sua operação com leitura rápida e decisões objetivas.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <span class="chip" id="statusChip" title="Ambiente (clique para recalcular)" style="cursor: pointer;">
+                <span class="badge">LIVE</span>
+                Atualização: <span id="lastUpdate" style="color:rgba(255,255,255,.92);">—</span>
+              </span>
+              <div class="actions-block">
+                <a href="../index.html" class="btn" title="Voltar para a Loja de Vendas">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                  <span>Voltar à Loja</span>
+                </a>
+                <button class="btn" id="themeToggleDash" type="button" title="Alternar Tema">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                  </svg>
+                </button>
+                <button class="btn" id="toggleView" type="button" title="Alternar visão">Ver como Cliente</button>
+                <button class="btn" id="btnRefresh" type="button" title="Recalcular números">Recalcular</button>
+                <button class="btn" id="btnSyncLP" type="button" title="Puxar dados de alvaro72-ar.github.io">Sincronizar Site</button>
+                <button class="btn btn-primary" id="btnExport" type="button" title="Exportar (exemplo)">Exportar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash">
+            <div class="surface reveal" style="animation-delay:.12s;">
+              <div class="section-head">
+                <div>
+                  <h3>Indicadores-chave</h3>
+                  <div class="meta">Resumo com variação vs. período anterior</div>
+                </div>
+                <div class="meta" id="periodLabel">Jan — Dez</div>
+              </div>
+
+              <div class="kpis">
+                <div class="kpi active" id="kpi-vendas" onclick="selectMetric('vendas')" role="button" tabindex="0">
+                  <div class="top">
+                    <div class="label">Vendas</div>
+                    <div class="delta" id="deltaVendas">+12%</div>
+                  </div>
+                  <div>
+                    <div class="value" id="kpiVendas">R$ 12.500</div>
+                    <div class="sub">Receita bruta no período selecionado</div>
+                  </div>
+                </div>
+
+                <div class="kpi" id="kpi-lucro" onclick="selectMetric('lucro')" role="button" tabindex="0">
+                  <div class="top">
+                    <div class="label">Lucro</div>
+                    <div class="delta" id="deltaLucro">+7%</div>
+                  </div>
+                  <div>
+                    <div class="value" id="kpiLucro">R$ 4.800</div>
+                    <div class="sub">Margem após custo e impostos estimados</div>
+                  </div>
+                </div>
+
+                <div class="kpi" id="kpi-pedidos" onclick="selectMetric('pedidos')" role="button" tabindex="0">
+                  <div class="top">
+                    <div class="label">Pedidos</div>
+                    <div class="delta" id="deltaPedidos">+4</div>
+                  </div>
+                  <div>
+                    <div class="value" id="kpiPedidos">18</div>
+                    <div class="sub">Quantidade de vendas confirmadas</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-wrap">
+                <div class="chart-area">
+                  <div class="section-head" style="padding:10px 8px 2px;">
+                    <div>
+                      <h3 style="font-size:16px;">Tendência de vendas</h3>
+                      <div class="meta">Sazonalidade (exemplo)</div>
+                    </div>
+                    <div class="meta">Últimos 6 meses</div>
+                  </div>
+                  <canvas id="grafico" aria-label="Gráfico de vendas"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidecol">
+              <div class="surface reveal" style="animation-delay:.18s;">
+                <div class="section-head">
+                  <div>
+                    <h3>Insights rápidos</h3>
+                    <div class="meta">Leituras práticas para a semana</div>
+                  </div>
+                  <div class="meta">Clima + Demanda</div>
+                </div>
+                <div class="insights">
+                  <div class="insight-grid">
+                    <div class="insight">
+                      <div class="spark" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                          <path d="M6 18c0-5 4-9 9-9" stroke="rgba(255,255,255,.88)" stroke-width="2" stroke-linecap="round"/>
+                          <path d="M16 9c2 0 4 2 4 4s-2 4-4 4h-7" stroke="rgba(127,231,255,.9)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Mix recomendado</strong>
+                        <p>Priorize <b>12.000 BTU</b> (alta saída) e reponha <b>18.000 BTU</b> com giro moderado.</p>
+                      </div>
+                    </div>
+
+                    <div class="insight">
+                      <div class="spark" aria-hidden="true" style="background:linear-gradient(135deg, rgba(167,139,250,.18), rgba(127,231,255,.14));">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                          <path d="M12 2l4 8-4 4-4-4 4-8Z" stroke="rgba(255,255,255,.88)" stroke-width="2" stroke-linejoin="round"/>
+                          <path d="M8 22h8" stroke="rgba(255,255,255,.75)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Margem sob controle</strong>
+                        <p>Evite promoções abaixo de <b>22%</b> de margem se o frete subir. Ajuste por região.</p>
+                      </div>
+                    </div>
+
+                    <div class="insight">
+                      <div class="spark" aria-hidden="true" style="background:linear-gradient(135deg, rgba(251,191,36,.16), rgba(251,113,133,.12));">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                          <path d="M12 6v6l4 2" stroke="rgba(255,255,255,.88)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                          <path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Velocidade de atendimento</strong>
+                        <p>Pedidos respondidos em até <b>15 min</b> aumentam conversão. Automatize mensagens e follow-up.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="surface reveal" style="animation-delay:.22s;">
+                <div class="section-head">
+                  <div>
+                    <h3>Resumo operacional</h3>
+                    <div class="meta">Custos e metas</div>
+                  </div>
+                  <div class="meta" id="opsDate">—</div>
+                </div>
+                <div class="insights">
+                  <div class="insight-grid">
+                    <div class="insight">
+                      <div class="spark" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                          <path d="M7 7h10v10H7V7Z" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linejoin="round"/>
+                          <path d="M5 21h14" stroke="rgba(127,231,255,.85)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Ticket médio</strong>
+                        <p><b id="ticketMedio">R$ 694</b> com upsell de instalação e garantia estendida.</p>
+                      </div>
+                    </div>
+                    <div class="insight">
+                      <div class="spark" aria-hidden="true" style="background:linear-gradient(135deg, rgba(61,227,201,.18), rgba(127,231,255,.14));">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                          <path d="M4 12h16" stroke="rgba(255,255,255,.85)" stroke-width="2" stroke-linecap="round"/>
+                          <path d="M12 4v16" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <strong>Meta semanal</strong>
+                        <p>Para bater o mês, mantenha <b id="metaSemanal">R$ 3.300</b> por semana.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- PRODUTOS -->
+        <section id="produtos" class="page" aria-labelledby="prod-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="prod-title">Catálogo Global HVAC</h2>
+              <p>Base de dados mestre com especificações técnicas. Atualizada via API dos fabricantes.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <div class="actions-block">
+                <button class="btn" id="btnAdd" type="button">Novo cadastro</button>
+                <button class="btn btn-primary" id="btnSync" type="button" title="Sincronizar API">Importar API</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="surface reveal" style="animation-delay:.12s;">
+            <div class="toolbar">
+              <div class="search" role="search">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M21 21l-4.3-4.3" stroke="rgba(255,255,255,.75)" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="rgba(255,255,255,.75)" stroke-width="2"/>
+                </svg>
+                <input id="q" placeholder="Buscar por marca, modelo ou BTU…" autocomplete="off" />
+              </div>
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end;">
+                <span class="chip">
+                  <span class="badge">CAT</span>
+                  SKUs: <span id="countProdutos" style="color:rgba(255,255,255,.92);">1</span>
+                </span>
+                <button class="btn" id="btnClear" type="button" title="Limpar filtro">Limpar</button>
+              </div>
+            </div>
+            
+            <div class="filter-scroll">
+              <button class="filter-btn active" data-cat="all">Todos</button>
+              <button class="filter-btn" data-cat="Split">Split</button>
+              <button class="filter-btn" data-cat="Inverter">Inverter</button>
+              <button class="filter-btn" data-cat="Multi Split">Multi Split</button>
+              <button class="filter-btn" data-cat="Cassete">Cassete</button>
+              <button class="filter-btn" data-cat="Piso Teto">Piso Teto</button>
+              <button class="filter-btn" data-cat="Portátil">Portátil</button>
+            </div>
+
+            <div class="table-wrap">
+              <table aria-label="Tabela de produtos">
+                <thead>
+                  <tr>
+                    <th>Modelo / Marca</th>
+                    <th>Especificações</th>
+                    <th class="muted">Ciclo</th>
+                    <th>Preço Médio (R$)</th>
+                    <th class="muted">Status</th>
+                    <th style="text-align:right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyProdutos">
+                  <!-- JS Render -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- PEDIDOS -->
+        <section id="pedidos" class="page" aria-labelledby="ped-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="ped-title">Controle de Pedidos</h2>
+              <p>Gerencie vendas, status de pagamento e logística de entrega.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <div class="actions-block">
+                <button class="btn btn-primary" id="btnNovoPedido" type="button">Novo Pedido</button>
+              </div>
+            </div>
+          </div>
+          <div class="surface reveal" style="animation-delay:.12s;">
+            <div class="table-wrap">
+              <table aria-label="Tabela de pedidos">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Itens</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Instalação</th>
+                    <th style="text-align:right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyPedidos">
+                  <!-- JS Render -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- AGENDA -->
+        <section id="agenda" class="page" aria-labelledby="age-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="age-title">Agenda de Instalação</h2>
+              <p>Cronograma de técnicos e entregas técnicas.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <div class="actions-block">
+                <button class="btn" type="button" onclick="alert('Funcionalidade de calendário completo em desenvolvimento.')">Ver Calendário</button>
+                <button class="btn" type="button" onclick="openFullCalendar()">Ver Calendário</button>
+              </div>
+            </div>
+          </div>
+          <div class="dash">
+            <div class="surface reveal" style="animation-delay:.12s; padding:20px;">
+              <h3 style="margin:0 0 12px;">Agendar Novo Serviço</h3>
+              <!-- FORMULÁRIO DE AGENDAMENTO -->
+              <form id="form-agenda" class="form" style="padding:0;" onsubmit="return false;">
+                <div class="row" style="margin-top:0;">
+                  <div class="field"><label for="agenda-data">Data</label><input type="date" id="agenda-data" required></div>
+                  <div class="field"><label for="agenda-hora">Hora</label><input type="time" id="agenda-hora" required></div>
+                </div>
+                <div class="field" style="margin-top:12px;"><label for="agenda-pedido">Vincular Pedido (Extrair Cliente)</label><select id="agenda-pedido"><option value="">Selecione um pedido...</option></select></div>
+                <div class="field" style="margin-top:12px;"><label for="agenda-desc">Descrição do Serviço</label><input type="text" id="agenda-desc" placeholder="Ex: Instalação para Carlos M." required></div>
+                <div class="field" style="margin-top:12px;"><label for="agenda-tecnico">Técnico Responsável</label><select id="agenda-tecnico"></select></div>
+                <div class="actions" style="margin-top:16px;">
+                  <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Agendar Serviço</button>
+                </div>
+              </form>
+
+              <h3 style="margin:24px 0 12px;">Próximos Serviços</h3>
+              <div class="timeline">
+                <!-- Compromissos serão renderizados aqui pelo JS -->
+              </div>
+            </div>
+            <div class="sidecol">
+              <div class="surface reveal" style="padding:18px;">
+                <h3>Técnicos Disponíveis</h3>
+                <div id="lista-tecnicos" style="margin-top:12px; display:flex; flex-direction:column; gap:8px;">
+                  <!-- Técnicos serão renderizados aqui pelo JS -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FORNECEDORES -->
+        <section id="fornecedores" class="page" aria-labelledby="forn-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="forn-title">Gestão de Fornecedores</h2>
+              <p>Monitore conexões, frequências de atualização e status de integração em tempo real (Fonte: Excel/CSV).</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <div class="actions-block">
+                <input type="file" id="csvFileInput" style="display:none" accept=".csv" onchange="handleCSVUpload(event)">
+                <button class="btn" type="button" onclick="document.getElementById('csvFileInput').click()">
+                  <i class="fa-solid fa-file-upload"></i> Importar Planilha
+                </button>
+                <button class="btn btn-primary" type="button" onclick="openSupplierModal()">
+                  <i class="fa-solid fa-plus"></i> Adicionar Manual
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="surface reveal" style="animation-delay:.12s; margin-top: 20px;">
+            <div class="section-head" style="padding-bottom:14px;">
+              <div>
+                <h3>Tabela de Fornecedores</h3>
+                <div class="meta">Importe a planilha de cada fornecedor para atualizar os preços</div>
+              </div>
+            </div>
+            <!-- CARDS DE UPLOAD POR FORNECEDOR -->
+            <div style="padding:0 18px 18px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
+              <div class="insight" style="flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="spark" style="width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <strong>Adias</strong>
+                  <span class="status-badge" id="status-adias" style="margin-left:auto;">—</span>
+                </div>
+                <input type="file" id="csv-adias" accept=".csv,.xlsx" style="display:none" onchange="importarPlanilha('adias', this)">
+                <button class="btn" style="width:100%;justify-content:center;font-size:12px;" onclick="document.getElementById('csv-adias').click()">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Importar Planilha
+                </button>
+              </div>
+
+              <div class="insight" style="flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="spark" style="width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <strong>Leveros</strong>
+                  <span class="status-badge" id="status-leveros" style="margin-left:auto;">—</span>
+                </div>
+                <input type="file" id="csv-leveros" accept=".csv,.xlsx" style="display:none" onchange="importarPlanilha('leveros', this)">
+                <button class="btn" style="width:100%;justify-content:center;font-size:12px;" onclick="document.getElementById('csv-leveros').click()">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Importar Planilha
+                </button>
+              </div>
+
+              <div class="insight" style="flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="spark" style="width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <strong>Dufrio</strong>
+                  <span class="status-badge" id="status-dufrio" style="margin-left:auto;">—</span>
+                </div>
+                <input type="file" id="csv-dufrio" accept=".csv,.xlsx" style="display:none" onchange="importarPlanilha('dufrio', this)">
+                <button class="btn" style="width:100%;justify-content:center;font-size:12px;" onclick="document.getElementById('csv-dufrio').click()">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Importar Planilha
+                </button>
+              </div>
+
+              <div class="insight" style="flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="spark" style="width:32px;height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+                  <strong>ClimaRio</strong>
+                  <span class="status-badge" id="status-climario" style="margin-left:auto;">—</span>
+                </div>
+                <input type="file" id="csv-climario" accept=".csv,.xlsx" style="display:none" onchange="importarPlanilha('climario', this)">
+                <button class="btn" style="width:100%;justify-content:center;font-size:12px;" onclick="document.getElementById('csv-climario').click()">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                  Importar Planilha
+                </button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table aria-label="Tabela de fornecedores dinâmicos">
+                <thead>
+                  <tr>
+                    <th>Fornecedor</th>
+                    <th>Integração</th>
+                    <th>Dados</th>
+                    <th>Frequência</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyFornecedoresCSV">
+                  <tr><td colspan="6" style="text-align:center;" class="muted">Carregando...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- COMPARADOR DE PREÇOS -->
+          <div class="surface reveal" style="animation-delay:.18s; margin-top: 20px;">
+            <div class="section-head" style="padding-bottom:14px;">
+              <div>
+                <h3>Comparador de Preços por Produto</h3>
+                <div class="meta">Melhor preço entre seus fornecedores — melhor destacado em verde ★, mais caro em vermelho</div>
+              </div>
+              <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                <span class="chip"><span class="badge" id="badge-economia">R$ 0,00</span> Economia potencial</span>
+                <span class="chip" id="chip-api-status" title="Status do servidor de integração"><span class="badge" style="background:rgba(251,113,133,.2);color:var(--rose);">OFF</span> Servidor API</span>
+                <button class="btn" type="button" id="btn-atualizar-precos" onclick="atualizarPrecosTempoReal()" title="Busca preços reais dos fornecedores via servidor">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+                  Atualizar Preços
+                </button>
+                <button class="btn btn-primary" type="button" onclick="openComparadorModal()">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                  Adicionar Produto
+                </button>
+              </div>
+            </div>
+            <div style="padding: 0 18px 10px;">
+              <div class="search" style="max-width:320px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.3-4.3" stroke="rgba(255,255,255,.75)" stroke-width="2" stroke-linecap="round"/><path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="rgba(255,255,255,.75)" stroke-width="2"/></svg>
+                <input id="q-comparador" placeholder="Filtrar produto ou SKU..." autocomplete="off" oninput="renderComparador()">
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table id="tabelaComparador" aria-label="Comparador de preços">
+                <thead>
+                  <tr id="theadComparador">
+                    <th>Produto / SKU</th>
+                    <th style="color:var(--aqua);">Melhor Preço</th>
+                    <th style="color:var(--aqua);">Fornecedor Ideal</th>
+                    <th style="color:var(--amber);">Economia</th>
+                    <th style="text-align:right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyComparador">
+                  <tr><td colspan="5" class="muted" style="text-align:center;">Adicione produtos para comparar preços entre fornecedores.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODAL COMPARADOR -->
+        <div class="modal" id="modal-comparador">
+          <div class="modal-backdrop" onclick="closeModal('modal-comparador')"></div>
+          <div class="modal-panel" style="max-width:640px;">
+            <div class="modal-header">
+              <h3 id="comparadorModalTitle">Adicionar Produto</h3>
+              <button class="btn-icon" onclick="closeModal('modal-comparador')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+              <form id="form-comparador" onsubmit="saveComparadorForm(event)">
+                <input type="hidden" id="edit-comp-index">
+                <div class="row" style="margin-top:0;">
+                  <div class="field"><label>Nome do Produto</label><input type="text" id="comp-produto" placeholder="Ex: Split LG 12.000 BTU" required></div>
+                  <div class="field"><label>SKU / Código</label><input type="text" id="comp-sku" placeholder="Ex: LG-S4Q12"></div>
+                </div>
+                <div style="margin-top:14px;">
+                  <div style="font-size:12px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:var(--muted); margin-bottom:10px;">Preço por Fornecedor (R$)</div>
+                  <div id="campos-fornecedores" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:20px;">Salvar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODAL FORNECEDOR -->
+        <div class="modal" id="modal-fornecedor">
+          <div class="modal-backdrop" onclick="closeModal('modal-fornecedor')"></div>
+          <div class="modal-panel">
+            <div class="modal-header">
+              <h3 id="supplierModalTitle">Editar Fornecedor</h3>
+              <button class="btn-icon" onclick="closeModal('modal-fornecedor')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="modal-body">
+              <form id="form-supplier-edit" onsubmit="saveSupplierForm(event)">
+                <input type="hidden" id="edit-supplier-index">
+                <div class="row" style="margin-top:0;"><div class="field"><label>Nome</label><input type="text" id="edit-sup-nome" required></div><div class="field"><label>Integração</label><input type="text" id="edit-sup-int" placeholder="Ex: API, Web"></div></div>
+                <div class="row"><div class="field"><label>Dados</label><input type="text" id="edit-sup-dados" placeholder="Ex: Estoque/Preço"></div><div class="field"><label>Frequência</label><input type="text" id="edit-sup-freq" placeholder="Ex: Diária"></div></div>
+                <div class="row"><div class="field"><label>Status</label><select id="edit-sup-status"><option value="Ativo">Ativo</option><option value="Em teste">Em teste</option><option value="Inativo">Inativo</option></select></div><div class="field"><label>Observações</label><input type="text" id="edit-sup-obs"></div></div>
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:20px;">Salvar Alterações</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- REVENDEDORES (NOVO MÓDULO) -->
+        <section id="revendedores" class="page" aria-labelledby="rev-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="rev-title">Gestão de Revendedores</h2>
+              <p>Administre o acesso, estoques e promoções dos parceiros comerciais.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <div class="actions-block">
+                <button class="btn" id="btnAddRevendedor" type="button">Convidar parceiro</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="surface reveal" style="animation-delay:.12s;">
+            <div class="table-wrap">
+              <table aria-label="Tabela de revendedores">
+                <thead>
+                  <tr>
+                    <th>Revendedor</th>
+                    <th>Região</th>
+                    <th>Estoque (Unid.)</th>
+                    <th>Último Acesso</th>
+                    <th style="text-align:right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyRevendedores">
+                  <!-- JS Render -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- CLIENTE -->
+        <section id="cliente" class="page" aria-labelledby="cliente-title">
+          <div class="cliente-dashboard">
+            <div class="titleblock">
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                  <h2 id="cliente-title">Área do Cliente</h2>
+                  <p>Acompanhe abaixo o status do seu pedido em tempo real.</p>
+                </div>
+                <div style="display:flex; gap:10px;">
+                  <button class="btn btn-primary" onclick="verProcessoCompleto()">Acompanhar Pedido Completo</button>
+                  <button class="btn" onclick="window.location.hash=''">Voltar ao Admin</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="cards">
+              <div class="card reveal" style="animation-delay:.1s;">
+                <h3><i class="fa-solid fa-cart-shopping"></i> Seu Pedido</h3>
+                <p id="cliente-pedido-produto">Carregando...</p>
+              </div>
+
+              <div class="card reveal" style="animation-delay:.15s;">
+                <h3><i class="fa-solid fa-gear"></i> Status Atual</h3>
+                <p id="cliente-pedido-status">Carregando...</p>
+              </div>
+
+              <div class="card reveal" style="animation-delay:.2s;">
+                <h3><i class="fa-solid fa-truck"></i> Previsão de Entrega</h3>
+                <p id="cliente-pedido-entrega">Carregando...</p>
+              </div>
+            </div>
+
+            <div class="grafico reveal" style="animation-delay:.25s;">
+              <h3>Progresso do Pedido</h3>
+              <canvas id="statusChart"></canvas>
+            </div>
+
+            <!-- Ação do Cliente -->
+            <div id="cliente-acao-container" class="reveal" style="animation-delay:.3s; margin-top: var(--gap);">
+              <!-- Botão de agendamento será inserido aqui pelo JS -->
+            </div>
+          </div>
+        </section>
+
+        <!-- REVENDEDORES (NOVO MÓDULO) -->
+        <section id="revendedores" class="page" aria-labelledby="rev-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="rev-title">Gestão de Revendedores</h2>
+              <p>Administre o acesso, estoques e promoções dos parceiros comerciais.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <div class="actions-block">
+                <button class="btn" id="btnAddRevendedor" type="button">Convidar parceiro</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="surface reveal" style="animation-delay:.12s;">
+            <div class="table-wrap">
+              <table aria-label="Tabela de revendedores">
+                <thead>
+                  <tr>
+                    <th>Revendedor</th>
+                    <th>Região</th>
+                    <th>Estoque (Unid.)</th>
+                    <th>Último Acesso</th>
+                    <th style="text-align:right;">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodyRevendedores">
+                  <!-- JS Render -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- IA -->
+        <section id="ia" class="page" aria-labelledby="ia-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="ia-title">Centro de Inteligência & Precificação</h2>
+              <p>Agentes autônomos para precificação e monitoramento. Simule o preço ideal considerando custo, impostos, margem e mercado.</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <span class="chip"><span class="badge">AI</span> Modo: <span id="aiMode" style="color:rgba(255,255,255,.92);">Conservador</span></span>
+              <div class="actions-block">
+                <button class="btn" id="btnExample" type="button">Usar exemplo</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="ai-grid">
+            <!-- COLUNA 1: PARÂMETROS -->
+            <div class="surface reveal" style="animation-delay:.12s;">
+              <div class="section-head">
+                <div>
+                  <h3>Precificação Dinâmica</h3>
+                  <div class="meta">Parâmetros para cálculo do preço ideal</div>
+                </div>
+                <div class="toggle-switch on" title="Ajuste automático de preços"></div>
+              </div>
+
+              <div class="form">
+                <div class="row">
+                  <div class="field">
+                    <label for="custo">Custo do fornecedor (R$)</label>
+                    <input id="custo" inputmode="decimal" placeholder="Ex.: 1750" />
+                  </div>
+                  <div class="field">
+                    <label for="imposto">Impostos + taxas (%)</label>
+                    <input id="imposto" inputmode="decimal" placeholder="Ex.: 10" value="10" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="margem">Margem alvo (%)</label>
+                    <input id="margem" inputmode="decimal" placeholder="Ex.: 25" value="25" />
+                  </div>
+                  <div class="field">
+                    <label for="frete">Frete + manuseio (R$)</label>
+                    <input id="frete" inputmode="decimal" placeholder="Ex.: 120" value="120" />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="field">
+                    <label for="btu">BTU</label>
+                    <select id="btu">
+                      <option value="9000">9.000</option>
+                      <option value="12000" selected>12.000</option>
+                      <option value="18000">18.000</option>
+                      <option value="24000">24.000</option>
+                      <option value="30000">30.000</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="posicionamento">Posicionamento</label>
+                    <select id="posicionamento">
+                      <option value="conservador" selected>Conservador (protege margem)</option>
+                      <option value="competitivo">Competitivo (ganha volume)</option>
+                      <option value="premium">Premium (valor percebido)</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="actions">
+                  <div class="actions-block">
+                    <button class="btn btn-primary" id="btnCalc" type="button">Calcular Preço</button>
+                    <button class="btn" id="btnReset" type="button">Limpar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUNA 2: RESULTADO E AGENTES -->
+            <div class="sidecol">
+              
+              <!-- RADAR DE CONCORRÊNCIA -->
+              <div class="surface reveal" style="animation-delay:.16s;">
+                <div class="section-head">
+                  <div>
+                    <h3>Radar de Concorrência</h3>
+                    <div class="meta">Monitoramento em tempo real</div>
+                  </div>
+                </div>
+
+                <p class="muted" style="margin:10px 18px 0; font-size:12px; line-height:1.45;">
+                  Observação: esta é uma simulação demonstrativa.
+                </p>
+                <div class="table-wrap" style="padding-bottom:12px;">
+                  <table style="font-size:12px;">
+                    <tbody>
+                      <tr>
+                        <td style="padding:8px 12px;"><b>Adias</b></td>
+                        <td style="padding:8px 12px; text-align:right; color:var(--rose);">R$ 2.380</td>
+                        <td style="padding:8px 12px; text-align:right;" class="muted">Em estoque</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:8px 12px;"><b>Leveros</b></td>
+                        <td style="padding:8px 12px; text-align:right;">R$ 2.415</td>
+                        <td style="padding:8px 12px; text-align:right;" class="muted">Online</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:8px 12px;"><b>Dufrio</b></td>
+                        <td style="padding:8px 12px; text-align:right;">R$ 2.450</td>
+                        <td style="padding:8px 12px; text-align:right;" class="muted">Online</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:8px 12px;"><b>ClimaRio</b></td>
+                        <td style="padding:8px 12px; text-align:right; color:var(--aqua);">R$ 2.350</td>
+                        <td style="padding:8px 12px; text-align:right;" class="muted">Promoção</td>
+                      </tr>
+                      <tr style="background:rgba(61,227,201,.08); border-color:rgba(61,227,201,.2);">
+                        <td style="padding:8px 12px; color:var(--aqua);"><b>Seu Preço</b></td>
+                        <td style="padding:8px 12px; text-align:right; font-weight:700; color:var(--aqua);">R$ 2.436</td>
+                        <td style="padding:8px 12px; text-align:right; color:var(--aqua);">Ideal</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- RESULTADO DA SIMULAÇÃO -->
+              <div class="surface reveal" style="animation-delay:.18s;">
+                <div class="section-head">
+                  <div>
+                    <h3>Resultado da Simulação</h3>
+                    <div class="meta">Preço + Recomendações</div>
+                  </div>
+                  <div class="meta" id="stampIA">—</div>
+                </div>
+
+              <div class="result">
+                <div class="box" id="resultadoIA">
+                  <div class="price">
+                    <div>
+                      <strong>Preço sugerido</strong>
+                      <div class="big" id="precoSugerido">R$ —</div>
+                    </div>
+                    <div style="flex:1;"></div>
+                    <button class="copy-btn" id="btnCopy" title="Copiar preço" type="button">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                    <div class="side" id="resumoIA">
+                      Informe os parâmetros<br/>e clique em calcular.
+                    </div>
+                  </div>
+                  </div>
+
+                  <!-- Oportunidade -->
+                  <div style="margin-top:12px; padding:12px; border-radius:12px; background:rgba(251,191,36,.1); border:1px solid rgba(251,191,36,.2);">
+                    <div style="display:flex; gap:10px; align-items:center; margin-bottom:6px;">
+                       <div class="spark" style="width:24px; height:24px; background:rgba(251,191,36,.2);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FBBF24" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></div>
+                       <strong style="color:#FBBF24; font-size:13px;">Oportunidade Detectada</strong>
+                    </div>
+                    <p style="margin:0; font-size:12px; line-height:1.4; color:rgba(255,255,255,.8);">
+                      Estoque de <b>18.000 BTU</b> está 30% acima da média. <br>
+                      <span style="color:var(--amber);">Sugestão:</span> Criar oferta relâmpago com <b>5% OFF</b> para liberar capital de giro.
+                    </p>
+                    <button class="btn" style="margin-top:10px; width:100%; justify-content:center; font-size:11px; padding:8px;" onclick="openModal('modal-whatsapp')">
+                      Como funciona a automação?
+                    </button>
+                  </div>
+
+                  <div class="list" aria-label="Recomendações" style="margin-top:12px;">
+                    <div class="li">
+                      <div class="bullet">1</div>
+                      <p><b>Âncora de valor:</b> apresente eficiência (Inverter), garantia e instalação como pacote para reduzir objeções.</p>
+                    </div>
+                    <div class="li">
+                      <div class="bullet">2</div>
+                      <p><b>Teste A/B:</b> rode 2 preços por 48h e meça conversão por canal (WhatsApp, balcão, marketplace).</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- BOT -->
+              <div class="surface reveal" style="animation-delay:.24s;">
+                <div class="section-head">
+                  <div>
+                    <h3>Bot de Vendas</h3>
+                    <div class="meta">WhatsApp & Orçamentos</div>
+                  </div>
+                  <div class="toggle-switch on" title="Bot Ativo"></div>
+                </div>
+                <div style="padding:12px 18px 18px;">
+                  <div id="botFeed">
+                    <div class="feed-item">
+                      <span class="feed-time">10:42</span>
+                      <span>Orçamento <b>#4092</b> gerado (PDF)</span>
+                    </div>
+                    <div class="feed-item">
+                      <span class="feed-time">10:43</span>
+                      <span>Enviado via WhatsApp para <b>Carlos M.</b></span>
+                    </div>
+                    <div class="feed-item">
+                      <span class="feed-time">10:45</span>
+                      <span style="color:var(--aqua);">Cliente respondeu: "Vou fechar!"</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FERRAMENTAS (NOVO) -->
+        <section id="ferramentas" class="page" aria-labelledby="ferr-title">
+          <div class="topbar">
+            <div class="titleblock reveal" style="animation-delay:.02s;">
+              <h2 id="ferr-title">Ferramentas Técnicas</h2>
+              <p>Calculadoras, comparativos e análise de eficiência energética (IDRS).</p>
+            </div>
+            <div class="top-actions reveal" style="animation-delay:.08s;">
+              <span class="chip" onclick="verMarcas()" style="cursor:pointer;" title="Ver Ranking"><span class="badge">DB</span> Marcas: <span id="totalMarcas" style="color:#fff;">0</span></span>
+              <span class="chip" onclick="verModelos()" style="cursor:pointer;" title="Ver Gráfico"><span class="badge">DB</span> Modelos: <span id="totalModelos" style="color:#fff;">0</span></span>
+            </div>
+          </div>
+
+          <div class="dash">
+            <!-- Coluna Esquerda: Calculadoras -->
+            <div class="sidecol">
+              <!-- Comparador -->
+              <div class="surface reveal" style="animation-delay:.12s;">
+                <div class="section-head">
+                  <h3>Comparador de Modelos</h3>
+                </div>
+                <div class="form">
+                  <div class="field">
+                    <label>Modelo A</label>
+                    <select id="modelo1"></select>
+                  </div>
+                  <div class="field" style="margin-top:10px;">
+                    <label>Modelo B</label>
+                    <select id="modelo2"></select>
+                  </div>
+                  <div id="resultadoComparacao" style="margin-top:15px; padding:15px; background:rgba(0,0,0,0.4); border-radius:12px; font-size:14px; line-height:1.6; min-height:80px; border: 2px solid rgba(255,255,255,0.1); color: #FFFFFF; font-weight: 500;">
+                    Selecione os modelos e clique em comparar.
+                  </div>
+                  <div class="actions" style="margin-top:15px;">
+                    <button class="btn btn-primary" onclick="comparar()" style="width:100%; justify-content:center;">Comparar Specs</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Calculadora BTU -->
+              <div class="surface reveal" style="animation-delay:.16s;">
+                <div class="section-head">
+                  <h3>Calculadora BTU</h3>
+                </div>
+                <div class="form">
+                  <div class="row" style="margin-top:0;">
+                    <div class="field"><label>Área (m²)</label><input id="area" type="number" placeholder="20"></div>
+                    <div class="field"><label>Pessoas</label><input id="pessoas" type="number" placeholder="2"></div>
+                  </div>
+                  <div class="field" style="margin-top:10px;"><label>Eletrônicos (Qtd)</label><input id="equip" type="number" placeholder="1"></div>
+                  <div id="resbtu" style="margin-top:15px; font-weight:700; color:var(--aqua); text-align:center;">BTU recomendado: —</div>
+                  <div class="actions" style="margin-top:15px;">
+                    <button class="btn" onclick="calcularBTU()" style="width:100%; justify-content:center;">Calcular Carga</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Coluna Direita: Gráficos e Simulador -->
+            <div class="sidecol">
+              <!-- Gráfico IDRS -->
+              <div class="surface reveal" style="animation-delay:.14s;">
+                <div class="section-head">
+                  <div>
+                    <h3>Eficiência Energética (IDRS)</h3>
+                    <div class="meta">Média do mercado: <span id="idrsMedio">0.00</span></div>
+                  </div>
+                </div>
+                <div class="chart-wrap">
+                  <div class="chart-area" style="height:220px;">
+                    <canvas id="graficoIDRS"></canvas>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Simulador de Consumo -->
+              <div class="surface reveal" style="animation-delay:.18s;">
+                <div class="section-head">
+                  <h3>Simulador de Consumo (R$)</h3>
+                </div>
+                <div class="form">
+                  <div class="row" style="margin-top:0;">
+                    <div class="field"><label>Potência (kWh)</label><input id="pot" type="number" step="0.1" placeholder="Ex: 1.2"></div>
+                    <div class="field"><label>Horas/Dia</label><input id="horas" type="number" placeholder="8"></div>
+                  </div>
+                  <div class="field" style="margin-top:10px;"><label>Tarifa (R$/kWh)</label><input id="valor" type="number" step="0.01" placeholder="0.90" value="0.92"></div>
+                  
+                  <div id="resultadoConsumo" style="margin-top:15px; font-size:14px; font-weight:700; color:var(--amber); text-align:center;">
+                    Custo mensal estimado: R$ 0,00
+                  </div>
+                  <div class="actions" style="margin-top:15px;">
+                    <button class="btn" onclick="simular()" style="width:100%; justify-content:center;">Simular Conta</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ranking -->
+              <div class="surface reveal" style="animation-delay:.20s;">
+                <div class="section-head">
+                  <h3>Ranking de Marcas (IDRS Médio)</h3>
+                </div>
+                <div style="padding:0 18px 18px;">
+                  <ul id="rankingLista" style="list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:8px;">
+                    <!-- JS -->
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <footer class="muted" style="padding: 6px 2px 20px; font-size:12px;">
+          <span style="color:rgba(255,255,255,.78); font-weight:700;">ClimaERP AI</span>
+          <span>• UI premium (single-file) •</span>
+          <span id="footYear"></span>
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODAL WHATSAPP -->
+  <div class="modal" id="modal-whatsapp">
+    <div class="modal-backdrop" onclick="closeModal('modal-whatsapp')"></div>
+    <div class="modal-panel">
+      <div class="modal-header">
+        <h3>Como o WhatsApp Responde Sozinho?</h3>
+        <button class="btn-icon" onclick="closeModal('modal-whatsapp')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <p>Para que o WhatsApp responda automaticamente, usamos a <strong>API Oficial do WhatsApp Business</strong>. Ela permite que um servidor seu receba e envie mensagens de forma programada.</p>
+        <h4>Fluxo de Dados:</h4>
+        <ol style="padding-left:20px; margin:0;">
+          <li>Cliente envia mensagem para seu número.</li>
+          <li>O WhatsApp notifica seu servidor (via <i>Webhook</i>).</li>
+          <li>Seu servidor consulta a IA (Groq) com a mensagem do cliente.</li>
+          <li>Seu servidor envia a resposta da IA de volta para o cliente via API.</li>
+        </ol>
+        <h4>Exemplo de Código (Servidor com Node.js):</h4>
+        <pre><code>// Este código rodaria em um servidor, não no navegador.
+
+// 1. Rota para receber a mensagem do WhatsApp
+app.post('/webhook', async (req, res) => {
+  const userMessage = req.body.messages[0].text.body;
+  const userPhone = req.body.messages[0].from;
+
+  // 2. Busca resposta da IA (usando a mesma lógica do chat)
+  const aiResponse = await buscarRespostaIA(userMessage);
+
+  // 3. Envia a resposta de volta para o usuário via API
+  await enviarMensagemWhatsApp(userPhone, aiResponse);
+
+  res.sendStatus(200); // Informa ao WhatsApp que a mensagem foi recebida
+});</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CALENDÁRIO -->
+  <div class="modal" id="modal-calendario">
+    <div class="modal-backdrop" onclick="closeModal('modal-calendario')"></div>
+    <div class="modal-panel" style="max-width: 700px;">
+      <div class="modal-header">
+        <h3>Cronograma de Instalações</h3>
+        <button class="btn-icon" onclick="closeModal('modal-calendario')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="modal-body" id="calendario-full-body">
+        <!-- Conteúdo preenchido via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL PROCESSO COMPLETO -->
+  <div class="modal" id="modal-processo">
+    <div class="modal-backdrop" onclick="closeModal('modal-processo')"></div>
+    <div class="modal-panel" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3>Status do Processo</h3>
+        <button class="btn-icon" onclick="closeModal('modal-processo')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <div class="timeline" id="timeline-processo">
+          <!-- JS Render -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP FLUTUANTE -->
+  <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20visitei%20o%20site%20e%20gostaria%20de%20solicitar%20um%20orçamento."
+     class="whatsapp-square" target="_blank" rel="noopener noreferrer" aria-label="Contato WhatsApp">
+    <img src="../images/icone/FALE_CONOSCO_150x50.webp" alt="Fale Conosco pelo WhatsApp">
+  </a>
+
+  <!-- CHAT IA -->
+  <button class="chat-fab" id="btn-toggle-chat" aria-label="Abrir Assistente">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    <span>Assistente IA</span>
+  </button>
+
+  <div class="chat-window" id="janela-assistente">
+    <div class="chat-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <div class="spark" style="width:32px; height:32px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"/></svg></div>
+        <div>
+          <div style="font-weight:700; font-size:14px;">Assistente AI</div>
+          <div style="font-size:11px; color:var(--aqua);">Online • Groq Llama 3</div>
+        </div>
+      </div>
+      <button id="btn-fechar-chat" style="background:none; border:0; color:rgba(255,255,255,.6); cursor:pointer;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="chat-body" id="chat">
+      <!-- Mensagens -->
+    </div>
+    <div class="chat-footer">
+      <input type="text" id="input-chat" class="chat-input" placeholder="Pergunte sobre vendas, estoque..." autocomplete="off">
+      <button id="btn-enviar" class="chat-send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></button>
+    </div>
+  </div>
+
+  <script>
+    // ---------- Helpers ----------
+    const brl = (n) => {
+      const v = Number(n);
+      if (!isFinite(v)) return "—";
+      return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    };
+    const num = (v) => {
+      if (typeof v === "number") return v;
+      if (!v) return NaN;
+      // accepts "1.750,50" or "1750.50" or "1750"
+      const s = String(v).trim().replace(/\s/g,'');
+      const normalized = s.includes(",")
+        ? s.replace(/\./g,'').replace(",", ".")
+        : s;
+      return Number(normalized);
+    };
+    const nowStamp = () => new Date().toLocaleString("pt-BR", { dateStyle:"short", timeStyle:"short" });
+
+    // Toast Notification Helper
+    let custosPorSKU = {}; // Armazena custos por ID: { "1": [2000, 2100], "2": [1800] }
+
+    function showToast(msg){
+      const div = document.createElement("div");
+      div.className = "toast";
+      div.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        ${msg}
+      `;
+      document.body.appendChild(div);
+      setTimeout(()=> {
+        div.style.transition = "all .3s"; div.style.opacity = "0"; div.style.transform = "translateY(10px)";
+        setTimeout(()=> div.remove(), 300);
+      }, 2500);
+    }
+
+    // Modal Helpers
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.add("open");
+    }
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) modal.classList.remove("open");
+    }
+    document.addEventListener("click", (e) => {
+      if (e.target.matches(".modal-backdrop")) {
+        e.target.closest(".modal")?.classList.remove("open");
+      }
+    });
+
+    function setActivePage(id){
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      const page = document.getElementById(id);
+      if (page) page.classList.add("active");
+
+      
+      document.querySelectorAll(".nav button").forEach(b => {
+        b.classList.toggle("active", b.dataset.page === id);
+      });
+
+      // Update header title context (subtle)
+      const title = page?.querySelector("h2")?.textContent?.trim();
+      document.title = title ? `ClimaERP AI — ${title}` : "ClimaERP AI";
+
+      // Close drawer on mobile
+      closeDrawer();
+      // Trigger reveals in new page
+      revealNow(page);
+    }
+
+    window.verProcessoCompleto = function() {
+      const pedidosLocal = JSON.parse(localStorage.getItem('alpe_pedidos')) || [];
+      const pedidoRecente = pedidosLocal.length > 0 ? pedidosLocal[0] : null;
+      
+      const container = document.getElementById('timeline-processo');
+      if (!container) return;
+
+      const etapas = [
+        { status: 'Pendente', title: 'Pedido Recebido', desc: 'Seu pedido foi registrado e aguarda confirmação de pagamento.' },
+        { status: 'Pago', title: 'Pagamento Confirmado', desc: 'O pagamento foi validado. Seu pedido está em processamento.' },
+        { status: 'Enviado', title: 'Enviado para Transportadora', desc: 'Seu pedido já saiu do nosso centro de distribuição.' },
+        { status: 'Entregue', title: 'Entregue com Sucesso', desc: 'O pedido foi entregue no endereço solicitado.' }
+      ];
+
+      const currentStatus = pedidoRecente ? pedidoRecente.status : 'Pendente';
+      
+      const statusIndexMap = {
+        'Pendente': 0,
+        'Pago': 1,
+        'Enviado': 2,
+        'Entregue': 3,
+        'Cancelado': -1
+      };
+
+      const currentIndex = statusIndexMap[currentStatus] ?? 0;
+
+      let html = '';
+      etapas.forEach((etapa, index) => {
+        let stateClass = '';
+        if (index < currentIndex) stateClass = 'completed';
+        else if (index === currentIndex) stateClass = 'active';
+        
+        // Se cancelado, não marcamos nada como ativo além do que já passou
+        if (currentStatus === 'Cancelado') stateClass = index < 0 ? 'completed' : '';
+
+        html += `
+          <div class="timeline-item ${stateClass}">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="timeline-title">${etapa.title}</div>
+              <div class="timeline-desc">${etapa.desc}</div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      openModal('modal-processo');
+    };
+
+    // ---------- Hash Routing (#/cliente) ----------
+    function handleHashChange() {
+      const rota = window.location.hash;
+      const appEl = document.querySelector('.app');
+      const sidebarEl = document.querySelector('.sidebar');
+      const mobilebarEl = document.querySelector('.mobilebar');
+
+      // Limpa o intervalo de atualização de status se sair da página do cliente
+      if (statusInterval) {
+        clearInterval(statusInterval);
+        statusInterval = null;
+      }
+
+      if (rota.startsWith("#/cliente")) {
+        // Setup client view
+        if(appEl) appEl.style.gridTemplateColumns = '1fr';
+        if(sidebarEl) sidebarEl.style.display = 'none';
+        if(mobilebarEl) mobilebarEl.style.display = 'none';
+        
+        document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+        const clientePage = document.getElementById("cliente");
+        if (clientePage) {
+          clientePage.classList.add("active");
+          revealNow(clientePage);
+
+          // DADOS DINÂMICOS DO PEDIDO (AGORA CONECTADO)
+          if (statusInterval) clearInterval(statusInterval); // Limpa o intervalo da simulação anterior
+
+          const pedidoRecente = pedidos.length > 0 ? pedidos[0] : null;
+
+          const produtoEl = document.getElementById('cliente-pedido-produto');
+          const statusEl = document.getElementById('cliente-pedido-status');
+          const entregaEl = document.getElementById('cliente-pedido-entrega');
+          const actionContainer = document.getElementById('cliente-acao-container');
+
+          if (pedidoRecente) {
+            const statusMap = {
+                'Pendente': { progresso: 10, entrega: 'Aguardando confirmação de pagamento.' },
+                'Pago': { progresso: 40, entrega: 'Em processamento (5 dias úteis)' },
+                'Enviado': { progresso: 75, entrega: '1-2 dias úteis' },
+                'Entregue': { progresso: 100, entrega: 'Entregue com sucesso' },
+                'Cancelado': { progresso: 0, entrega: 'Pedido cancelado' }
+            };
+            const statusTextMap = { 'Enviado': 'Enviado para transportadora' };
+
+            const info = statusMap[pedidoRecente.status] || { progresso: 0, entrega: 'Status desconhecido' };
+            const statusDisplay = statusTextMap[pedidoRecente.status] || pedidoRecente.status;
+            
+            clientProgress = info.progresso;
+            if(produtoEl) produtoEl.textContent = pedidoRecente.itens;
+            if(statusEl) statusEl.textContent = statusDisplay;
+            if(entregaEl) entregaEl.textContent = info.entrega;
+
+            // Adiciona o botão de ação
+            if(actionContainer) {
+                if (pedidoRecente.status === 'Entregue') {
+                    actionContainer.innerHTML = `
+                        <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá,%20gostaria%20de%20agendar%20a%20instalação%20do%20pedido%20%23${pedidoRecente.id}" target="_blank" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:20px; background: linear-gradient(135deg, #25D366, #128C7E); border:0;">
+                            <i class="fa-brands fa-whatsapp" style="margin-right:8px;"></i> Agendar Instalação
+                        </a>`;
+                } else {
+                    actionContainer.innerHTML = '';
+                }
+            }
+
+            updateClientChart();
+          } else {
+            if(produtoEl) produtoEl.textContent = "Nenhum pedido encontrado";
+            if(statusEl) statusEl.textContent = "—";
+            if(entregaEl) entregaEl.textContent = "—";
+            if(actionContainer) actionContainer.innerHTML = '';
+            clientProgress = 0;
+            updateClientChart();
+          }
+        }
+      } else { // Default to Admin/Reseller view
+        if(appEl) appEl.style.gridTemplateColumns = '';
+        if(sidebarEl) sidebarEl.style.display = '';
+        if(mobilebarEl) mobilebarEl.style.display = '';
+
+        const activePage = document.querySelector('.page.active');
+        if (!activePage || activePage.id === 'cliente') {
+          setActivePage("dashboard");
+        }
+      }
+    }
+
+    // ---------- Drawer (mobile) ----------
+    const drawer = document.getElementById("drawer");
+    const hamb = document.getElementById("hamb");
+
+    function openDrawer(){
+      if (!drawer) return;
+      drawer.classList.add("open");
+      drawer.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+    function closeDrawer(){
+      if (!drawer) return;
+      drawer.classList.remove("open");
+      drawer.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+    hamb?.addEventListener("click", openDrawer);
+    drawer?.addEventListener("click", (e)=>{
+      const t = e.target;
+      if (t && (t.matches("[data-close]") || t.matches(".backdrop"))) closeDrawer();
+    });
+
+    // ---------- Navigation ----------
+    document.addEventListener("click", (e)=>{
+      const btn = e.target.closest("button[data-page]");
+      if (!btn) return;
+      setActivePage(btn.dataset.page);
+    });
+
+    // Listen for hash changes for client/admin routing
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Initial check on page load
+    window.addEventListener('load', handleHashChange);
+
+    // Keyboard shortcuts: G, P, I and Cmd/Ctrl+K focuses search
+    document.addEventListener("keydown", (e)=>{
+      const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+      const typing = tag === "input" || tag === "textarea" || e.target?.isContentEditable;
+      if (!typing){
+        if (e.key.toLowerCase() === "g") setActivePage("dashboard");
+        if (e.key.toLowerCase() === "p") setActivePage("produtos");
+        if (e.key.toLowerCase() === "o") setActivePage("pedidos");
+        if (e.key.toLowerCase() === "a") setActivePage("agenda");
+        if (e.key.toLowerCase() === "f") setActivePage("fornecedores");
+        if (e.key.toLowerCase() === "r") setActivePage("revendedores");
+        if (e.key.toLowerCase() === "i") setActivePage("ia");
+        if (e.key.toLowerCase() === "t") setActivePage("ferramentas");
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k"){
+        e.preventDefault();
+        setActivePage("produtos");
+        setTimeout(()=> document.getElementById("q")?.focus(), 50);
+      }
+      // CTRL+S (Save Simulation)
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){
+        e.preventDefault();
+        showToast("Alterações salvas com sucesso.");
+      }
+      if (e.key === "Escape") closeDrawer();
+    });
+
+    // ---------- Toggle View (Cliente/Admin) ----------
+    document.getElementById("toggleView")?.addEventListener("click", () => {
+      if (window.location.hash === "#/cliente") {
+        window.location.hash = "";
+      } else {
+        window.location.hash = "#/cliente";
+      }
+    });
+
+    // ---------- Chart Variables (must be declared before theme is set) ----------
+    const ctx = document.getElementById("grafico");
+    let chart;
+    let clientChart;
+    let clientProgress = 40;
+    let currentMetric = "vendas";
+    let statusInterval;
+    let currentStatusIndex = 0;
+
+    const chartData = {
+      vendas: {
+        label: "Vendas (R$)",
+        data: [9200, 10800, 12500, 11200, 13150, 14780],
+        color: "rgba(127,231,255,"
+      },
+      lucro: {
+        label: "Lucro (R$)",
+        data: [3200, 3800, 4500, 3900, 4800, 5200],
+        color: "rgba(167,139,250,"
+      },
+      pedidos: {
+        label: "Pedidos (Qtd)",
+        data: [12, 15, 18, 14, 19, 22],
+        color: "rgba(61,227,201,"
+      }
+    };
+
+    // ---------- Data Variables (must be defined before use) ----------
+    const marcas = [
+      "Daikin", "Mitsubishi Electric", "Fujitsu", "LG", "Samsung", "Gree",
+      "Midea", "Carrier", "Springer", "Elgin", "Consul", "Electrolux",
+      "Philco", "Agratto", "Hitachi", "TCL", "York", "Trane", "Komeco", "Fontaine", "Hisense"
+    ];
+
+    // Ajustado para refletir o ranking fornecido pelo usuário
+    const equipamentos = [
+      // Marcas com IDRS médio específico
+      {marca:"Mitsubishi Electric",modelo:"MSZ-HR",btu:12000,idrs:8.90,consumo:10},
+      {marca:"Fujitsu",modelo:"Inverter",btu:9000,idrs:8.80,consumo:10},
+      {marca:"Daikin",modelo:"EcoSwing",btu:12000,idrs:8.60,consumo:14},
+      {marca:"LG",modelo:"Dual Inverter",btu:12000,idrs:8.30,consumo:15},
+      {marca:"Hisense",modelo:"Hi-Wall Inverter",btu:12000,idrs:8.30,consumo:14},
+      {marca:"Gree",modelo:"GTop",btu:9000,idrs:8.10,consumo:13},
+      {marca:"Samsung",modelo:"WindFree",btu:9000,idrs:8.00,consumo:13},
+      {marca:"Hitachi",modelo:"Air Home 600",btu:12000,idrs:8.00,consumo:15},
+      {marca:"Midea",modelo:"Xtreme Save",btu:12000,idrs:7.90,consumo:16},
+      {marca:"Carrier",modelo:"XPower",btu:12000,idrs:7.80,consumo:17},
+      {marca:"Springer",modelo:"AirVolution",btu:9000,idrs:7.50,consumo:18},
+      {marca:"Elgin",modelo:"Eco Power",btu:12000,idrs:7.20,consumo:19},
+
+      // Marcas "Sem dados" - apenas para garantir que apareçam na lista de marcas, mas sem IDRS para cálculo
+      {marca:"Consul",modelo:"Bem Estar",btu:9000,consumo:null},
+      {marca:"Electrolux",modelo:"Ecoturbo",btu:9000,consumo:null},
+      {marca:"Philco",modelo:"Hit",btu:9000,consumo:null},
+      {marca:"Agratto",modelo:"Neo",btu:9000,consumo:null},
+      {marca:"TCL",modelo:"Elite",btu:9000,consumo:null},
+      {marca:"York",modelo:"YCAS",btu:9000,consumo:null},
+      {marca:"Trane",modelo:"Split",btu:9000,consumo:null},
+      {marca:"Komeco",modelo:"Komeco",btu:9000,consumo:null},
+      {marca:"Fontaine",modelo:"Fontaine",btu:9000,consumo:null}
+    ];
+
+    // ---------- Theme Toggle ----------
+    const themeToggle = document.getElementById("themeToggle");
+    const themeToggleMobile = document.getElementById("themeToggleMobile");
+    const themeToggleDash = document.getElementById("themeToggleDash");
+    const themeLabel = document.getElementById("themeLabel");
+    const themeLabelMobile = document.getElementById("themeLabelMobile");
+    
+    function setTheme(isLight){
+      const labelText = isLight ? "Mudar para Escuro" : "Mudar para Claro";
+      if(isLight){
+        document.body.classList.add("light");
+      } else {
+        document.body.classList.remove("light");
+      }
+      if(themeLabel) themeLabel.textContent = labelText;
+      if(themeLabelMobile) themeLabelMobile.textContent = labelText;
+
+      localStorage.setItem("climaerp_theme", isLight ? "light" : "dark");
+      makeChart(); // Redraw main chart
+      if(window.location.hash.includes("#/cliente")) updateClientChart();
+      try {
+        graficoIDRS(); // Redraw IDRS chart
+      } catch(e) {
+        console.error("Falha ao redesenhar gráfico IDRS na troca de tema:", e);
+      }
+    }
+
+    themeToggle?.addEventListener("click", () => {
+      const isLight = !document.body.classList.contains("light");
+      setTheme(isLight);
+    });
+
+    themeToggleMobile?.addEventListener("click", () => {
+      const isLight = !document.body.classList.contains("light");
+      setTheme(isLight);
+    });
+
+    themeToggleDash?.addEventListener("click", () => {
+      const isLight = !document.body.classList.contains("light");
+      setTheme(isLight);
+    });
+
+    // Load saved theme - Default to Light if not set
+    if(localStorage.getItem("climaerp_theme") !== "dark"){
+      setTheme(true);
+    }
+
+    // ---------- Reveal on load + IntersectionObserver ----------
+    function revealNow(root=document){
+      root.querySelectorAll(".reveal").forEach((el, i)=>{
+        if (el.classList.contains("in")) return;
+        const delay = parseFloat(getComputedStyle(el).animationDelay || "0") || (i*0.05);
+        el.style.animationDelay = `${delay}s`;
+        el.classList.add("in");
+      });
+    }
+    revealNow(document);
+
+    const io = ("IntersectionObserver" in window) ? new IntersectionObserver((entries)=>{
+      entries.forEach((en)=>{
+        if (en.isIntersecting){
+          en.target.classList.add("in");
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.18 }) : null;
+
+    document.querySelectorAll(".reveal").forEach(el => io?.observe(el));
+
+    // ---------- Chart ----------
+    function makeChart(){
+      if (!ctx) return;
+      const labels = ["Out", "Nov", "Dez", "Jan", "Fev", "Mar"];
+      const ds = chartData[currentMetric];
+      const isLight = document.body.classList.contains("light");
+      const gridColor = isLight ? "rgba(0,0,0,0.06)" : "rgba(255,255,255,.06)";
+      const tickColor = isLight ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,.55)";
+
+      if (chart) chart.destroy();
+
+      chart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [{
+            label: ds.label,
+            data: ds.data,
+            tension: 0.35,
+            borderColor: ds.color + ".95)",
+            backgroundColor: ds.color + ".12)",
+            fill: true,
+            pointRadius: 3.5,
+            pointHoverRadius: 5,
+            pointBorderWidth: 1,
+            pointBorderColor: "rgba(255,255,255,.55)",
+            pointBackgroundColor: ds.color + ".85)"
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: isLight ? "rgba(255,255,255,.95)" : "rgba(10,14,24,.92)",
+              borderColor: isLight ? "rgba(0,0,0,.1)" : "rgba(255,255,255,.12)",
+              borderWidth: 1,
+              titleColor: isLight ? "#0F172A" : "rgba(255,255,255,.92)",
+              bodyColor: isLight ? "#334155" : "rgba(255,255,255,.82)",
+              displayColors: false,
+              callbacks: {
+                label: (ctx) => {
+                  const val = ctx.parsed.y;
+                  return currentMetric === 'pedidos' ? ` ${val} pedidos` : ` ${brl(val)}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: gridColor },
+              ticks: { color: tickColor, font: { weight: 650 } }
+            },
+            y: {
+              grid: { color: gridColor },
+              ticks: {
+                color: tickColor,
+                callback: (v)=> {
+                  if(currentMetric === 'pedidos') return v;
+                  return (Number(v) >= 1000 ? `R$ ${(v/1000).toFixed(1)}k` : `R$ ${v}`);
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    makeChart();
+
+    function updateClientChart(){
+      const ctxStatus = document.getElementById('statusChart');
+      if (!ctxStatus) return;
+      
+      if (clientChart) clientChart.destroy();
+
+      const isLight = document.body.classList.contains("light");
+      clientChart = new Chart(ctxStatus, {
+        type: 'doughnut',
+        data: {
+          labels: ['Concluído', 'Restante'],
+          datasets: [{
+            data: [clientProgress, 100 - clientProgress],
+            backgroundColor: [isLight ? '#0EA5E9' : 'var(--aqua)', isLight ? '#F1F5F9' : 'rgba(255,255,255,0.1)'],
+            borderColor: isLight ? '#FFFFFF' : 'var(--panel)',
+            borderWidth: 5,
+            borderRadius: 5,
+          }]
+        },
+        options: {
+          responsive: true,
+          cutout: '75%',
+          plugins: { legend: { display: false }, tooltip: { enabled: false } }
+        }
+      });
+    }
+
+    window.selectMetric = (m) => {
+      currentMetric = m;
+      document.querySelectorAll(".kpi").forEach(k => k.classList.remove("active"));
+      const target = document.getElementById(`kpi-${m}`);
+      if(target) target.classList.add("active");
+      makeChart();
+    };
+
+    // ---------- Dashboard mock refresh ----------
+    function refreshKPIs(){
+      // Slightly vary values to feel "live"
+      const baseV = 12500, baseL = 4800, baseP = 18;
+      const jitter = (n, pct)=> Math.round(n * (1 + (Math.random()*2-1) * pct));
+      const vendas = jitter(baseV, 0.06);
+      const lucro = jitter(baseL, 0.08);
+      const pedidos = Math.max(1, jitter(baseP, 0.12));
+
+      document.getElementById("kpiVendas").textContent = brl(vendas);
+      document.getElementById("kpiLucro").textContent = brl(lucro);
+      document.getElementById("kpiPedidos").textContent = pedidos.toString();
+
+      const tv = Math.round((Math.random()*18-3)); // -3..15
+      const tl = Math.round((Math.random()*16-4));
+      const tp = Math.round((Math.random()*8-2));
+
+      const elV = document.getElementById("deltaVendas");
+      const elL = document.getElementById("deltaLucro");
+      const elP = document.getElementById("deltaPedidos");
+
+      if(elV) {
+        elV.textContent = `${tv>=0?"+":""}${tv}%`;
+        elV.classList.toggle("neg", tv < 0);
+      }
+      if(elL) {
+        elL.textContent = `${tl>=0?"+":""}${tl}%`;
+        elL.classList.toggle("neg", tl < 0);
+      }
+      if(elP) {
+        elP.textContent = `${tp>=0?"+":""}${tp}`;
+        elP.classList.toggle("neg", tp < 0);
+      }
+
+      const ticket = vendas / pedidos;
+      document.getElementById("ticketMedio").textContent = brl(ticket);
+      document.getElementById("metaSemanal").textContent = brl(Math.max(0, (baseV*1.06)/4));
+
+      document.getElementById("lastUpdate").textContent = new Date().toLocaleTimeString("pt-BR", { hour:"2-digit", minute:"2-digit" });
+      document.getElementById("opsDate").textContent = new Date().toLocaleDateString("pt-BR", { weekday:"short", day:"2-digit", month:"short" });
+    }
+
+    // Função para verificar novos pedidos e alertar no menu
+    function checkOrderNotifications() {
+      const pedidosLocal = JSON.parse(localStorage.getItem('alpe_pedidos')) || [];
+      // Filtra pedidos que requerem atenção (Pendente ou Pago)
+      const pedidosAtencao = pedidosLocal.filter(p => p.status === 'Pendente' || p.status === 'Pago').length;
+      
+      const btnPedidos = document.querySelector('button[data-page="pedidos"]');
+      if (btnPedidos) {
+        const existingBadge = btnPedidos.querySelector('.nav-badge-blink');
+        
+        if (pedidosAtencao > 0 && !existingBadge) {
+          const badge = document.createElement('span');
+          badge.className = 'nav-badge-blink';
+          badge.title = `${pedidosAtencao} pedidos requerem atenção`;
+          btnPedidos.appendChild(badge);
+        } else if (pedidosAtencao === 0 && existingBadge) {
+          existingBadge.remove();
+        }
+      }
+    }
+
+    document.getElementById("btnRefresh")?.addEventListener("click", ()=>{
+      refreshKPIs();
+      checkOrderNotifications(); // Verifica notificações ao atualizar
+      // Update chart as well
+      if (chart && chartData[currentMetric]){
+        const d = chart.data.datasets[0].data;
+        const last = d[d.length-1];
+        const next = Math.round(last * (1 + (Math.random()*0.10 - 0.03)));
+        d.shift();
+        d.push(next);
+        chart.update();
+      }
+    });
+
+    // Adiciona ação de clique ao chip de status para recalcular
+    document.getElementById("statusChip")?.addEventListener("click", () => {
+        document.getElementById("btnRefresh")?.click();
+        showToast("Indicadores recalculados.");
+    });
+
+    document.getElementById("btnExport")?.addEventListener("click", ()=>{
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        kpis: {
+          vendas: document.getElementById("kpiVendas")?.textContent,
+          lucro: document.getElementById("kpiLucro")?.textContent,
+          pedidos: document.getElementById("kpiPedidos")?.textContent
+        }
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type:"application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "climaerp-export.json";
+      a.click();
+      URL.revokeObjectURL(url);
+
+      // --- Exemplo Prático de Comunicação Segura com Extensão ---
+      // Esta função verifica se a API da extensão existe antes de usá-la.
+      const comunicarComExtensao = (dados) => {
+        if (window.chrome && chrome.runtime && chrome.runtime.sendMessage) {
+          console.log("Enviando mensagem para a extensão:", dados);
+          chrome.runtime.sendMessage({ type: "DADOS_CLIMAERP", payload: dados }, (response) => {
+            if (chrome.runtime.lastError) {
+              console.warn("Receptor da extensão não encontrado:", chrome.runtime.lastError.message);
+            } else {
+              console.log("Resposta da extensão:", response);
+            }
+          });
+        } else {
+          console.log("Ambiente local: A comunicação com a extensão foi simulada (mock).");
+        }
+      };
+
+      // Envia os dados para a extensão (se ela existir)
+      comunicarComExtensao(payload);
+    });
+
+    // ---------- Sincronização Landing Page ----------
+    document.getElementById("btnSyncLP")?.addEventListener("click", async () => {
+      const btn = document.getElementById("btnSyncLP");
+      const originalHTML = btn.innerHTML;
+      const urlApi = LANDING_PAGE_API_URL;
+
+      // Estado de carregamento
+      btn.disabled = true;
+      btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite; margin-right:6px;"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Conectando...`;
+      
+      showToast(`Conectando a ${urlApi}...`);
+      
+      try {
+        // Adiciona timestamp (?t=...) para garantir que pegamos os dados mais recentes e evitar cache antigo
+        const response = await fetch(urlApi + "?t=" + new Date().getTime());
+        if (!response.ok) {
+          throw new Error(`Erro na rede: ${response.statusText}`);
+        }
+        const data = await response.json();
+
+        // Atualiza a interface com os dados recebidos
+        document.getElementById("kpiVendas").textContent = brl(data.vendas);
+        document.getElementById("kpiLucro").textContent = brl(data.lucro);
+        document.getElementById("kpiPedidos").textContent = data.pedidos.toString();
+        
+        // Você pode calcular os deltas ou recebê-los da API também
+        document.getElementById("deltaVendas").textContent = data.deltaVendas || "+0%";
+        document.getElementById("deltaLucro").textContent = data.deltaLucro || "+0%";
+        document.getElementById("deltaPedidos").textContent = data.deltaPedidos || "+0";
+        document.getElementById("lastUpdate").textContent = "Agora (LP)";
+
+        sincronizarPrecosVitrine();
+        showToast("Dados da Landing Page sincronizados!");
+
+      } catch (error) {
+        console.error("Falha ao sincronizar:", error);
+        showToast("Falha ao conectar com a Landing Page.");
+        document.getElementById("lastUpdate").textContent = "Falha";
+      } finally {
+        btn.innerHTML = originalHTML;
+        btn.disabled = false;
+      }
+    });
+
+    refreshKPIs();
+    checkOrderNotifications(); // Executa ao carregar a página
+
+    // ---------- Produtos (data + filter) ----------
+    const tbody = document.getElementById("tbodyProdutos");
+    const countProdutos = document.getElementById("countProdutos");
+    const q = document.getElementById("q");
+
+    let produtos = [
+      { id: 2, marca:"LG", modelo:"S4-Q12JA31", tipo:"Split", btu:12000, ciclo:"Frio", volt:"220V", preco:2400, status:"Sincronizado" },
+      { id: 1, marca:"Samsung", modelo:"WindFree", tipo:"Inverter", btu:9000, ciclo:"Quente/Frio", volt:"220V", preco:2690, status:"Sincronizado" },
+      { id: 3, marca:"Daikin", modelo:"Multi 32k", tipo:"Multi Split", btu:32000, ciclo:"Inverter", volt:"220V", preco:8900, status:"Premium" },
+      { id: 5, marca:"Elgin", modelo:"Cassete 360", tipo:"Cassete", btu:24000, ciclo:"Frio", volt:"220V", preco:5200, status:"Novo" },
+      { id: 10, marca:"Gree", modelo:"G-Prime", tipo:"Piso Teto", btu:36000, ciclo:"Frio", volt:"220V", preco:6100, status:"Sincronizado" },
+      { id: 9, marca:"Philco", modelo:"Portátil 12k", tipo:"Portátil", btu:12000, ciclo:"Frio", volt:"110V", preco:2100, status:"Manual" }
+    ];
+
+    function renderProdutos(list){
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      list.forEach((p, idx)=>{
+        const tr = document.createElement("tr");
+
+        const tdNome = document.createElement("td");
+        tdNome.setAttribute("data-label","Modelo");
+        tdNome.innerHTML = `<div>${p.modelo}</div><div class="muted" style="font-size:11px; font-weight:500;">${p.marca} • ${p.tipo}</div>`;
+
+        const tdBTU = document.createElement("td");
+        tdBTU.setAttribute("data-label","Specs");
+        tdBTU.innerHTML = `<span class="tag" style="font-size:11px;">${p.btu/1000}k BTU</span> <span class="muted" style="font-size:11px; margin-left:4px;">${p.volt}</span>`;
+
+        const tdCiclo = document.createElement("td");
+        tdCiclo.setAttribute("data-label","Ciclo");
+        tdCiclo.className = "muted";
+        tdCiclo.textContent = p.ciclo;
+
+        const tdVenda = document.createElement("td");
+        tdVenda.setAttribute("data-label","Preço Médio");
+        tdVenda.className = "money";
+        tdVenda.textContent = (p.preco ?? 0).toLocaleString("pt-BR");
+
+        const tdStatus = document.createElement("td");
+        tdStatus.setAttribute("data-label","Status");
+        tdStatus.className = "muted";
+        tdStatus.innerHTML = `<span style="color:#3DE3C9;">●</span> ${p.status}`;
+
+        const tdActions = document.createElement("td");
+        tdActions.style.textAlign = "right";
+        tdActions.innerHTML = `
+          <button class="btn-icon danger" onclick="removeProduto(${idx})" title="Excluir">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+          </button>
+        `;
+
+        tr.append(tdNome, tdBTU, tdCiclo, tdVenda, tdStatus, tdActions);
+        tbody.appendChild(tr);
+      });
+
+      if (countProdutos) countProdutos.textContent = String(list.length);
+    }
+
+    window.removeProduto = (idx) => {
+      if(confirm("Deseja remover este produto?")){
+        produtos.splice(idx, 1);
+        applyFilter();
+      }
+    };
+
+    let activeCat = "all";
+
+    function applyFilter(){
+      const term = (q?.value || "").trim().toLowerCase();
+      
+      const filtered = produtos.filter(p => {
+        const matchesTerm = !term || `${p.marca} ${p.modelo} ${p.btu} ${p.status} ${p.tipo}`.toLowerCase().includes(term);
+        const matchesCat = activeCat === "all" || p.tipo === activeCat || (activeCat === "Inverter" && (p.tipo === "Inverter" || p.ciclo.includes("Inverter")));
+        return matchesTerm && matchesCat;
+      });
+      renderProdutos(filtered);
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeCat = btn.dataset.cat;
+        applyFilter();
+      });
+    });
+
+    q?.addEventListener("input", applyFilter);
+    document.getElementById("btnClear")?.addEventListener("click", ()=>{
+      if (q) q.value = "";
+      renderProdutos(produtos);
+    });
+
+    document.getElementById("btnSync")?.addEventListener("click", ()=>{
+      // Simulating API Import
+      produtos = [
+        { marca:"LG", modelo:"S4-Q12JA31", tipo:"Split", btu:12000, ciclo:"Frio", volt:"220V", preco:2400, status:"Sincronizado" },
+        { marca:"Samsung", modelo:"AR12TSEABWK", tipo:"Inverter", btu:12000, ciclo:"Quente/Frio", volt:"220V", preco:2690, status:"Sincronizado" },
+        { marca:"Midea", modelo:"42AGVCC09M5", tipo:"Split", btu:9000, ciclo:"Frio", volt:"110V", preco:2090, status:"Novo" },
+        { marca:"Gree", modelo:"G-Top 18k", tipo:"Piso Teto", btu:18000, ciclo:"Frio", volt:"220V", preco:3490, status:"Sincronizado" },
+        { marca:"Daikin", modelo:"FTXP35KV", tipo:"Multi Split", btu:12000, ciclo:"Inverter", volt:"220V", preco:3890, status:"Atualizado" },
+        { marca:"Elgin", modelo:"Eco Power", tipo:"Cassete", btu:24000, ciclo:"Frio", volt:"220V", preco:5200, status:"Sincronizado" }
+      ];
+      renderProdutos(produtos);
+      if (q) q.value = "";
+      alert("5 produtos importados da API de Fabricantes.");
+    });
+
+    document.getElementById("btnAdd")?.addEventListener("click", ()=>{
+      const modelo = prompt("Modelo do equipamento:");
+      if (!modelo) return;
+      const btu = num(prompt("BTU (ex.: 12000):"));
+      const tipo = prompt("Tipo (Split, Cassete...):") || "Split";
+      const preco = num(prompt("Preço Sugerido (R$):"));
+      produtos.unshift({
+        marca: "Manual",
+        modelo,
+        tipo,
+        btu: isFinite(btu) ? Math.round(btu) : 12000,
+        ciclo: "Frio", volt: "220V",
+        preco: isFinite(preco) ? preco : 0,
+        status: "Manual"
+      });
+      renderProdutos(produtos);
+    });
+
+    renderProdutos(produtos);
+
+    // ---------- IA Precificação ----------
+    const custoEl = document.getElementById("custo");
+    const impostoEl = document.getElementById("imposto");
+    const margemEl = document.getElementById("margem");
+    const freteEl = document.getElementById("frete");
+    const btuEl = document.getElementById("btu");
+    const posEl = document.getElementById("posicionamento");
+
+    const precoSugeridoEl = document.getElementById("precoSugerido");
+    const resumoIAEl = document.getElementById("resumoIA");
+    const stampIAEl = document.getElementById("stampIA");
+    const aiModeEl = document.getElementById("aiMode");
+
+    function calcularIA(){
+      const custo = num(custoEl?.value);
+      const impostoPct = num(impostoEl?.value);
+      const margemPct = num(margemEl?.value);
+      const frete = num(freteEl?.value);
+      const btu = Number(btuEl?.value || 12000);
+      const pos = posEl?.value || "conservador";
+
+      if (!isFinite(custo) || custo <= 0){
+        precoSugeridoEl.textContent = "R$ —";
+        resumoIAEl.innerHTML = "Informe um <b>custo válido</b> para calcular.";
+        return;
+      }
+
+      const imposto = 0.10; // Fixo para demo
+      const margem = isFinite(margemPct) ? margemPct/100 : 0.25;
+      const ship = 120; // Frete médio
+
+      // Simple demand factor by BTU (bigger units allow higher absolute price tolerance)
+      const btuFactor = (btu <= 9000) ? 0.98 : (btu <= 12000) ? 1.00 : (btu <= 18000) ? 1.03 : 1.06;
+
+      // Effective margin
+      const effMargin = Math.max(0.05, Math.min(0.55, margem));
+
+      // Price model: (custo + frete) / (1 - imposto - margem)
+      const denom = (1 - imposto - effMargin);
+      const raw = (custo + ship) / Math.max(0.12, denom);
+      const priced = raw * btuFactor;
+
+      // Psychological pricing: end with .90 or .95 (BRL cents)
+      const final = Math.max(0, Math.floor(priced) + 0.90);
+
+      precoSugeridoEl.textContent = brl(final);
+      resumoIAEl.innerHTML = `Baseado em custo, impostos e margem segura.`;
+    }
+
+    document.getElementById("btnCopy")?.addEventListener("click", ()=>{
+      const txt = precoSugeridoEl.textContent;
+      if(!txt.includes("R$") || txt.includes("—")) return;
+      navigator.clipboard.writeText(txt).then(()=>{
+        alert("Preço copiado: " + txt);
+      });
+    });
+
+    document.getElementById("btnCalc")?.addEventListener("click", calcularIA);
+    document.getElementById("btnReset")?.addEventListener("click", ()=>{
+      if (custoEl) custoEl.value = "";
+      if (impostoEl) impostoEl.value = "10";
+      if (margemEl) margemEl.value = "25";
+      if (freteEl) freteEl.value = "120";
+      if (btuEl) btuEl.value = "12000";
+      if (posEl) posEl.value = "conservador";
+      precoSugeridoEl.textContent = "R$ —";
+      resumoIAEl.innerHTML = "Informe os parâmetros<br/>e clique em calcular.";
+      stampIAEl.textContent = "—";
+      aiModeEl.textContent = "Conservador";
+    });
+
+    document.getElementById("btnExample")?.addEventListener("click", ()=>{
+      setActivePage("ia");
+      custoEl.value = "1750";
+      impostoEl.value = "10";
+      margemEl.value = "26";
+      freteEl.value = "140";
+      btuEl.value = "12000";
+      posEl.value = "competitivo";
+      calcularIA();
+    });
+
+    // Bot Simulation
+    setInterval(()=>{
+      const feed = document.getElementById("botFeed");
+      if(!feed || document.hidden) return;
+      
+      // 10% chance to add new item
+      if(Math.random() > 0.90){
+        const now = new Date().toLocaleTimeString("pt-BR", {hour:"2-digit", minute:"2-digit"});
+        const msgs = [
+          `<span>Dúvida sobre <b>Inverter</b> respondida.</span>`,
+          `<span>Orçamento enviado para <b>(11) 99...</b></span>`,
+          `<span style="color:var(--aqua);">Novo lead qualificado!</span>`
+        ];
+        const msg = msgs[Math.floor(Math.random()*msgs.length)];
+        
+        const div = document.createElement("div");
+        div.className = "feed-item reveal";
+        div.innerHTML = `<span class="feed-time">${now}</span>${msg}`;
+        feed.prepend(div);
+        if(feed.children.length > 4) feed.lastElementChild.remove();
+        
+        // Trigger animation
+        setTimeout(()=> div.classList.add("in"), 50);
+      }
+    }, 3000);
+
+    // allow Enter key to calculate inside inputs
+    document.querySelectorAll("#ia input, #ia select").forEach(el=>{
+      el.addEventListener("keydown", (e)=>{
+        if (e.key === "Enter") calcularIA();
+      });
+    });
+
+    // ---------- Revendedores ----------
+    const tbodyRev = document.getElementById("tbodyRevendedores");
+    let revendedores = [
+      { nome: "Clima Sul Ltda", regiao: "Porto Alegre, RS", estoque: 142, acesso: "Hoje, 08:30" },
+      { nome: "Ar Frio SP", regiao: "São Paulo, SP", estoque: 85, acesso: "Ontem, 14:15" },
+      { nome: "Norte Clima", regiao: "Manaus, AM", estoque: 320, acesso: "Há 2 dias" }
+    ];
+
+    function renderRevendedores(){
+      if(!tbodyRev) return;
+      tbodyRev.innerHTML = "";
+      revendedores.forEach((r, i) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td data-label="Revendedor" style="font-weight:700;">${r.nome}</td>
+          <td data-label="Região">${r.regiao}</td>
+          <td data-label="Estoque">${r.estoque}</td>
+          <td data-label="Acesso" class="muted">${r.acesso}</td>
+          <td style="text-align:right;">
+            <button class="btn-icon" onclick="alert('Tabela de preços enviada para ${r.nome}')" title="Enviar Tabela">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+            <button class="btn-icon danger" onclick="removerRevendedor(${i})" title="Remover">
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg>
+            </button>
+          </td>
+        `;
+        tbodyRev.appendChild(tr);
+      });
+    }
+
+    document.getElementById("btnAddRevendedor")?.addEventListener("click", () => {
+       const nome = prompt("Nome do Revendedor:");
+       if(!nome) return;
+       const regiao = prompt("Região (Cidade, UF):");
+       const estoque = prompt("Estoque Inicial:");
+       revendedores.push({ nome, regiao: regiao || "—", estoque: parseInt(estoque) || 0, acesso: "Nunca" });
+       renderRevendedores();
+       showToast("Revendedor adicionado.");
+    });
+
+    window.removerRevendedor = (i) => { if(confirm("Remover?")){ revendedores.splice(i, 1); renderRevendedores(); } };
+    renderRevendedores();
+
+    // ---------- Pedidos ----------
+    const tbodyPed = document.getElementById("tbodyPedidos");
+    
+    // Tenta carregar do LocalStorage (onde a loja salva), se não existir, usa dados de exemplo
+    let pedidos = JSON.parse(localStorage.getItem('alpe_pedidos')) || [
+      { id: 4092, cliente: "Carlos M.", itens: "Daikin Cassete 36.000 BTU", total: 8990, status: "Pago", instalacao: "Agendado" },
+      { id: 4091, cliente: "Empresa ABC", itens: "3x Cassete 24k", total: 14200, status: "Pendente", instalacao: "Aguardando" },
+      { id: 4090, cliente: "Ana Julia", itens: "1x Hitachi 9k", total: 2496, status: "Enviado", instalacao: "Aguardando" }
+    ];
+
+    const getStatusClass = (status) => {
+      switch (status) {
+        case 'Pendente': return 'st-orange';
+        case 'Pago': return 'st-green';
+        case 'Enviado': return 'st-blue';
+        case 'Entregue': return 'st-green';
+        case 'Cancelado': return 'st-red';
+        default: return 'st-gray';
+      }
+    };
+
+    function renderPedidos(){
+      if(!tbodyPed) return;
+      tbodyPed.innerHTML = "";
+      pedidos.forEach((p, i) => {
+        const statusClass = getStatusClass(p.status);
+        const instClass = p.instalacao === 'Agendado' ? 'st-blue' : (p.instalacao === 'Concluído' ? 'st-green' : 'st-gray');
+
+        let btnAgendar = '';
+        if (p.status === 'Pago' && p.instalacao === 'Aguardando') {
+          const msg = encodeURIComponent(`Olá! Gostaria de agendar a instalação do pedido #${p.id} (${p.itens}) para o cliente ${p.cliente}.`);
+          btnAgendar = `<button class="btn" style="padding:4px 8px; font-size:11px; background:#25d366; color:#fff; border:0; margin-right:4px;" onclick="window.open('https://api.whatsapp.com/send?phone=5521980220417&text=${msg}', '_blank')">Agendar</button>`;
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td data-label="ID" class="muted">#${p.id}</td>
+          <td data-label="Cliente" style="font-weight:700;">${p.cliente}</td>
+          <td data-label="Itens">${p.itens}</td>
+          <td data-label="Total" class="money">${brl(p.total)}</td>
+          <td data-label="Status"><span class="status-badge ${statusClass}">${p.status}</span></td>
+          <td data-label="Instalação"><span class="status-badge ${instClass}">${p.instalacao}</span></td>
+          <td style="text-align:right;">
+            ${btnAgendar}
+            <button class="btn-icon" onclick="updatePedidoStatus(${i})" title="Alterar Status">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+            </button>
+            <button class="btn-icon danger" onclick="removerPedido(${i})" title="Remover Pedido">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
+          </td>
+        `;
+        tbodyPed.appendChild(tr);
+      });
+    }
+
+    window.updatePedidoStatus = (i) => {
+      const p = pedidos[i];
+      if (!p) return;
+      
+      const novoStatus = prompt("Novo status do PAGAMENTO (Pendente, Pago, Enviado, Entregue, Cancelado):", p.status);
+      const validStatus = ["Pendente", "Pago", "Enviado", "Entregue", "Cancelado"];
+      if (novoStatus && validStatus.map(s => s.toLowerCase()).includes(novoStatus.trim().toLowerCase())) {
+        pedidos[i].status = validStatus.find(s => s.toLowerCase() === novoStatus.trim().toLowerCase());
+      }
+
+      const novoInst = prompt("Novo status da INSTALAÇÃO (Aguardando, Agendado, Concluído):", p.instalacao);
+      const validInst = ["Aguardando", "Agendado", "Concluído"];
+      if (novoInst && validInst.map(s => s.toLowerCase()).includes(novoInst.trim().toLowerCase())) {
+        pedidos[i].instalacao = validInst.find(s => s.toLowerCase() === novoInst.trim().toLowerCase());
+      }
+
+      localStorage.setItem('alpe_pedidos', JSON.stringify(pedidos));
+      renderPedidos();
+      showToast(`Dados do pedido #${p.id} atualizados!`);
+    };
+
+    document.getElementById("btnNovoPedido")?.addEventListener("click", () => {
+      const cliente = prompt("Nome do Cliente:");
+      if (!cliente) return;
+      const itens = prompt("Itens (ex: 1x Split 12k):");
+      const total = num(prompt("Valor Total (R$):"));
+      
+      pedidos.unshift({ id: Math.floor(4100 + Math.random()*100), cliente, itens: itens || "N/A", total: total || 0, status: "Pendente", instalacao: "Aguardando" });
+      localStorage.setItem('alpe_pedidos', JSON.stringify(pedidos)); // Salva alteração
+      renderPedidos();
+      showToast("Novo pedido registrado.");
+    });
+
+    window.removerPedido = (i) => { 
+      if(confirm("Remover este pedido?")) { 
+        pedidos.splice(i, 1); 
+        localStorage.setItem('alpe_pedidos', JSON.stringify(pedidos)); // Atualiza armazenamento
+        renderPedidos(); 
+      }
+    };
+    renderPedidos();
+
+    // ---------- AGENDA (MÓDULO DINÂMICO) ----------
+    function initAgendaModule() {
+      const form = document.getElementById("form-agenda");
+      const dataInput = document.getElementById("agenda-data");
+      const horaInput = document.getElementById("agenda-hora");
+      const descInput = document.getElementById("agenda-desc");
+      const pedidoSelect = document.getElementById("agenda-pedido");
+      const tecnicoSelect = document.getElementById("agenda-tecnico");
+      const timeline = document.querySelector("#agenda .timeline");
+      const listaTecnicosEl = document.getElementById("lista-tecnicos");
+
+      // Dados de exemplo (poderiam vir de uma API)
+      let tecnicos = [
+        { id: 1, nome: "Roberto Silva", status: "Em serviço" },
+        { id: 2, nome: "André Costa", status: "Disponível" },
+        { id: 3, nome: "Juliana Pereira", status: "Disponível" }
+      ];
+
+      let compromissos = JSON.parse(localStorage.getItem("alpe_agenda")) || [
+        { data: new Date(new Date().setHours(14,0,0,0)).toISOString(), descricao: 'Instalação Split 12k - Carlos M.', tecnico: 'Roberto Silva' },
+        { data: new Date(new Date().setDate(new Date().getDate() + 1)).toISOString(), descricao: 'Manutenção Preventiva - Shopping Plaza', tecnico: 'Equipe Alpha' }
+      ];
+
+      function formatarData(isoString) {
+        const data = new Date(isoString);
+        const hoje = new Date();
+        const amanha = new Date();
+        amanha.setDate(hoje.getDate() + 1);
+
+        const isHoje = data.toDateString() === hoje.toDateString();
+        const isAmanha = data.toDateString() === amanha.toDateString();
+
+        const hora = data.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+        if (isHoje) return `Hoje, ${hora}`;
+        if (isAmanha) return `Amanhã, ${hora}`;
+        
+        return data.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }) + `, ${hora}`;
+      }
+
+      function popularSelectPedidos() {
+        if (!pedidoSelect) return;
+        const pedidosLocal = JSON.parse(localStorage.getItem('alpe_pedidos')) || [];
+        pedidoSelect.innerHTML = '<option value="">Selecione um pedido para extrair dados...</option>';
+        pedidosLocal.forEach(p => {
+          const opt = document.createElement("option");
+          opt.value = p.id;
+          opt.textContent = `#${p.id} - ${p.cliente} (${p.itens})`;
+          opt.dataset.cliente = p.cliente;
+          opt.dataset.item = p.itens;
+          pedidoSelect.appendChild(opt);
+        });
+      }
+
+      pedidoSelect?.addEventListener("change", (e) => {
+        const opt = e.target.options[e.target.selectedIndex];
+        if (opt && opt.value) descInput.value = `Instalação ${opt.dataset.item} - ${opt.dataset.cliente}`;
+      });
+
+      function renderTecnicos() {
+        if (!listaTecnicosEl || !tecnicoSelect) return;
+        
+        listaTecnicosEl.innerHTML = "";
+        tecnicoSelect.innerHTML = '<option value="A definir">A definir</option>';
+
+        tecnicos.forEach(t => {
+          const isDisponivel = t.status === 'Disponível';
+          const inicial = t.nome.charAt(0);
+          listaTecnicosEl.innerHTML += `
+            <div class="sup-card" style="padding:8px;">
+              <div style="width:32px; height:32px; background:var(--bg2); border-radius:50%; display:grid; place-items:center; font-weight:700;">${inicial}</div>
+              <div>
+                <div style="font-size:13px; font-weight:700;">${t.nome}</div>
+                <div class="muted" style="font-size:11px; color:${isDisponivel ? 'var(--aqua)' : 'var(--muted)'};">${t.status}</div>
+              </div>
+            </div>
+          `;
+          tecnicoSelect.innerHTML += `<option value="${t.nome}">${t.nome}</option>`;
+        });
+      }
+
+      function renderCompromissos() {
+        if (!timeline) return;
+        timeline.innerHTML = "";
+        compromissos.sort((a, b) => new Date(a.data) - new Date(b.data));
+        if (compromissos.length === 0) {
+          timeline.innerHTML = "<p class='muted' style='padding: 10px;'>Nenhum compromisso agendado.</p>";
+          return;
+        }
+        compromissos.forEach((c, index) => {
+          const isFuture = new Date(c.data) >= new Date();
+          const item = document.createElement("div");
+          item.className = isFuture ? "t-item future" : "t-item";
+          item.innerHTML = `
+            <span class="t-time">${formatarData(c.data)}</span>
+            <div class="t-card">
+              <div style="display:flex; justify-content:space-between; align-items:center; gap: 10px;">
+                <div style="flex:1;">
+                  <div style="font-weight:700;">${c.descricao}</div>
+                  <div class="muted" style="font-size:12px; margin-top:4px;">Técnico: ${c.tecnico || 'A definir'}</div>
+                </div>
+                <button class="btn-icon danger" onclick="removerCompromisso(${index})" title="Remover">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+              </div>
+            </div>
+          `;
+          timeline.appendChild(item);
+        });
+      }
+
+      window.removerCompromisso = (index) => { if (confirm("Remover este compromisso?")) { compromissos.splice(index, 1); localStorage.setItem("alpe_agenda", JSON.stringify(compromissos)); renderCompromissos(); } }
+
+      form?.addEventListener("submit", (e) => { e.preventDefault(); const data = dataInput.value, hora = horaInput.value, descricao = descInput.value.trim(), tecnico = tecnicoSelect.value; if (data && hora && descricao) { const dataISO = new Date(`${data}T${hora}`).toISOString(); compromissos.push({ data: dataISO, descricao, tecnico }); localStorage.setItem("alpe_agenda", JSON.stringify(compromissos)); renderCompromissos(); form.reset(); showToast("Compromisso agendado!"); } });
+
+      popularSelectPedidos();
+      renderTecnicos();
+      renderCompromissos();
+
+      // Atualiza a lista de pedidos toda vez que o usuário clica no menu "Agenda"
+      document.querySelectorAll('button[data-page="agenda"]').forEach(btn => {
+        btn.addEventListener('click', popularSelectPedidos);
+      });
+    }
+    initAgendaModule();
+
+    // ---------- FERRAMENTAS (Funções) ----------
+
+    function carregarFerramentas(){
+      // Stats
+      const elTotalMarcas = document.getElementById("totalMarcas");
+      const elTotalModelos = document.getElementById("totalModelos");
+      const elIdrsMedio = document.getElementById("idrsMedio");
+      
+      if(elTotalMarcas) elTotalMarcas.innerText = marcas.length;
+      if(elTotalModelos) elTotalModelos.innerText = equipamentos.length;
+
+      let media = 8.16; // Média benchmark mercado
+      if(elIdrsMedio) elIdrsMedio.innerText = media.toFixed(2);
+
+      ranking();
+      popularSelects();
+      graficoIDRS();
+    }
+
+    function ranking(){
+      let lista = document.getElementById("rankingLista");
+      if(!lista) return;
+      lista.innerHTML = "";
+
+      // Mapeia todas as marcas para calcular a média ou marcar como "sem dados"
+      let medias = marcas.map(marca => {
+        const equipamentosDaMarca = equipamentos.filter(e => e.marca === marca);
+        if (equipamentosDaMarca.length > 0) {
+          const media = equipamentosDaMarca.reduce((a, b) => a + b.idrs, 0) / equipamentosDaMarca.length;
+          return { marca, media };
+        }
+        return { marca, media: null }; // Marca as que não têm equipamentos
+      });
+
+      // Ordena por média (maior para menor), colocando as sem dados no final
+      medias.sort((a, b) => {
+        if (a.media === b.media) return 0; // Mantém a ordem original para nulos
+        if (a.media === null) return 1;
+        if (b.media === null) return -1;
+        return b.media - a.media;
+      });
+
+      let rankCounter = 1;
+      medias.forEach(m => {
+        let li = document.createElement("li");
+        li.className = "li"; // Reusing existing style
+        li.style.padding = "8px 12px";
+        li.style.fontSize = "12px";
+        const mediaText = m.media !== null ? `<span style="color:var(--aqua); font-weight:700;">${m.media.toFixed(2)}</span>` : `<span style="color:var(--muted); font-size:11px;">Sem dados</span>`;
+        const rankNumber = m.media !== null ? `<b>${rankCounter++}.</b>` : `<span style="opacity:0.5; display:inline-block; width:16px; text-align:center;">-</span>`;
+        li.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+            <span>${rankNumber} ${m.marca}</span>
+            ${mediaText}
+          </div>`;
+        lista.appendChild(li);
+      });
+    }
+
+    function popularSelects(){
+      const s1 = document.getElementById("modelo1");
+      const s2 = document.getElementById("modelo2");
+      if(!s1 || !s2) return;
+
+      s1.innerHTML = ""; s2.innerHTML = ""; // Clear first
+
+      equipamentos.forEach((e,i)=>{
+        let nome = `${e.marca} ${e.modelo} (${e.btu/1000}k)`;
+        let o1 = new Option(nome,i);
+        let o2 = new Option(nome,i);
+        s1.add(o1);
+        s2.add(o2);
+      });
+    }
+
+    window.comparar = function(){
+      const s1 = document.getElementById("modelo1");
+      const s2 = document.getElementById("modelo2");
+      const res = document.getElementById("resultadoComparacao");
+      
+      let m1 = equipamentos[s1.value];
+      let m2 = equipamentos[s2.value];
+
+      res.innerHTML = `
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div><div class="muted">IDRS</div><b style="font-size:16px; color:${m1.idrs > m2.idrs ? 'var(--aqua)' : '#fff'}">${m1.idrs}</b></div>
+          <div style="text-align:right;"><div class="muted">IDRS</div><b style="font-size:16px; color:${m2.idrs > m1.idrs ? 'var(--aqua)' : '#fff'}">${m2.idrs}</b></div>
+          
+          <div><div class="muted">Consumo</div><b>${m1.consumo} kWh</b></div>
+          <div style="text-align:right;"><div class="muted">Consumo</div><b>${m2.consumo} kWh</b></div>
+          
+          <div><div class="muted">BTU</div><b>${m1.btu}</b></div>
+          <div style="text-align:right;"><div class="muted">BTU</div><b>${m2.btu}</b></div>
+        </div>
+      `;
+    }
+
+    window.simular = function(){
+      let pot = parseFloat(document.getElementById("pot").value) || 0;
+      let horas = parseFloat(document.getElementById("horas").value) || 0;
+      let valor = parseFloat(document.getElementById("valor").value) || 0;
+      let consumo = pot * horas * 30 * valor;
+      document.getElementById("resultadoConsumo").innerText = "Custo mensal aproximado: " + brl(consumo);
+    }
+
+    window.calcularBTU = function(){
+      let area = parseFloat(document.getElementById("area").value) || 0;
+      let pessoas = parseFloat(document.getElementById("pessoas").value) || 0;
+      let equip = parseFloat(document.getElementById("equip").value) || 0;
+      let btu = (area*600) + (pessoas*600) + (equip*600);
+      document.getElementById("resbtu").innerText = "BTU recomendado: " + btu.toLocaleString("pt-BR");
+    }
+
+    function graficoIDRS(){
+      const ctxIDRS = document.getElementById("graficoIDRS");
+      if(!ctxIDRS) return;
+      const isLight = document.body.classList.contains("light");
+      const gridColor = isLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,.06)";
+      const tickColor = isLight ? "#64748B" : "rgba(255,255,255,.5)";
+
+      // Ordenar por IDRS (melhor performance primeiro)
+      const sorted = [...equipamentos].sort((a, b) => b.idrs - a.idrs);
+      const labels = sorted.map(e => e.marca);
+      const values = sorted.map(e => e.idrs);
+      const marketAvg = 8.16; // Benchmark solicitado
+
+      if(window.chartIDRS) window.chartIDRS.destroy();
+
+      window.chartIDRS = new Chart(ctxIDRS, {
+        type: "bar",
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: "IDRS",
+              data: values,
+              backgroundColor: values.map(v => v >= marketAvg 
+                ? (isLight ? "rgba(14, 165, 233, 0.8)" : "rgba(61, 227, 201, 0.8)") 
+                : (isLight ? "rgba(251, 113, 133, 0.6)" : "rgba(251, 113, 133, 0.5)")),
+              borderColor: values.map(v => v >= marketAvg 
+                ? (isLight ? "#0EA5E9" : "#3DE3C9") 
+                : "#FB7185"),
+              borderWidth: 1.5,
+              borderRadius: 6,
+              barPercentage: 0.65,
+              categoryPercentage: 0.8
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: { 
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: isLight ? "rgba(255,255,255,0.98)" : "#0B1220",
+              titleColor: isLight ? "#0F172A" : "#FFF",
+              bodyColor: isLight ? "#475569" : "rgba(255,255,255,.8)",
+              borderColor: isLight ? "rgba(0,0,0,.1)" : "rgba(255,255,255,.15)",
+              borderWidth: 1,
+              padding: 12,
+              cornerRadius: 10,
+              callbacks: {
+                title: (items) => `${sorted[items[0].dataIndex].marca} — ${sorted[items[0].dataIndex].modelo}`,
+                label: (ctx) => `Eficiência (IDRS): ${ctx.parsed.y}`,
+                afterLabel: (ctx) => {
+                  const diff = (ctx.parsed.y - marketAvg).toFixed(2);
+                  const perc = (((ctx.parsed.y / marketAvg) - 1) * 100).toFixed(1);
+                  return [
+                    `Benchmark: ${diff >= 0 ? '+' : ''}${diff} vs Média`,
+                    `Desempenho: ${perc >= 0 ? '+' : ''}${perc}%`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: false,
+              min: 5,
+              max: 10,
+              grid: { color: gridColor, drawTicks: false },
+              ticks: { color: tickColor, font: { size: 10, weight: '500' } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: tickColor, font: { size: 10 }, maxRotation: 45, minRotation: 45 }
+            }
+          }
+        },
+        plugins: [{
+          id: 'marketLine',
+          afterDraw: (chart) => {
+            const { ctx, chartArea: { top, right, bottom, left, width }, scales: { y } } = chart;
+            const yPos = y.getPixelForValue(marketAvg);
+            if (yPos < top || yPos > bottom) return;
+
+            ctx.save();
+            // Sombra da linha
+            ctx.shadowColor = 'rgba(0,0,0,0.2)';
+            ctx.shadowBlur = 4;
+            ctx.shadowOffsetY = 2;
+
+            // Linha
+            ctx.beginPath();
+            ctx.setLineDash([6, 4]);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = isLight ? '#F59E0B' : '#FBBF24';
+            ctx.moveTo(left, yPos);
+            ctx.lineTo(right, yPos);
+            ctx.stroke();
+
+            // Label
+            ctx.setLineDash([]);
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+            ctx.fillStyle = isLight ? '#D97706' : '#FBBF24';
+            ctx.font = 'bold 10px Inter';
+            ctx.textAlign = 'right';
+            ctx.fillText('MÉDIA MERCADO: 8.16', right, yPos - 6);
+            ctx.restore();
+          }
+        }]
+      });
+    }
+
+    window.verMarcas = function(){
+      const el = document.getElementById("rankingLista");
+      if(el){
+        el.scrollIntoView({behavior:"smooth", block:"center"});
+        const card = el.closest(".surface");
+        if(card){
+          card.style.transition = "background .4s";
+          card.style.background = "rgba(61,227,201,.15)";
+          setTimeout(()=> card.style.background = "", 1000);
+        }
+      }
+    }
+
+    window.verModelos = function(){
+      const el = document.getElementById("graficoIDRS");
+      if(el){
+        el.scrollIntoView({behavior:"smooth", block:"center"});
+        const card = el.closest(".surface");
+        if(card){
+          card.style.transition = "background .4s";
+          card.style.background = "rgba(127,231,255,.15)";
+          setTimeout(()=> card.style.background = "", 1000);
+        }
+      }
+    }
+
+    // Init tools
+    carregarFerramentas();
+
+    // ---------- Calendário Completo ----------
+    function openFullCalendar() {
+      const body = document.getElementById("calendario-full-body");
+      const compromissos = JSON.parse(localStorage.getItem("alpe_agenda")) || [];
+      
+      body.innerHTML = "";
+      if (compromissos.length === 0) {
+        body.innerHTML = "<p class='muted'>Nenhum serviço agendado no momento.</p>";
+      } else {
+        compromissos.sort((a, b) => new Date(a.data) - new Date(b.data)).forEach(c => {
+          const dataFormatada = new Date(c.data).toLocaleString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long', hour: '2-digit', minute: '2-digit' });
+          body.innerHTML += `<div class="li" style="margin-bottom:10px;"><div class="bullet"><i class="fa-solid fa-calendar-day" style="font-size:10px;"></i></div><p><b>${dataFormatada}</b><br/>${c.descricao} <span class="tag" style="font-size:10px; padding:2px 6px;">${c.tecnico}</span></p></div>`;
+        });
+      }
+      openModal('modal-calendario');
+    }
+
+    // ---------- Fornecedores CSV Loader ----------
+    let fornecedoresData = JSON.parse(localStorage.getItem('alpe_fornecedores')) || [
+      { nome: "Adias", integracao: "API", dados: "Estoque/Preço", frequencia: "Diária", status: "Ativo", obs: "Integração OK" },
+      { nome: "Leveros", integracao: "API", dados: "Estoque/Preço", frequencia: "Diária", status: "Ativo", obs: "Integração OK" },
+      { nome: "Dufrio", integracao: "Web", dados: "Preço", frequencia: "Semanal", status: "Em teste", obs: "Ajustando parser" }
+    ];
+    
+    // Garante que o reveal funcione mesmo se houver erro em módulos secundários
+    setTimeout(() => revealNow(), 500);
+  </script>
+</body>
+</html>

@@ -14,10 +14,10 @@ h1, h2, h3, .cta-header { font-weight: 700 !important; letter-spacing: -0.5px; }
 body, p, span, li { font-weight: 400 !important; }
 strong, b { font-weight: 700 !important; }
 body{margin:0;color:var(--cor-texto);background:white;line-height:1.6;}
-header{background:white;padding:5px 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100;}
-.logo { display: flex; align-items: flex-end; gap: 0; text-decoration: none; }
-.logo img:first-child { height: 55px; }
-.logo img:last-child { height: 45px; margin-left: -15px; }
+header{background:white;padding:10px 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100;}
+.logo { display: flex; align-items: center; gap: 0; text-decoration: none; line-height: 0; }
+.logo img:first-child { height: 75px; width: auto; }
+.logo img:last-child { height: 55px; width: auto; margin-left: -18px; }
 nav a{color:var(--cor-secundaria);text-decoration:none;margin-left:20px;font-weight:500;}
 .cta-header{background:var(--cor-principal);color:white;padding:8px 15px;border-radius:5px;text-decoration:none;font-weight:bold;white-space:nowrap;}
 .section{padding:30px 5%;text-align:center;}
@@ -157,16 +157,20 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
         <a href="tcl.html">TCL</a>
       </div>
     </div>
-    <a href="../sobre-nos/sobre-nos.html">Sobre Nós</a>
+    <a href="../Sobre_Nos/sobre-nos.html">Sobre Nós</a>
     <a href="../index.html#servicos">Serviços</a>
     <a href="../index.html#produtos">Produtos</a>
     <a href="../index.html#contato">Contato</a>
     <a href="#color">Color Adapt</a>
     <a href="#inverter">Inverter</a>
+    <a href="../dashboard/index.html">Dashboard</a>
   </nav>
   <div class="header-actions">
     <a href="#" class="cart-link"><img src="https://img.icons8.com/ios-filled/50/000000/shopping-cart.png" alt="Carrinho" class="cart-icon"><span class="cart-badge">0</span></a>
     <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20vi%20a%20página%20Electrolux." target="_blank" rel="noopener noreferrer" class="cta-header">Fale Conosco</a>
+    <button type="button" class="mobile-menu-toggle" aria-label="Abrir menu">
+      <i class="fas fa-bars"></i>
+    </button>
   </div>
 </header>
 <section class="section section-hero">
