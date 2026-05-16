@@ -2795,6 +2795,7 @@ app.post('/webhook', async (req, res) => {
     </div>
   </div>
 
+  <script src="../config.js"></script>
   <script>
     // ---------- Helpers ----------
     const brl = (n) => {
@@ -2851,10 +2852,13 @@ app.post('/webhook', async (req, res) => {
       const page = document.getElementById(id);
       if (page) page.classList.add("active");
 
-      
       document.querySelectorAll(".nav button").forEach(b => {
         b.classList.toggle("active", b.dataset.page === id);
       });
+
+      // Gatilhos de atualização ao trocar de página para garantir dados frescos
+      if (id === 'pedidos') renderPedidos();
+      if (id === 'agenda') popularSelectPedidos(); 
 
       // Update header title context (subtle)
       const title = page?.querySelector("h2")?.textContent?.trim();
@@ -2943,6 +2947,10 @@ app.post('/webhook', async (req, res) => {
 
           // DADOS DINÂMICOS DO PEDIDO (AGORA CONECTADO)
           if (statusInterval) clearInterval(statusInterval); // Limpa o intervalo da simulação anterior
+
+          // Sincroniza a variável local de pedidos antes de exibir a área do cliente
+          const pedidosLocal = JSON.parse(localStorage.getItem('alpe_pedidos')) || [];
+          pedidos = pedidosLocal;
 
           const pedidoRecente = pedidos.length > 0 ? pedidos[0] : null;
 

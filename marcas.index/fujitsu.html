@@ -182,6 +182,11 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
 .dropdown:hover .dropdown-content { display: block; animation: fadeIn 0.3s; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+/* Evita que o título da seção fique escondido sob o header fixo ao navegar via âncora */
+section[id] {
+  scroll-margin-top: 85px;
+}
+
 /* Header Actions */
 .header-actions { display: flex; align-items: center; gap: 20px; }
 .cart-link { position: relative; display: flex; align-items: center; text-decoration: none; }
