@@ -2,10 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Utilitário para acesso seguro ao Storage (evita erro de Tracking Prevention)
     const safeStorage = {
         get: (key) => {
-            try { return localStorage.getItem(key); } catch (e) { console.warn('Acesso ao localStorage bloqueado pelo navegador.', e); return null; }
+            try { return localStorage.getItem(key); } catch (e) { return null; }
         },
         set: (key, value) => {
-            try { localStorage.setItem(key, value); } catch (e) { console.error('Erro ao salvar no localStorage.', e); }
+            try { localStorage.setItem(key, value); } catch (e) { return false; }
         }
     };
 

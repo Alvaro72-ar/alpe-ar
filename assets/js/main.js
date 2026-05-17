@@ -2,20 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- State ---
   
   // Função segura para acessar o Storage (evita erro de Tracking Prevention)
+  const inMemoryStorage = {};
   const safeStorage = {
     get: (key) => {
       try {
-        return localStorage.getItem(key);
+        return localStorage.getItem(key) || inMemoryStorage[key] || null;
       } catch (e) {
-        console.warn('Acesso ao localStorage bloqueado pelo navegador.', e);
-        return null;
+        return inMemoryStorage[key] || null;
       }
     },
     set: (key, value) => {
       try {
         localStorage.setItem(key, value);
       } catch (e) {
-        console.warn('Erro ao salvar no localStorage.', e);
+        inMemoryStorage[key] = value;
       }
     }
   };
@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         carrinho.push(produto);
         atualizarContadorCarrinho();
 
-        const isMarcaPage = window.location.pathname.includes('/Marcas.index/');
+        const isMarcaPage = window.location.pathname.includes('/marcas.index/');
         const checkoutUrl = isMarcaPage ? '../checkout.html' : 'checkout.html';
         window.location.href = checkoutUrl;
       }

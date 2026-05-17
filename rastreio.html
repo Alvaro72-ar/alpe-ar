@@ -73,7 +73,7 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
 <header>
   <a href="index.html" class="logo">
     <img src="images/logo marcas/Triângulo-Logo.webp" alt="Logo ALPE">
-    <img src="images/Logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
+    <img src="images/logo marcas/Texto-logo_-_Editado-removebg-preview.png" alt="Logo Secundária">
   </a>
   <nav>
     <a href="index.html">Voltar ao Início</a>
@@ -114,8 +114,14 @@ const safeStorage = {
         try {
             return localStorage.getItem(key);
         } catch (e) {
-            console.warn('Acesso ao localStorage bloqueado pelo navegador.', e);
             return null;
+        }
+    },
+    set: (key, value) => {
+        try {
+            localStorage.setItem(key, value);
+        } catch (e) {
+            return false;
         }
     }
 };

@@ -52,7 +52,7 @@ body {
 /* Cabeçalho Loja ALPE */
 header {
   background: #ffffff; /* Fundo branco para a loja */
-  padding: 6px 2%; /* Padding vertical reduzido para aproximar linhas */
+  padding: 0 2%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,6 +60,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
+  height: 70px !important;
+  flex-wrap: nowrap !important;
 }
 .logo {
   display: flex;
@@ -69,31 +71,36 @@ header {
   line-height: 0;
   padding: 0;
 }
-.logo img {
-  height: 180px; /* Revertido ao tamanho original */
-  width: auto;
-  display: block;
-}
+.logo img:first-child { height: 50px; width: auto; display: block; }
+.logo img:last-child { height: 35px; width: auto; display: block; margin-left: -20px; }
 
 @media (max-width: 768px) {
-  .logo img { height: 100px; } /* Revertido para mobile original */
+  header { height: 60px; }
+  .logo img:first-child { height: 40px; }
+  .logo img:last-child { height: 28px; margin-left: -12px; }
 }
 /* Corrigindo cor dos links do header da loja */
-header #main-nav > a, header #main-nav > .dropdown > a {
+header nav a, header nav .dropdown > a { /* Aplica a todos os links de navegação no cabeçalho */
   color: #333; /* Cor preta para os links */
   text-decoration: none;
-  margin-left: 12px;
+  margin-left: 0; 
   font-weight: 500;
   transition: color 0.3s;
-  display: inline-block; /* Garante que o link se comporte como um bloco para espaçamento */
+  display: flex;
+  align-items: center;
   padding: 0; /* Zerado para aproximar totalmente das linhas */
+  white-space: nowrap; /* Impede que o texto quebre linha */
 }
 
 header #main-nav {
   display: flex;
   align-items: center;
+  gap: 12px; 
+  flex: 1;
+  justify-content: flex-end; /* Empurra os links para junto do carrinho */
+  margin-right: 20px;
 }
-header #main-nav a:hover {
+header nav a:hover { /* Aplica o hover a todos os links de navegação no cabeçalho */
   color: var(--cor-principal);
 }
 /* Estilo padrão para outros 'nav' (como o do dashboard) */
@@ -197,6 +204,8 @@ section.page.active {
   font-family: 'Roboto', sans-serif;
   letter-spacing: 0.2px;
 }
+.loja-font-override { background-color: #ffffff !important; color: #333 !important; }
+.loja-font-override .section { color: #333; }
 
 /* Banner Hero */
 .banner-hero {
@@ -291,6 +300,11 @@ section.page.active {
   background-color: #fff;
   color: #333;
 }
+
+.section-hero { background-color: #f8f9fa !important; color: #333 !important; }
+.section-hero h1, .section-hero p, .section-hero h2 { color: #333 !important; }
+.brand-logo { height: auto; max-width: 200px; margin: 0 auto 20px; display: block; }
+.selo-procel { color: green; font-weight: 600; font-size: 14px; margin: 4px 0; }
 
 .section-loja h2 {
   font-size: 32px;
