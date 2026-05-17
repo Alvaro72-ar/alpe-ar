@@ -124,6 +124,18 @@ nav:not(#main-nav) a:hover {
   box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
 }
 
+/* Badge de Atenção para o Dashboard */
+.dashboard-badge {
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 /* Placeholder para banners e imagens */
 .placeholder-img {
   background: var(--panel);

@@ -484,6 +484,18 @@ footer{
 .cart-link { position: relative; display: flex; align-items: center; text-decoration: none; }
 .cart-badge { position: absolute; top: -8px; right: -8px; background: #d30029; color: white; font-size: 10px; font-weight: bold; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
 
+/* Badge de Atenção para o Dashboard */
+.dashboard-badge {
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
 .video-banner { margin-top: 0; width: 100%; height: 320px; overflow: hidden; border-radius: 0 0 8px 8px; }
 .video-content { width: 100%; height: 100%; object-fit: cover; }
 
@@ -676,7 +688,7 @@ textarea.input-contato { resize: vertical; }
     <a href="#servicos">Serviços</a>
     <a href="#produtos">Produtos</a>
     <a href="#contato">Contato</a>
-    <a href="dashboard/index.html">Dashboard</a>
+    <a href="dashboard/index.html">Dashboard <span class="dashboard-badge">NOVO</span></a>
   </nav>
   <div class="header-actions">
     <a href="#" class="cart-link">
@@ -685,7 +697,7 @@ textarea.input-contato { resize: vertical; }
     </a>
     <a href="#calculadora" class="cta-header">Calcule Seu BTU</a>
     <button type="button" class="mobile-menu-toggle" aria-label="Abrir menu">
-      <i class="fas fa-bars"></i>
+      <i class="fas fa-bars"></i correç>
     </button>
   </div>
 </header>
@@ -698,7 +710,7 @@ textarea.input-contato { resize: vertical; }
         <!-- Slide 1 -->
         <img class="carousel-slide" src="images/banner/banner_daikin-novo.jpg" alt="Banner Daikin">
         <!-- Slide 2 -->
-        <img class="carousel-slide" src="images/banner/Banner_Fujitsu-Premium.png" alt="Banner Fujitsu 2">
+        <img class="carousel-slide" src="images/banner/banner_fujitsu-premium.png" alt="Banner Fujitsu 2">
         <!-- Slide 3 -->
         <img class="carousel-slide" src="images/banner/banner-Elgin.png" alt="Banner Elgin">
       </div>
@@ -761,7 +773,7 @@ textarea.input-contato { resize: vertical; }
 
 <!-- VÍDEO ABAIXO DO CARROSSEL -->
 <div class="video-banner">
-  <video autoplay muted loop playsinline webkit-playsinline class="video-content">
+  <video autoplay muted loop webkit-playsinline class="video-content">
     <source src="images/banner/video_project_4.mp4" type="video/mp4" />
   </video>
 </div>
@@ -888,14 +900,14 @@ textarea.input-contato { resize: vertical; }
 <!-- SERVIÇOS -->
 <section class="section section-servicos" id="servicos">
   <h2>Venda e Serviço. A Solução Completa de Conforto com a ALPE.</h2>
-  <div class="servicos-grid">
-    <div class="servico-card">
-      <h3><img src="images/icone/instalacao_certificada.png" class="icon-service" alt="Tools"> Instalação Certificada</h3>
+  <div class="servicos-grid"> 
+    <div class="servico-card"> 
+      <h3><img src="images/icone/instalacao_certificada.png" class="icon-service" alt="Tools"> Instalação Certificada</h3> 
       <p>Compre e instale com a ALPE e garanta que seu equipamento funcione com a máxima eficiência e segurança, mantendo a garantia de fábrica.</p>
       <a href="#contato" class="cta-header">SOLICITE SEU ORÇAMENTO</a>
     </div>
     <div class="servico-card">
-      <h3><img src="images/icone/manutencao_preventiva.png" class="icon-service" alt="Clean"> Manutenção Preventiva</h3>
+      <h3><img src="images/icone/manutencao_preventiva.png" class="icon-service" alt="Clean"> Manutenção Preventiva</h3> 
       <p>Planos de Manutenção Preventiva (PMOC) para empresas e limpeza especializada para residências. Ar mais limpo e contas mais leves.</p>
       <a href="#contato" class="cta-header">CONHEÇA NOSSOS PLANOS</a>
     </div>
@@ -928,7 +940,7 @@ textarea.input-contato { resize: vertical; }
   <div class="catalogo-grid">
     
     <div class="produto-card">
-      <img src="images/produtos/split_samsung/samsung-12000.webp" alt="Samsung Inverter 12.000 BTU">
+      <img src="images/produtos/split_samsung/Samsung-12000.webp" alt="Samsung Inverter 12.000 BTU">
       <div class="produto-info">
         <h4>Samsung Inverter 12.000 BTU</h4>
         <p class="prod-feature green">✓ Selo Procel A</p>
@@ -938,7 +950,7 @@ textarea.input-contato { resize: vertical; }
       </div>
     </div>
     
-    <div class="produto-card">
+    <div class="produto-card"> 
       <img src="images/produtos/split_lg/split-inverter-lg-hi-wall-dual-compact-9000-btus-frio-220v.png" alt="LG Dual Inverter 9.000 BTU">
       <div class="produto-info">
         <h4>LG Dual Inverter 9.000 BTU</h4>
@@ -959,7 +971,7 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
+ 
     <div class="produto-card">
       <img src="images/produtos/split_hisense/ar-condicionado-split-inverter-hi-wall-wi-fi-hisense-12000-btus-frio-220v.jpg" alt="Hisense inverter 12.000 BTU">
       <div class="produto-info">
@@ -981,7 +993,7 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
+ 
     <div class="produto-card">
       <img src="images/produtos/split_electrolux/electrolux-9000.png" alt="Electrolux inverter 9.000 BTU">
       <div class="produto-info">
@@ -992,7 +1004,7 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
+ 
     <div class="produto-card">
       <img src="images/produtos/split_fujitsu/fujitsu-9000-premium.jpg" alt="Fujitsu inverter 9.000 BTU">
       <div class="produto-info">
@@ -1003,7 +1015,7 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
+ 
     <div class="produto-card">
       <img src="images/produtos/split_hitachi/hitachi-9000.webp" alt="Hitachi inverter 9.000 BTU">
       <div class="produto-info">
@@ -1014,7 +1026,7 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
+ 
     <div class="produto-card">
       <img src="images/produtos/split_philco/philco_split_12000.webp" alt="Philco inverter 12.000 BTU">
       <div class="produto-info">
@@ -1025,9 +1037,9 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
-     <div class="produto-card">
-      <img src="images/produtos/split_gree/gree-inverter-high-wall-9000-btus-frio-220v.webp" alt="Gree inverter 9.000 BTU">
+ 
+    <div class="produto-card">
+      <img src="images/produtos/split_gree/split-inverter-gree-g-top-auto-9000-btuh-frio-r-32-220v-9000-frio-63.webp" alt="Gree inverter 9.000 BTU">
       <div class="produto-info">
         <h4>Gree inverter 9.000 BTU</h4>
         <p class="prod-feature light-green">✓ Selo Procel A</p>
@@ -1036,8 +1048,8 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
-     <div class="produto-card">
+ 
+    <div class="produto-card">
       <img src="images/produtos/split_tcl/tcl-freshin3-0-1.webp" alt="TCL inverter 12.000 BTU">
       <div class="produto-info">
         <h4>TCL inverter 12.000 BTU</h4>
@@ -1047,8 +1059,8 @@ textarea.input-contato { resize: vertical; }
         <a href="#" class="cta-card btn-add-cart">COMPRAR AGORA</a>
       </div>
     </div>
-
-     <div class="produto-card">
+ 
+    <div class="produto-card">
       <img src="images/produtos/split_midea/midea-9000.webp" alt="Midea inverter 9.000 BTU">
       <div class="produto-info">
         <h4>Midea inverter 9.000 BTU</h4>
