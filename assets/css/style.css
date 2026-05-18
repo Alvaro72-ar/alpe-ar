@@ -136,6 +136,22 @@ nav:not(#main-nav) a:hover {
   vertical-align: middle;
 }
 
+/* Selo de Atenção para Banners e Vídeos */
+.badge-promo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 50px;
+  z-index: 10;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 /* Placeholder para banners e imagens */
 .placeholder-img {
   background: var(--panel);
@@ -298,6 +314,7 @@ section.page.active {
   height: 320px;
   overflow: hidden;
   background: #000;
+  position: relative;
 }
 .video-content {
   width: 100%;

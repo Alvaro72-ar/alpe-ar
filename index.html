@@ -496,6 +496,22 @@ footer{
   vertical-align: middle;
 }
 
+/* Selo de Atenção para Banners e Vídeos */
+.badge-promo {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 50px;
+  z-index: 10;
+  text-transform: uppercase;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
 .video-banner { margin-top: 0; width: 100%; height: 320px; overflow: hidden; border-radius: 0 0 8px 8px; }
 .video-content { width: 100%; height: 100%; object-fit: cover; }
 
@@ -706,13 +722,14 @@ textarea.input-contato { resize: vertical; }
 
     <!-- CARROSSEL DE BANNERS -->
     <section class="carousel" id="mainCarousel">
+      <span class="badge-promo">Novidades 2025</span>
       <div class="carousel-track" id="carouselTrack">
         <!-- Slide 1 -->
         <img class="carousel-slide" src="images/banner/banner_daikin-novo.jpg" alt="Banner Daikin">
         <!-- Slide 2 -->
         <img class="carousel-slide" src="images/banner/banner_fujitsu-premium.png" alt="Banner Fujitsu 2">
         <!-- Slide 3 -->
-        <img class="carousel-slide" src="images/banner/banner-Elgin.png" alt="Banner Elgin">
+        <img class="carousel-slide" src="images/banner/banner-elgin.png" alt="Banner Elgin">
       </div>
       <button type="button" class="carousel-arrow left" id="prevBtn" aria-label="Slide Anterior">&#10094;</button>
       <button type="button" class="carousel-arrow right" id="nextBtn" aria-label="Próximo Slide">&#10095;</button>
@@ -773,6 +790,7 @@ textarea.input-contato { resize: vertical; }
 
 <!-- VÍDEO ABAIXO DO CARROSSEL -->
 <div class="video-banner">
+  <span class="badge-promo">Showroom Virtual</span>
   <video autoplay muted loop webkit-playsinline class="video-content">
     <source src="images/banner/video_project_4.mp4" type="video/mp4" />
   </video>
@@ -826,27 +844,27 @@ textarea.input-contato { resize: vertical; }
       <p>O modelo mais popular para residências. Silencioso, eficiente e com design moderno para um único ambiente.</p>
     </div>
     <div class="sistema-card">
-      <img src="images/produtos/multi_split/Multi-split-Fujitsu.webp" alt="Multi-Split" class="sistema-img">
+      <img src="images/produtos/multi_split/multi-split-fujitsu.webp" alt="Multi-Split" class="sistema-img">
       <h3>Multi-Split</h3>
       <p>Climatize até 5 ambientes com apenas uma unidade externa. Ideal para apartamentos com pouco espaço na varanda.</p>
     </div>
     <div class="sistema-card">
-      <img src="images/produtos/mini_vrf/Vrv_Daikin_Fit.webp" alt="Mini VRF" class="sistema-img">
+      <img src="images/produtos/mini_vrf/vrv_daikin_fit.webp" alt="Mini VRF" class="sistema-img">
       <h3>Mini VRF</h3>
       <p>Alta capacidade e eficiência para residências de alto padrão e pequenos comércios. Conecte múltiplas unidades internas.</p>
     </div>
     <div class="sistema-card">
-      <img src="images/produtos/vrf/V8-Series-VRF.webp" alt="VRF" class="sistema-img">
+      <img src="images/produtos/vrf/v8-series-vrf.webp" alt="VRF" class="sistema-img">
       <h3>VRF</h3>
       <p>A solução definitiva para grandes edifícios e empresas. Controle preciso, máxima economia e longas distâncias de tubulação.</p>
     </div>
     <div class="sistema-card">
-      <img src="images/produtos/cassete/Cassete_Electrolux.jpg" alt="Cassette" class="sistema-img">
+      <img src="images/produtos/cassete/cassete_electrolux.jpg" alt="Cassette" class="sistema-img">
       <h3>Cassette</h3>
       <p>Ideal para ambientes amplos e com forro rebaixado. Distribuição de ar uniforme em 360º e design discreto.</p>
     </div>
     <div class="sistema-card">
-      <img src="images/produtos/piso_teto/piso-teto.Fujitsu.webp" alt="Piso Teto" class="sistema-img">
+      <img src="images/produtos/piso_teto/piso-teto.fujitsu.webp" alt="Piso Teto" class="sistema-img">
       <h3>Piso Teto</h3>
       <p>Versatilidade e alta potência. Pode ser instalado no piso ou no teto, perfeito para comércios e grandes salões.</p>
     </div>
@@ -940,7 +958,7 @@ textarea.input-contato { resize: vertical; }
   <div class="catalogo-grid">
     
     <div class="produto-card">
-      <img src="images/produtos/split_samsung/Samsung-12000.webp" alt="Samsung Inverter 12.000 BTU">
+      <img src="images/produtos/split_samsung/samsung-12000.webp" alt="Samsung Inverter 12.000 BTU">
       <div class="produto-info">
         <h4>Samsung Inverter 12.000 BTU</h4>
         <p class="prod-feature green">✓ Selo Procel A</p>
@@ -1105,7 +1123,7 @@ textarea.input-contato { resize: vertical; }
     <img src="images/logo-pagamento/boleto.webp" alt="boleto" class="img-pagamento">
     <img src="images/logo-pagamento/mastercard.webp" alt="Mastercard" class="img-pagamento">
     <img src="images/logo-pagamento/visa.webp" alt="Visa" class="img-pagamento">
-    <img src="images/logo-pagamento/dinner club.webp" alt="Diners Club" class="img-pagamento">
+    <img src="images/logo-pagamento/dinner-club.webp" alt="Diners Club" class="img-pagamento">
     <img src="images/logo-pagamento/elo.webp" alt="Elo" class="img-pagamento">
     <img src="images/logo-pagamento/hipercard.webp" alt="Hipercard" class="img-pagamento">
     <img src="images/logo-pagamento/america express.webp" alt="America Express" class="img-pagamento">
