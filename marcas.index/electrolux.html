@@ -16,8 +16,8 @@ strong, b { font-weight: 700 !important; }
 body{margin:0;color:var(--cor-texto);background:white;line-height:1.6;}
 header{background:white;padding:0 2%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;box-shadow:0 2px 5px rgba(0,0,0,0.05);position:sticky;top:0;z-index:100;height:70px;flex-wrap:nowrap;}
 .logo{display:flex;align-items:flex-end;gap:0;text-decoration:none;} 
-.logo img:first-child { height: 50px; }
-.logo img:last-child { height: 35px; margin-left: -20px; }
+.logo img:first-child { height: 50px; width: auto; }
+.logo img:last-child { height: 35px; width: auto; margin-left: -20px; }
 .cta-header{background:var(--cor-principal);color:white;padding:8px 15px;border-radius:5px;text-decoration:none;font-weight:bold;white-space:nowrap;}
 .section{padding:30px 5%;text-align:center;}
 .catalogo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;max-width:1200px;margin:0 auto;}
@@ -192,7 +192,13 @@ footer{background:var(--cor-secundaria);color:white;padding:20px;text-align:cent
     </div>
   </div>
 </section>
-<footer><p>© 2025 ALPE.Ar Condicionado. <a href="../index.html" class="footer-link">Voltar ao site principal</a></p></footer>
+<footer>
+  <div style="display:flex; justify-content:center; align-items:center; gap:10px; margin-bottom:10px;">
+    <img src="../images/logo-marcas/triangulo-logo1.webp" alt="Logo" style="height:30px;">
+    <img src="../images/logo-marcas/texto-logo_-_editado-removebg-preview.png" alt="ALPE" style="height:20px; filter:brightness(0) invert(1);">
+  </div>
+  <p>© 2025 ALPE.Ar Condicionado. <a href="../index.html" class="footer-link">Voltar ao site principal</a></p>
+</footer>
 <a href="https://api.whatsapp.com/send?phone=5521980220417&text=Olá%20ALPE,%20vi%20a%20página%20Electrolux." class="whatsapp-square" target="_blank" rel="noopener noreferrer"><img src="../images/icone/fale_conosco_150x50.webp" alt="Fale Conosco"></a>
 <script src="../js/cart.js"></script>
 </body>
