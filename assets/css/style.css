@@ -198,15 +198,19 @@ section.page.active {
   max-width: 1400px;
   margin: auto;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 20px;
   padding: 4px 10px; /* Preenchimento vertical reduzido para compactar linhas */
+  -webkit-overflow-scrolling: touch;
 }
+.top-bar-container::-webkit-scrollbar { display: none; }
 .top-item {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     gap: 8px;
     color: #333; /* Cor do texto escura */
     text-align: left;
@@ -221,6 +225,7 @@ section.page.active {
   display: flex;
   flex-direction: column;
   line-height: 1; /* Linha compacta para "TELEVENDAS" e afins */
+  white-space: nowrap;
 }
 .top-item span { font-size: 11px; color: #555; }
 .top-item img { width: 20px; height: 20px; object-fit: contain; }
